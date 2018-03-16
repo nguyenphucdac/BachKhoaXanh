@@ -1,5 +1,3 @@
 # BachKhoaXanh
-# mission: Server
-# Laguage: Javaa
-# Author: NguyenPhucDac
-# 
+# Laguage: Java
+# Author: Nhom Qua Ta
