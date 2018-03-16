@@ -1,0 +1,17 @@
+﻿# coding convention nhóm DSD26
+# project: BachKhoaXanh
+
+
+# Ai viết lớp nào ghi rõ tên mình trong lớp đó ở trong comment nhé
+
+# Quy tắc đặt tên lớp:
+Cú pháp Pascal viết hoa chữ cái đầu tiên của mỗi từ.
+Ví dụ: ProductName, PascalCasing, ThisIsTheNameThatFollowThePascalCase
+
+# Quy tắc đặt tên biến, phương thức: 
+Ký tự đầu tiên của từ đầu tiên viết thường những ký tự đầu tiên của những từ tiếp theo được viết hoa.
+Ví dụ: productPrice, camelCasing, thisIsTheNameThatFollowTheCamelCase
+ghi chú: Dùng tiếng việt
+
+# Quy tắc đặt tên Hằng
+Hằng số đặt theo UPPER_CASE, vd: CLICK_COUNTER
