@@ -1,14 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Glance Design Dashboard an Admin Panel Category Flat
-	Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>role index</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -118,28 +115,55 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <body class="cbp-spmenu-push">
 	<div class="main-content">
 		
-		<jsp:include page="../menu.jsp"></jsp:include>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="../thanhphanchung/menu.jsp"></jsp:include>
+		<jsp:include page="../thanhphanchung/header.jsp"></jsp:include>
 		
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				
-				<!-- for amcharts js -->
-				<script src="js/amcharts.js"></script>
-				<script src="js/serial.js"></script>
-				<script src="js/export.min.js"></script>
-				<link rel="stylesheet" href="css/export_admin.css" type="text/css"
-					media="all" />
-				<script src="js/light.js"></script>
-				<!-- for amcharts js -->
+				<div class=" form-grids row form-grids-right">
+					<div class="widget-shadow " data-example-id="basic-forms">
+						<div class="form-title col-md-12">
+							<h4 class="col-md-10">Manage Role :</h4>
+							<a class="agile-icon" href="${pageContext.request.contextPath}/role-create"><i class="fa fa-plus-square"></i> Create new</a>
+							
+						</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>id</th>
+										<th>Loại Cây</th>
+										<th>Tọa độ x</th>
+										<th>Tọa độ y</th>
+										<th>lượng nước cần</th>
+										<th>Tình trạng</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${danhSachCay.list}" var="cay">
+								<tr class="active">
+										<td>${cay.idCay }</td>
+										<td>${cay.idLoaiCay}</td>
+										<td>${cay.toaDoX}</td>
+										<td>${cay.toaDoY }</td>
+										<td>${cay.luongNuocCan}</td>
+										<td>${cay.tinhTrang}</td>
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-xoa?idCay=${cay.idCay}"><i class="fa fa-edit"></i>edit</a></td>
+										
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-xoa?idCay=${cay.idCay}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
+									</tr>
+								 </c:forEach>
+								</tbody>
+							</table>
+						
+					</div>
+				</div>
 
-				<script src="js/index1.js"></script>
 			</div>
 		</div>
 		<!--footer-->
-		<jsp:include page="../footer.jsp"></jsp:include>
+		<jsp:include page="../thanhphanchung/footer.jsp"></jsp:include>
 		<!--//footer-->
 	</div>
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.PaginationResult;
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -44,19 +45,23 @@ public class CayDAO implements ICayDAO {
 		cay.setTinhTrang(cayMD.getTinhTrang());
 		
 		this.sessionFactory.getCurrentSession().persist(cay);
+		
 	}
 
 	@Override
 	public boolean xoa(String idCay) {
 		String sql = "";
+		System.out.println("giá trị của idcay là:" + idCay);
 		if(idCay == null || idCay.equals("")) {
 			return false;
 		}
-		sql = "delete from Role where id= :id";
+		sql = "delete from Cay where id_cay= :id_cay";
+		
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(sql);
 		query.setParameter("id_cay", idCay);
-		query.executeUpdate();
+		
+		int result = query.executeUpdate();
 		
 		return true;
 	}
@@ -66,7 +71,35 @@ public class CayDAO implements ICayDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria crit = session.createCriteria(Cay.class);
         crit.add(Restrictions.eq("id_cay", idCay));
-        return (Cay) crit.uniqueResult();
+        //return (Cay) crit.uniqueResult();
+        return null;
 	}
+
+	@Override
+	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage) {
+		return queryRoles(page, maxResult, maxNavigationPage, null);
+	}
+
+	@Override
+	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
+		String sql = "Select new " + CayMD.class.getName() 
+				+ " (p.idCay, p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocCan, p.tinhTrang) " 
+				+ " from "
+				+ Cay.class.getName() + " p ";
+		if (likeName != null && likeName.length() > 0) {
+			sql += " Where lower(p.name) like :likeName ";
+		}
+		sql += " order by p.id asc ";
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery(sql);
+		if (likeName != null && likeName.length() > 0) {
+			query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
+		}
+		return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
+	}
+	
+	
 
 }

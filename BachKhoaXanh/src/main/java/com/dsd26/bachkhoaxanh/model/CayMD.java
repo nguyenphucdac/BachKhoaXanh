@@ -26,7 +26,6 @@ public class CayMD {
 	}
 	
 	public CayMD(String idCay, String idLoaiCay, String toaDoX, String toaDoY, int luongNuocCan, String tinhTrang) {
-		super();
 		this.idCay = idCay;
 		this.idLoaiCay = idLoaiCay;
 		this.toaDoX = toaDoX;
@@ -34,6 +33,7 @@ public class CayMD {
 		this.luongNuocCan = luongNuocCan;
 		this.tinhTrang = tinhTrang;
 	}
+	
 	public String getIdCay() {
 		return idCay;
 	}

@@ -16,7 +16,7 @@
 						</button>
 						<h1>
 							<a class="navbar-brand" href="index.html"><span
-								class="fa fa-area-chart"></span> Eshop<span
+								class="fa fa-area-chart"></span>BKX<span
 								class="dashboard_text"></span></a>
 						</h1>
 					</div>

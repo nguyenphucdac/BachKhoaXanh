@@ -7,4 +7,6 @@ encoding//src/main/java/com/dsd26/bachkhoaxanh/dao/ICayDAO.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/dao/impl/CayDAO.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/entity/Cay.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/CayMD.java=UTF-8
+encoding//src/main/java/com/dsd26/bachkhoaxanh/model/PaginationResult.java=UTF-8
 encoding//src/main/webapp/WEB-INF/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/cay/taomoi.jsp=UTF-8

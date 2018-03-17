@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class QuanLyController {
 	@RequestMapping("/admin")
 	public String index() {
-		return "/admin/home/index";
+		return "/admin/trangchu/index";
 	}
 }
 
