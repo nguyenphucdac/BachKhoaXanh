@@ -11,6 +11,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
  
+/*
+ * author: Nguyễn Phúc Đạc
+ */
+
 public class SpringWebAppInitializer implements WebApplicationInitializer {
  
     @Override

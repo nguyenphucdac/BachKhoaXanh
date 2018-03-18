@@ -1,30 +1,28 @@
-package com.dsd26.bachkhoaxanh.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package com.dsd26.bachkhoaxanh.model;
 
 /*
  * author: Nguyễn Phúc Đạc
  */
 
-@Entity
-@Table(name="Loai_Cay")
-public class LoaiCay {
+public class LoaiCayMD {
 	private String idLoaiCay;
 	private String tenLoaiCay;
 	
-	@Id
-	@Column(name = "id_loai_cay", length = 20, nullable = false)
+	public LoaiCayMD() {
+		super();
+	}
+	public LoaiCayMD(String idLoaiCay, String tenLoaiCay) {
+		super();
+		this.idLoaiCay = idLoaiCay;
+		this.tenLoaiCay = tenLoaiCay;
+	}
+	
 	public String getIdLoaiCay() {
 		return idLoaiCay;
 	}
 	public void setIdLoaiCay(String idLoaiCay) {
 		this.idLoaiCay = idLoaiCay;
 	}
-	
-	@Column(name = "ten_loai_cay", length = 20, nullable = false)
 	public String getTenLoaiCay() {
 		return tenLoaiCay;
 	}

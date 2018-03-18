@@ -16,8 +16,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -76,6 +78,42 @@ public class CayController {
 	@RequestMapping(value= {"/cay-xoa"}, method = RequestMethod.GET)
 	public String xoaCay(@RequestParam(value = "idCay", defaultValue = "0") String idCay) {
 		iCayDAO.xoa(idCay);
+		return "redirect:/cay";
+	}
+	
+	@RequestMapping(value = {"/cay-sua"}, method = RequestMethod.GET)
+	public String suaCay(Model model, @RequestParam(value="idCay", defaultValue = "0") String idCay,
+			@ModelAttribute("cayForm") @Validated CayMD cayMD) {
+		
+		Cay cay = null;
+		if(idCay != null && idCay != "") {
+			cay = iCayDAO.timKiem(idCay);
+		}
+		model.addAttribute("cay", cay);
+		
+		return "admin/cay/sua";
+	}
+	
+	@RequestMapping(value = {"/cay-sua"}, method = RequestMethod.POST)
+	public String xacNhanSua(
+			Model model,
+			@ModelAttribute("cayForm") @Validated CayMD cayMD, 
+			BindingResult result,
+			final RedirectAttributes redirectAttributes
+			) {
+		if (result.hasErrors()) {
+            return "admin/cay/sua";
+        }
+		try {
+			cayMD.setIdCay(cayMD.getIdCay().split(",")[0]);
+			iCayDAO.luu(cayMD);
+		}
+		catch(Exception ex) {
+			String message = ex.getMessage();
+            model.addAttribute("message", message);
+            // Show product form.
+            return "admin/cay/taomoi";
+		}
 		return "redirect:/cay";
 	}
 }

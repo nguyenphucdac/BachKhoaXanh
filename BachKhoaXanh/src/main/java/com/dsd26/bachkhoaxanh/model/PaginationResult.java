@@ -7,6 +7,9 @@ import org.hibernate.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
 public class PaginationResult<E> {
 	 
 	   private int totalRecords;

@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
  
 @Configuration
 // @EnableWebSecurity = @EnableWebMVCSecurity + Extra features
@@ -41,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        http.authorizeRequests().antMatchers("/product").access("hasRole('ROLE_MANAGER')");
  
   
-       // Khi ngư�?i dùng đã login, với vai trò XX.
+       // Khi ngư�?i dùng đã login, với vai trò XX.
        // Nhưng truy cập vào trang yêu cầu vai trò YY,
        // Ngoại lệ AccessDeniedException sẽ ném ra.
        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");

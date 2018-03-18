@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>role index</title>
+<title>cây tạo mới</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -124,39 +124,52 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<div class="main-page">
 				<div class=" form-grids row form-grids-right">
 					<div class="widget-shadow " data-example-id="basic-forms">
-						<div class="form-title col-md-12">
-							<h4 class="col-md-10">Cây :</h4>
-							<a class="agile-icon" href="${pageContext.request.contextPath}/cay-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
-							
+						<div class="form-title">
+							<h4>Chỉnh sửa cây :</h4>
 						</div>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>id</th>
-										<th>Loại Cây</th>
-										<th>Tọa độ x</th>
-										<th>Tọa độ y</th>
-										<th>lượng nước cần</th>
-										<th>Tình trạng</th>
-									</tr>
-								</thead>
-								<tbody>
-								<c:forEach items="${danhSachCay.list}" var="cay">
-								<tr class="active">
-										<td>${cay.idCay }</td>
-										<td>${cay.idLoaiCay}</td>
-										<td>${cay.toaDoX}</td>
-										<td>${cay.toaDoY }</td>
-										<td>${cay.luongNuocCan}</td>
-										<td>${cay.tinhTrang}</td>
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-sua?idCay=${cay.idCay}"><i class="fa fa-edit"></i>edit</a></td>
-										
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-xoa?idCay=${cay.idCay}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
-									</tr>
-								 </c:forEach>
-								</tbody>
-							</table>
-						
+						<div class="form-body">
+							<form:form modelAttribute="cayForm" method="POST" class="form-horizontal">
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
+									<div class="col-sm-9">
+										<form:input path="idCay" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${cay.idCay}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Loại cây</label>
+									<div class="col-sm-9">
+										<form:input path="idLoaiCay" type="text" class="form-control" id="inputEmail1" placeholder="loại cây" value="${cay.idLoaiCay}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ x</label>
+									<div class="col-sm-9">
+										<form:input path="toaDoX" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ x" value="${cay.toaDoX}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ y</label>
+									<div class="col-sm-9">
+										<form:input path="toaDoY" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ y" value="${cay.toaDoY}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước cần</label>
+									<div class="col-sm-9">
+										<form:input path="luongNuocCan" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocCan}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
+									<div class="col-sm-9">
+										<form:input path="tinhTrang" type="text" class="form-control" id="inputPassword3" placeholder="tình trạng" value="${cay.tinhTrang}" />
+									</div>
+								</div>
+								<div class="col-sm-offset-2">
+									<button type="submit" class="btn btn-default">Xác nhận</button>
+								</div>
+							</form:form>
+						</div>
 					</div>
 				</div>
 

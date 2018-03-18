@@ -10,9 +10,11 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 
 /*
@@ -21,45 +23,40 @@ import com.dsd26.bachkhoaxanh.model.PaginationResult;
 
 @Service
 @Transactional
-public class CayDAO implements ICayDAO {
+public class LoaiCayDAO implements ILoaiCayDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public void luu(CayMD cayMD) {
-		String idCay = cayMD.getIdCay();
-		Cay cay = null;
+	public void luu(LoaiCayMD loaiCayMD) {
+		String idLoaiCay = loaiCayMD.getIdLoaiCay();
+		LoaiCay loaiCay = null;
 		
-		if(idCay != null) {
-			cay = this.timKiem(idCay);
+		if(idLoaiCay != null && idLoaiCay.equals("")) {
+			loaiCay = this.timKiem(idLoaiCay);
 		}
-		if(cay == null) {
-			cay = new Cay();
+		if(loaiCay == null) {
+			loaiCay = new LoaiCay();
 		}
-		cay.setIdCay(cayMD.getIdCay());
-		cay.setIdLoaiCay(cayMD.getIdLoaiCay());
-		cay.setToaDoX(cayMD.getToaDoX());
-		cay.setToaDoY(cayMD.getToaDoY());
-		cay.setLuongNuocCan(cayMD.getLuongNuocCan());
-		cay.setTinhTrang(cayMD.getTinhTrang());
 		
-		this.sessionFactory.getCurrentSession().persist(cay);
+		loaiCay.setIdLoaiCay(loaiCayMD.getIdLoaiCay());
+		loaiCay.setTenLoaiCay(loaiCayMD.getTenLoaiCay());
 		
+		this.sessionFactory.getCurrentSession().persist(loaiCay);
 	}
 
 	@Override
-	public boolean xoa(String idCay) {
+	public boolean xoa(String idLoaiCay) {
 		String sql = "";
-		System.out.println("giá trị của idcay là:" + idCay);
-		if(idCay == null || idCay.equals("")) {
+		if(idLoaiCay == null || idLoaiCay.equals("")) {
 			return false;
 		}
-		sql = "delete from Cay where id_cay= :id_cay";
+		sql = "delete from LoaiCay where id_loai_cay= :id_loai_cay";
 		
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(sql);
-		query.setParameter("id_cay", idCay);
+		query.setParameter("id_loai_cay", idLoaiCay);
 		
 		int result = query.executeUpdate();
 		
@@ -67,24 +64,24 @@ public class CayDAO implements ICayDAO {
 	}
 
 	@Override
-	public Cay timKiem(String idCay) {
+	public LoaiCay timKiem(String idLoaiCay) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Criteria crit = session.createCriteria(Cay.class);
-        crit.add(Restrictions.eq("idCay", idCay));
-        return (Cay) crit.uniqueResult();
+		Criteria crit = session.createCriteria(LoaiCay.class);
+        crit.add(Restrictions.eq("idLoaiCay", idLoaiCay));
+        return (LoaiCay) crit.uniqueResult();
 	}
 
 	@Override
-	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage) {
+	public PaginationResult<LoaiCayMD> queryRoles(int page, int maxResult, int maxNavigationPage) {
 		return queryRoles(page, maxResult, maxNavigationPage, null);
 	}
 
 	@Override
-	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
-		String sql = "Select new " + CayMD.class.getName() 
-				+ " (p.idCay, p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocCan, p.tinhTrang) " 
+	public PaginationResult<LoaiCayMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
+		String sql = "Select new " + LoaiCayMD.class.getName() 
+				+ " (p.idLoaiCay, p.tenLoaiCay) " 
 				+ " from "
-				+ Cay.class.getName() + " p ";
+				+ LoaiCay.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {
 			sql += " Where lower(p.name) like :likeName ";
 		}
@@ -99,6 +96,4 @@ public class CayDAO implements ICayDAO {
 		return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
 	}
 	
-	
-
 }

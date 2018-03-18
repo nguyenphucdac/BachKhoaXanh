@@ -19,8 +19,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.CayDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.LoaiCayDAO;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
  
 @Configuration
 @ComponentScan("com.dsd26.bachkhoaxanh.*")
@@ -116,24 +121,9 @@ public class ApplicationContextConfig {
    public ICayDAO getCayDAO() {
 	   return new CayDAO();
    }
-//   @Bean(name = "memberTypeDAO")
-//   public IMemberTypeDAO getMemberTypeDAO() {
-//       return new MemberTypeDAO();
-//   }
-// 
-//   @Bean(name = "productDAO")
-//   public ProductDAO getProductDAO() {
-//       return new ProductDAOImpl();
-//   }
-// 
-//   @Bean(name = "orderDAO")
-//   public OrderDAO getOrderDAO() {
-//       return new OrderDAOImpl();
-//   }
-//    
-//   @Bean(name = "accountDAO")
-//   public AccountDAO getAccountDAO()  {
-//       return new AccountDAOImpl();
-//   }
+   @Bean(name="loaiCayDAO")
+   public ILoaiCayDAO getLoaiCayDAO() {
+	   return new LoaiCayDAO();
+   }
  
 }
