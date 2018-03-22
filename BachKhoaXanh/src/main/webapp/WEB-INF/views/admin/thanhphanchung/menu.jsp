@@ -25,17 +25,24 @@
 						<ul class="sidebar-menu">
 							<li class="header">MAIN NAVIGATION</li>
 							<li class="treeview"><a href="index.html"> <i
-									class="fa fa-dashboard"></i> <span>Dashboard</span>
+									class="fa fa-dashboard"></i> <span>Thống kê</span>
+							</a></li>
+							<li class="treeview"><a href="index.html"> <i
+									class="fa fa-dashboard"></i> <span>Thông báo</span>
 							</a></li>
 							<li class="treeview"><a href="#"> <i
-									class="fa fa-laptop"></i> <span>Components</span> <i
+									class="fa fa-laptop"></i> <span>Quản lý</span> <i
 									class="fa fa-angle-left pull-right"></i>
 							</a>
 								<ul class="treeview-menu">
-									<li><a href="grids.html"><i class="fa fa-angle-right"></i>
-											Grids</a></li>
-									<li><a href="media.html"><i class="fa fa-angle-right"></i>
-											Media Css</a></li>
+									<li><a href="${pageContext.request.contextPath}/cay"><i class="fa fa-angle-right"></i>
+											Cây</a></li>
+									<li><a href="${pageContext.request.contextPath}/thanhvien"><i class="fa fa-angle-right"></i>
+											Thành Viên</a></li>
+											<li><a href="${pageContext.request.contextPath}/diemcapnuoc"><i class="fa fa-angle-right"></i>
+											Điểm cấp nước</a></li>
+									<li><a href="${pageContext.request.contextPath}/loaicay"><i class="fa fa-angle-right"></i>
+											Loại Cây</a></li>
 								</ul></li>
 							<li class="treeview"><a href="charts.html"> <i
 									class="fa fa-pie-chart"></i> <span>Charts</span> <span

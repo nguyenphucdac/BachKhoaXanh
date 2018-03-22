@@ -51,7 +51,6 @@ public class CayDAO implements ICayDAO {
 	@Override
 	public boolean xoa(String idCay) {
 		String sql = "";
-		System.out.println("giá trị của idcay là:" + idCay);
 		if(idCay == null || idCay.equals("")) {
 			return false;
 		}
