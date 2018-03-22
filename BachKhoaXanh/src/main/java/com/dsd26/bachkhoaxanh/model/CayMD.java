@@ -7,6 +7,9 @@ import com.dsd26.bachkhoaxanh.entity.Cay;
  */
 
 public class CayMD {
+	
+	public final static int MA_TO_DO = 4;
+	
 	private String idCay;
 	private String idLoaiCay;
 	private int toaDoX;
