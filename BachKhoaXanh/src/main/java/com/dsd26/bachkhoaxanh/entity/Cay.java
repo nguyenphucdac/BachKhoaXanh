@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class Cay {
 	private String idCay;
 	private String idLoaiCay;
-	private String toaDoX;
-	private String toaDoY;
+	private int toaDoX;
+	private int toaDoY;
 	private int luongNuocCan;
 	private String tinhTrang;
 	
@@ -37,18 +37,18 @@ public class Cay {
 	}
 	
 	@Column(name = "toa_do_x", length = 20, nullable = false)
-	public String getToaDoX() {
+	public int getToaDoX() {
 		return toaDoX;
 	}
-	public void setToaDoX(String toaDoX) {
+	public void setToaDoX(int toaDoX) {
 		this.toaDoX = toaDoX;
 	}
 	
 	@Column(name = "toa_do_y", length = 20, nullable = false)
-	public String getToaDoY() {
+	public int getToaDoY() {
 		return toaDoY;
 	}
-	public void setToaDoY(String toaDoY) {
+	public void setToaDoY(int toaDoY) {
 		this.toaDoY = toaDoY;
 	}
 	

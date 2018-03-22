@@ -9,8 +9,8 @@ import com.dsd26.bachkhoaxanh.entity.Cay;
 public class CayMD {
 	private String idCay;
 	private String idLoaiCay;
-	private String toaDoX;
-	private String toaDoY;
+	private int toaDoX;
+	private int toaDoY;
 	private int luongNuocCan;
 	private String tinhTrang;
 	
@@ -25,7 +25,7 @@ public class CayMD {
 		this.tinhTrang = cay.getTinhTrang();
 	}
 	
-	public CayMD(String idCay, String idLoaiCay, String toaDoX, String toaDoY, int luongNuocCan, String tinhTrang) {
+	public CayMD(String idCay, String idLoaiCay, int toaDoX, int toaDoY, int luongNuocCan, String tinhTrang) {
 		this.idCay = idCay;
 		this.idLoaiCay = idLoaiCay;
 		this.toaDoX = toaDoX;
@@ -46,16 +46,16 @@ public class CayMD {
 	public void setIdLoaiCay(String idLoaiCay) {
 		this.idLoaiCay = idLoaiCay;
 	}
-	public String getToaDoX() {
+	public int getToaDoX() {
 		return toaDoX;
 	}
-	public void setToaDoX(String toaDoX) {
+	public void setToaDoX(int toaDoX) {
 		this.toaDoX = toaDoX;
 	}
-	public String getToaDoY() {
+	public int getToaDoY() {
 		return toaDoY;
 	}
-	public void setToaDoY(String toaDoY) {
+	public void setToaDoY(int toaDoY) {
 		this.toaDoY = toaDoY;
 	}
 	public int getLuongNuocCan() {
