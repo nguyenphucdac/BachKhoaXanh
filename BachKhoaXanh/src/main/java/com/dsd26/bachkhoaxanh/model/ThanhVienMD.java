@@ -1,5 +1,7 @@
 package com.dsd26.bachkhoaxanh.model;
 
+import com.dsd26.bachkhoaxanh.entity.ThanhVien;
+
 /*
 * author: Nguyễn Phúc Đạc
 */
@@ -15,12 +17,19 @@ public class ThanhVienMD {
 	
 	public ThanhVienMD() {}
 	
-	public ThanhVienMD(String idThanhVien, String tenTaiKhoan, String tenDayDu, LoaiThanhVienMD loaiThanhVien) {
+	public ThanhVienMD(ThanhVien thanhVien) {
+		this.idThanhVien = thanhVien.getIdThanhVien();
+		this.tenTaiKhoan = thanhVien.getTenTaiKhoan();
+		this.tenDayDu = thanhVien.getTenDayDu();
+		this.loaiThanhVienMD.setIdLoaiThanhVien(thanhVien.getIdLoaiThanhVien());
+	}
+	
+	public ThanhVienMD(String idThanhVien, String tenTaiKhoan, String tenDayDu) {
 		super();
 		this.idThanhVien = idThanhVien;
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.tenDayDu = tenDayDu;
-		this.loaiThanhVienMD = loaiThanhVienMD;
+		
 	}
 	
 	public String getIdThanhVien() {
