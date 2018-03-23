@@ -103,7 +103,9 @@ public class LoaiCayController {
             return "admin/loaicay/sua";
         }
 		try {
-			loaiCayMD.setIdLoaiCay(loaiCayMD.getIdLoaiCay().split(",")[0]);
+			System.out.println("gia tri cua id : " + loaiCayMD.getIdLoaiCay());
+			iLoaiCayDAO.xoa(loaiCayMD.getIdLoaiCay().split(",")[0]);
+			loaiCayMD.setIdLoaiCay(loaiCayMD.getIdLoaiCay().split(",")[1]);
 			iLoaiCayDAO.luu(loaiCayMD);
 		}
 		catch(Exception ex) {
