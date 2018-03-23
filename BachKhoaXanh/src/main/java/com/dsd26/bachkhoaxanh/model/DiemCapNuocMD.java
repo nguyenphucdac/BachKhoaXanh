@@ -4,42 +4,49 @@ package com.dsd26.bachkhoaxanh.model;
 * author: Nguyen Van Cong
 */
 
-public class DiemCapNuocMD {
+public class DiemCapNuocMD
+{
 	
 	public final static int MA_TO_DO = 3;
 	
-	private String id;
-	private int toDoX;
-	private int toDoY;
+	private String idDiemCapNuoc;
+	private int toaDoX;
+	private int toaDoY;
 	private int luongNuocToiDa;
 	private String tinhTrang;
 	
 	
-	public DiemCapNuocMD(String id, int toDoX, int toDoY, int luongNuocToiDa, String tinhTrang) {
+	public DiemCapNuocMD(String idDiemCapNuoc, int toaDoX, int toaDoY, int luongNuocToiDa, String tinhTrang) {
 		super();
-		this.id = id;
-		this.toDoX = toDoX;
-		this.toDoY = toDoY;
+		this.idDiemCapNuoc = idDiemCapNuoc;
+		this.toaDoX = toaDoX;
+		this.toaDoY = toaDoY;
 		this.luongNuocToiDa = luongNuocToiDa;
 		this.tinhTrang = tinhTrang;
 	}
-	public String getId() {
-		return id;
+	
+	
+	public DiemCapNuocMD() {
 	}
-	public void setId(String id) {
-		this.id = id;
+
+
+	public String getIdDiemCapNuoc() {
+		return idDiemCapNuoc;
 	}
-	public int getToDoX() {
-		return toDoX;
+	public void setIdDiemCapNuoc(String idDiemCapNuoc) {
+		this.idDiemCapNuoc = idDiemCapNuoc;
 	}
-	public void setToDoX(int toDoX) {
-		this.toDoX = toDoX;
+	public int getToaDoX() {
+		return toaDoX;
 	}
-	public int getToDoY() {
-		return toDoY;
+	public void setToDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
 	}
-	public void setToDoY(int toDoY) {
-		this.toDoY = toDoY;
+	public int getToaDoY() {
+		return toaDoY;
+	}
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
 	}
 	public int getLuongNuocToiDa() {
 		return luongNuocToiDa;

@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class DiemCapNuoc {
 
 	private String idDiemCapNuoc;
-	private String toDoX;
-	private String toDoY;
+	private int toaDoX;
+	private int toaDoY;
 	private int luongNuocToiDa;
 	private String tinhTrang;
 	
@@ -28,20 +28,20 @@ public class DiemCapNuoc {
 		this.idDiemCapNuoc = idDiemCapNuoc;
 	}
 	
-	@Column(name = "to_do_x", length = 100, nullable = false)
-	public String getToDoX() {
-		return toDoX;
+	@Column(name = "toa_do_x", length = 100, nullable = false)
+	public int getToaDoX() {
+		return toaDoX;
 	}
-	public void setToDoX(String toDoX) {
-		this.toDoX = toDoX;
+	public void setToaDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
 	}
 	
-	@Column(name = "to_do_y", length = 100, nullable = false)
-	public String getToDoY() {
-		return toDoY;
+	@Column(name = "toa_do_y", length = 100, nullable = false)
+	public int getToaDoY() {
+		return toaDoY;
 	}
-	public void setToDoY(String toDoY) {
-		this.toDoY = toDoY;
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
 	}
 	
 	@Column(name = "luong_nuoc_toi_da", length = 5)

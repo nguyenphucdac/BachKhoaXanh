@@ -1,4 +1,4 @@
-package com.dsd26.bachkhoaxanh.config;
+﻿package com.dsd26.bachkhoaxanh.config;
 
 import java.util.Properties;
 
@@ -124,6 +124,11 @@ public class ApplicationContextConfig {
    @Bean(name="loaiCayDAO")
    public ILoaiCayDAO getLoaiCayDAO() {
 	   return new LoaiCayDAO();
+   }
+
+   @Bean(name="diemCapNuocDAO")
+   public IDiemCapNuocDAO getDiemCapNuocDAO() {
+	   return new DiemCapNuocDAO();
    }
  
 }
