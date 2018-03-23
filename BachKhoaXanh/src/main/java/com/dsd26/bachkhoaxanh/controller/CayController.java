@@ -105,7 +105,9 @@ public class CayController {
             return "admin/cay/sua";
         }
 		try {
-			cayMD.setIdCay(cayMD.getIdCay().split(",")[0]);
+			iCayDAO.xoa(cayMD.getIdCay().split(",")[0]);
+			cayMD.setIdCay(cayMD.getIdCay().split(",")[1]);
+			
 			iCayDAO.luu(cayMD);
 		}
 		catch(Exception ex) {
