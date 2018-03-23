@@ -19,8 +19,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.CayDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.DiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.LoaiCayDAO;
 
 /*
