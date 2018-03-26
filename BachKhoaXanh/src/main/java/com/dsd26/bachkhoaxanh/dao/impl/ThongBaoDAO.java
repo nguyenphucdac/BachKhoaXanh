@@ -1,8 +1,18 @@
 package com.dsd26.bachkhoaxanh.dao.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.dsd26.bachkhoaxanh.dao.IThongBaoDAO;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
+import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 import com.dsd26.bachkhoaxanh.entity.ThongBao;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.ThongBaoMD;
 
 
@@ -12,6 +22,9 @@ import com.dsd26.bachkhoaxanh.model.ThongBaoMD;
 
 public class ThongBaoDAO implements IThongBaoDAO {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	@Override
 	public void luu(ThongBaoMD thongBaoMD) {
 		String idThongBao = thongBaoMD.getIdThongBao();
@@ -29,30 +42,58 @@ public class ThongBaoDAO implements IThongBaoDAO {
 		thongBao.setThoiGian(thongBaoMD.getThoiGian());
 		thongBao.setIdNguoiTao(thongBaoMD.getIdNguoiTao());
 		
+		this.sessionFactory.getCurrentSession().persist(thongBao);
+		
 	}
 
 	@Override
 	public boolean xoa(String idThongBao) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "";
+		if(idThongBao == null || idThongBao.equals("")) {
+			return false;
+		}
+		sql = "delete from ThongBao where id_thong_bao= :id_thong_bao";
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(sql);
+		query.setParameter("id_thong_bao", idThongBao);
+		
+		int result = query.executeUpdate();
+		
+		return true;
 	}
 
 	@Override
 	public ThongBao timKiem(String idThongBao) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(ThongBao.class);
+        crit.add(Restrictions.eq("idThongBao", idThongBao));
+        return (ThongBao) crit.uniqueResult();
 	}
 
 	@Override
 	public PaginationResult<ThongBaoMD> queryRoles(int page, int maxResult, int maxNavigationPage) {
-		// TODO Auto-generated method stub
-		return null;
+		return queryRoles(page, maxResult, maxNavigationPage, null);
 	}
 
 	@Override
 	public PaginationResult<ThongBaoMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "Select new " + ThongBaoMD.class.getName() 
+				+ " (p.idThongBao, p.noiDung, p.nguoiTao) " 
+				+ " from "
+				+ ThongBao.class.getName() + " p ";
+		if (likeName != null && likeName.length() > 0) {
+			sql += " Where lower(p.name) like :likeName ";
+		}
+		sql += " order by p.id asc ";
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery(sql);
+		if (likeName != null && likeName.length() > 0) {
+			query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
+		}
+		return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
 	}
 
 }

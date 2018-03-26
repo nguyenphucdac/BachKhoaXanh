@@ -85,10 +85,10 @@ public class LoaiThanhVienDAO implements ILoaiThanhVienDAO {
 	@Override
 	public PaginationResult<LoaiThanhVienMD> queryRoles(int page, int maxResult, int maxNavigationPage,
 			String likeName) {
-		String sql = "Select new " + LoaiCayMD.class.getName() 
+		String sql = "Select new " + LoaiThanhVienMD.class.getName() 
 				+ " (p.idLoaiThanhVien, p.tenLoaiThanhVien) " 
 				+ " from "
-				+ LoaiCay.class.getName() + " p ";
+				+ LoaiThanhVien.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {
 			sql += " Where lower(p.name) like :likeName ";
 		}
