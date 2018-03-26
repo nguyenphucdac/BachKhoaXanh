@@ -1,53 +1,57 @@
-package com.dsd26.bachkhoaxanh.entity;
+package com.dsd26.bachkhoaxanh.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.dsd26.bachkhoaxanh.entity.ThongBao;
 
 
 /*
-* author: Nguyen Van Cong
+* author: Nguyễn Phúc Đạc
 */
-@Entity
-@Table(name="thong_bao")
 
-public class ThongBao {
-
+public class ThongBaoMD {
 	private String idThongBao;
 	private String noiDung;
 	private Date thoiGian;
 	private String idNguoiTao;
 	
+
+	public ThongBaoMD() {
+		super();
+	}
 	
-	@Id
-	@Column(name = "id_thong_bao", length = 30, nullable = false)
+	public ThongBaoMD(ThongBao thongBao){
+		this.idThongBao = thongBao.getIdThongBao();
+		this.noiDung = thongBao.getNoiDung();
+		this.thoiGian = thongBao.getThoiGian();
+		this.idNguoiTao = thongBao.getIdNguoiTao();
+	}
+	
+	public ThongBaoMD(String idThongBao, String noiDung, Date thoiGian, String idNguoiTao) {
+		super();
+		this.idThongBao = idThongBao;
+		this.noiDung = noiDung;
+		this.thoiGian = thoiGian;
+		this.idNguoiTao = idNguoiTao;
+	}
 	public String getIdThongBao() {
 		return idThongBao;
 	}
 	public void setIdThongBao(String idThongBao) {
 		this.idThongBao = idThongBao;
 	}
-	
-	@Column(name = "noi_dung", length = 200)
 	public String getNoiDung() {
 		return noiDung;
 	}
 	public void setNoiDung(String noiDung) {
 		this.noiDung = noiDung;
 	}
-	
-	@Column(name = "thoi_gian")
 	public Date getThoiGian() {
 		return thoiGian;
 	}
 	public void setThoiGian(Date thoiGian) {
 		this.thoiGian = thoiGian;
 	}
-	
-	@Column(name = "id_nguoi_tao", length = 20, nullable = false)
 	public String getIdNguoiTao() {
 		return idNguoiTao;
 	}

@@ -21,9 +21,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.CayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.DiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.LoaiCayDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.LoaiThanhVienDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.ThanhVienDAO;
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -131,6 +135,15 @@ public class ApplicationContextConfig {
    @Bean(name="diemCapNuocDAO")
    public IDiemCapNuocDAO getDiemCapNuocDAO() {
 	   return new DiemCapNuocDAO();
+   }
+   @Bean(name="thanhVienDAO")
+   public IThanhVienDAO getThanhVienDAO() {
+	   return new ThanhVienDAO();
+   }
+
+   @Bean(name="loaiThanhVienDAO")
+   public ILoaiThanhVienDAO getLoaiThanhVienDAO() {
+	   return new LoaiThanhVienDAO();
    }
  
 }
