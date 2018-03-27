@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div class=" form-grids row form-grids-right">
 					<div class="widget-shadow " data-example-id="basic-forms">
 						<div class="form-title col-md-12">
-							<h4 class="col-md-10">Cây :</h4>
+							<h4 class="col-md-8">Cây :</h4>
 							<a class="agile-icon" href="${pageContext.request.contextPath}/cay-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
 							
 						</div>
