@@ -125,33 +125,33 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div class=" form-grids row form-grids-right">
 					<div class="widget-shadow " data-example-id="basic-forms">
 						<div class="form-title col-md-12">
-							<h4 class="col-md-10">Cây :</h4>
-							<a class="agile-icon" href="${pageContext.request.contextPath}/cay-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
+							<h4 class="col-md-10">Lịch sử tưới :</h4>
+							<a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
 							
 						</div>
 							<table class="table">
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>Loại Cây</th>
-										<th>Tọa độ x</th>
-										<th>Tọa độ y</th>
-										<th>lượng nước cần</th>
-										<th>Tình trạng</th>
+										<th>Id Cây</th>
+										<th>Id Thành viên</th>
+										<th>Lượng nước tưới</th>
+										<th>Thời gian</th>
+										
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${danhSachCay.list}" var="cay">
+								<c:forEach items="${danhSachLichSuTuoi.list}" var="lichSuTuoi">
 								<tr class="active">
-										<td>${cay.idCay }</td>
-										<td>${cay.idLoaiCay}</td>
-										<td>${cay.toaDoX}</td>
-										<td>${cay.toaDoY }</td>
-										<td>${cay.luongNuocCan}</td>
-										<td>${cay.tinhTrang}</td>
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-sua?idCay=${cay.idCay}"><i class="fa fa-edit"></i>edit</a></td>
+										<td>${lichSuTuoi.idLichSuTuoi }</td>
+										<td>${lichSuTuoi.idCay}</td>
+										<td>${lichSuTuoi.idThanhVien}</td>
+										<td>${lichSuTuoi.luongNuocDaTuoi }</td>
+										<td>${lichSuTuoi.thoiGian}</td>
 										
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-xoa?idCay=${cay.idCay}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-sua?idLichSuTuoi=${lichSuTuoi.idLichSuTuoi}"><i class="fa fa-edit"></i>edit</a></td>
+										
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-xoa?idLichSuTuoi=${lichSuTuoi.idLichSuTuoi}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
 									</tr>
 								 </c:forEach>
 								</tbody>

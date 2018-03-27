@@ -56,13 +56,13 @@ public class LoaiThanhVienController {
 	}
 	
 	@RequestMapping(value = { "/loaithanhvien-tao-moi" }, method = RequestMethod.POST)
-	public String luuLoaithanhvien(Model model, @ModelAttribute("loaiThanhVienForm") @Validated LoaiThanhVienMD loaithanhvienMD, BindingResult result,
+	public String luuLoaithanhvien(Model model, @ModelAttribute("loaiThanhVienForm") @Validated LoaiThanhVienMD loaiThanhVienMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "redirect:/loaithanhvien-tao-moi";
 		}
 		try {
-			iLoaiThanhVienDAO.luu(loaithanhvienMD);
+			iLoaiThanhVienDAO.luu(loaiThanhVienMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
@@ -73,18 +73,18 @@ public class LoaiThanhVienController {
 	}
 	
 	@RequestMapping(value= {"/loaithanhvien-xoa"}, method = RequestMethod.GET)
-	public String xoathanhvien(@RequestParam(value = "idLoaiThanhVien", defaultValue = "0") String idLoaithanhvien) {
-		iLoaiThanhVienDAO.xoa(idLoaithanhvien);
+	public String xoathanhvien(@RequestParam(value = "idLoaiThanhVien", defaultValue = "0") String idLoaiThanhVien) {
+		iLoaiThanhVienDAO.xoa(idLoaiThanhVien);
 		return "redirect:/loaithanhvien";
 	}
 	
 	@RequestMapping(value = {"/loaithanhvien-sua"}, method = RequestMethod.GET)
-	public String suathanhvien(Model model, @RequestParam(value="idLoaiThanhVien", defaultValue = "0") String idLoaithanhvien,
+	public String suathanhvien(Model model, @RequestParam(value="idLoaiThanhVien", defaultValue = "0") String idLoaiThanhVien,
 			@ModelAttribute("loaiThanhVienForm") @Validated LoaiThanhVienMD loaithanhvienMD) {
 		
 		LoaiThanhVien loaiThanhVien = null;
-		if(idLoaithanhvien != null && idLoaithanhvien != "") {
-			loaiThanhVien = iLoaiThanhVienDAO.timKiem(idLoaithanhvien);
+		if(idLoaiThanhVien != null && idLoaiThanhVien != "") {
+			loaiThanhVien = iLoaiThanhVienDAO.timKiem(idLoaiThanhVien);
 		}
 		model.addAttribute("loaiThanhVien", loaiThanhVien);
 		

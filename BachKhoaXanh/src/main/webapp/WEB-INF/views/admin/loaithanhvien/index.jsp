@@ -141,11 +141,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<c:forEach items="${danhSachLoaiThanhVien.list}" var="loaiThanhVien">
 								<tr class="active">
 										<td>${loaiThanhVien.idLoaiThanhVien }</td>
-										<td>${loaiThanhVien.tenLoaithanhvien}</td>
+										<td>${loaiThanhVien.tenLoaiThanhVien}</td>
 										
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaiThanhVien-sua?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-edit"></i>edit</a></td>
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaithanhvien-sua?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-edit"></i>edit</a></td>
 										
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaiThanhVien-xoa?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaithanhvien-xoa?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
 									</tr>
 								 </c:forEach>
 								</tbody>

@@ -45,7 +45,7 @@ public class LichSuTuoiDAO implements ILichSuTuoiDAO {
 		lichSuTuoi.setIdCay(lichSuTuoiMD.getIdCay());
 		lichSuTuoi.setIdThanhVien(lichSuTuoiMD.getIdThanhVien());
 		lichSuTuoi.setLuongNuocDaTuoi(lichSuTuoiMD.getLuongNuocDaTuoi());
-		lichSuTuoi.setThoiGianTuoi(lichSuTuoiMD.getThoiGianTuoi());
+		lichSuTuoi.setThoiGian(lichSuTuoiMD.getThoiGian());
 		
 		this.sessionFactory.getCurrentSession().persist(lichSuTuoi);
 	}
@@ -56,7 +56,7 @@ public class LichSuTuoiDAO implements ILichSuTuoiDAO {
 		if(idLichSuTuoi == null || idLichSuTuoi.equals("")) {
 			return false;
 		}
-		sql = "delete from LoaiThanhVien where id_lich_su_tuoi= :id_lich_su_tuoi";
+		sql = "delete from LichSuTuoi where id_lich_su_tuoi= :id_lich_su_tuoi";
 		
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(sql);
@@ -83,7 +83,7 @@ public class LichSuTuoiDAO implements ILichSuTuoiDAO {
 	@Override
 	public PaginationResult<LichSuTuoiMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + LichSuTuoiMD.class.getName() 
-				+ " (p.idLichSuTuoi, p.idCay, p.idThanhVien, p.luongNuocDaTuoi, p.thoiGianTuoi) " 
+				+ " (p.idLichSuTuoi, p.idCay, p.idThanhVien, p.luongNuocDaTuoi, p.thoiGian) " 
 				+ " from "
 				+ LichSuTuoi.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

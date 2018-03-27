@@ -128,43 +128,32 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h4>Chỉnh sửa cây :</h4>
 						</div>
 						<div class="form-body">
-							<form:form modelAttribute="cayForm" method="POST" class="form-horizontal">
+							<form:form modelAttribute="lichSuTuoiForm" method="POST" class="form-horizontal">
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${cay.idCay}" />
+										<form:input path="idLichSuTuoi" type="text" class="form-control" id="inputEmail3" placeholder="id" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Loại cây</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Id cây</label>
 									<div class="col-sm-9">
-										<form:input path="idLoaiCay" type="text" class="form-control" id="inputEmail1" placeholder="loại cây" value="${cay.idLoaiCay}" />
+										<form:input path="idCay" type="text" class="form-control" id="inputEmail1" placeholder="id cây" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ x</label>
+									<label for="inputPassword3" class="col-sm-2 control-label">Id thành viên</label>
 									<div class="col-sm-9">
-										<form:input path="toaDoX" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ x" value="${cay.toaDoX}" />
+										<form:input path="idThanhVien" type="text" class="form-control" id="inputPassword3" placeholder="id thành viên" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ y</label>
+									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước đã tưới</label>
 									<div class="col-sm-9">
-										<form:input path="toaDoY" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ y" value="${cay.toaDoY}" />
+										<form:input path="luongNuocDaTuoi" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước" />
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước cần</label>
-									<div class="col-sm-9">
-										<form:input path="luongNuocCan" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocCan}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
-									<div class="col-sm-9">
-										<form:input path="tinhTrang" type="text" class="form-control" id="inputPassword3" placeholder="tình trạng" value="${cay.tinhTrang}" />
-									</div>
-								</div>
+								
 								<div class="col-sm-offset-2">
 									<button type="submit" class="btn btn-default">Xác nhận</button>
 								</div>

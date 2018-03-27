@@ -13,7 +13,7 @@ public class LichSuTuoiMD {
 	private String idCay;
 	private String idThanhVien;
 	private int luongNuocDaTuoi;
-	private Date thoiGianTuoi;
+	private Date thoiGian;
 	
 	
 	public LichSuTuoiMD() {
@@ -25,16 +25,16 @@ public class LichSuTuoiMD {
 		this.idCay = lichSuTuoi.getIdCay();
 		this.idThanhVien = lichSuTuoi.getIdThanhVien();
 		this.luongNuocDaTuoi = lichSuTuoi.getLuongNuocDaTuoi();
-		this.thoiGianTuoi = lichSuTuoi.getThoiGianTuoi();
+		this.thoiGian = lichSuTuoi.getThoiGian();
 	}
 	
-	public LichSuTuoiMD(String idLichSuTuoi, String idCay, String idThanhVien, int luongNuocDaTuoi, Date thoiGianTuoi) {
+	public LichSuTuoiMD(String idLichSuTuoi, String idCay, String idThanhVien, int luongNuocDaTuoi, Date thoiGian) {
 		super();
 		this.idLichSuTuoi = idLichSuTuoi;
 		this.idCay = idCay;
 		this.idThanhVien = idThanhVien;
 		this.luongNuocDaTuoi = luongNuocDaTuoi;
-		this.thoiGianTuoi = thoiGianTuoi;
+		this.thoiGian = thoiGian;
 	}
 	public String getIdLichSuTuoi() {
 		return idLichSuTuoi;
@@ -60,11 +60,11 @@ public class LichSuTuoiMD {
 	public void setLuongNuocDaTuoi(int luongNuocDaTuoi) {
 		this.luongNuocDaTuoi = luongNuocDaTuoi;
 	}
-	public Date getThoiGianTuoi() {
-		return thoiGianTuoi;
+	public Date getThoiGian() {
+		return thoiGian;
 	}
-	public void setThoiGianTuoi(Date thoiGianTuoi) {
-		this.thoiGianTuoi = thoiGianTuoi;
+	public void setThoiGian(Date thoiGian) {
+		this.thoiGian = thoiGian;
 	}
 	
 	

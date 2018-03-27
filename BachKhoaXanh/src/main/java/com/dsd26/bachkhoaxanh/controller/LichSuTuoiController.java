@@ -1,5 +1,9 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +60,17 @@ public class LichSuTuoiController {
 	@RequestMapping(value = { "/lichsutuoi-tao-moi" }, method = RequestMethod.POST)
 	public String luuLichSuTuoi(Model model, @ModelAttribute("lichSuTuoiForm") @Validated LichSuTuoiMD lichSuTuoiMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
+		
+		 
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	    Date date = new Date();  
+		lichSuTuoiMD.setThoiGian(date);
+		
+		
 		if (result.hasErrors()) {
+			System.out.println("có lỗi");
+			System.out.println(result.getAllErrors());
 			return "redirect:/lichsutuoi-tao-moi";
 		}
 		try {
@@ -96,11 +110,16 @@ public class LichSuTuoiController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes
 			) {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	    Date date = new Date();  
+		lichSuTuoiMD.setThoiGian(date);
+		
 		if (result.hasErrors()) {
             return "admin/lichsutuoi/sua";
         }
 		try {
-			System.out.println("gia tri cua id : " + lichSuTuoiMD.getIdLichSuTuoi());
+			
 			iLichSuTuoiDAO.xoa(lichSuTuoiMD.getIdLichSuTuoi().split(",")[0]);
 			lichSuTuoiMD.setIdLichSuTuoi(lichSuTuoiMD.getIdLichSuTuoi().split(",")[1]);
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
@@ -109,8 +128,8 @@ public class LichSuTuoiController {
 			String message = ex.getMessage();
             model.addAttribute("message", message);
             // Show product form.
-            return "admin/LichSuTuoi/taomoi";
+            return "admin/lichsutuoi/taomoi";
 		}
-		return "redirect:/LichSuTuoi";
+		return "redirect:/lichsutuoi";
 	}
 }

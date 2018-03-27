@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /*
 * author: Nguyen Van Cong
@@ -20,7 +22,9 @@ public class LichSuTuoi {
 	private String idCay;
 	private String idThanhVien;
 	private int luongNuocDaTuoi;
-	private Date thoiGianTuoi;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date thoiGian;
 	
 	@Id
 	@Column(name = "id_lich_su_tuoi", length = 20, nullable = false)
@@ -60,11 +64,12 @@ public class LichSuTuoi {
 	
 	
 	@Column(name = "thoi_gian")
-	public Date getThoiGianTuoi() {
-		return thoiGianTuoi;
+	
+	public Date getThoiGian() {
+		return thoiGian;
 	}
-	public void setThoiGianTuoi(Date thoiGianTuoi) {
-		this.thoiGianTuoi = thoiGianTuoi;
+	public void setThoiGian(Date thoiGian) {
+		this.thoiGian = thoiGian;
 	}
 	
 	
