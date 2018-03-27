@@ -132,25 +132,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
-										<form:input path="idThongBao" type="text" class="form-control" id="inputEmail3" placeholder="id" />
+										<form:input path="idThongBao" type="text" class="form-control" id="inputEmail3" value="${thongBao.idThongBao }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Nội dung</label>
 									<div class="col-sm-9">
-										<form:input path="noiDung" type="text" class="form-control" id="inputEmail1" placeholder="loại cây" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Thời gian</label>
-									<div class="col-sm-9">
-										<form:input path="thoigian" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ x" />
+										<form:input path="noiDung" type="text" class="form-control" id="inputEmail1" value="${thongBao.noiDung }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label"> id người tạo</label>
 									<div class="col-sm-9">
-										<form:input path="idNguoiTao" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ y" />
+										<form:input path="idNguoiTao" type="text" class="form-control" id="inputPassword3" value="${thongBao.idNguoiTao }" />
 									</div>
 								</div>
 								

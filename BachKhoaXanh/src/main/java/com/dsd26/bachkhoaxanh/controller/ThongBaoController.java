@@ -1,5 +1,8 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +58,16 @@ public class ThongBaoController {
 	}
 	
 	@RequestMapping(value = { "/thongbao-tao-moi" }, method = RequestMethod.POST)
-	public String luuThongBao(Model model, @ModelAttribute("thongBaoForm") @Validated ThongBaoMD ThongBaoMD, BindingResult result,
+	public String luuThongBao(Model model, @ModelAttribute("thongBaoForm") @Validated ThongBaoMD thongBaoMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
+		
+		thongBaoMD.setThoiGian(Calendar.getInstance().getTime());
+		
 		if (result.hasErrors()) {
 			return "redirect:/thongbao-tao-moi";
 		}
 		try {
-			iThongBaoDAO.luu(ThongBaoMD);
+			iThongBaoDAO.luu(thongBaoMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
@@ -72,14 +78,14 @@ public class ThongBaoController {
 	}
 	
 	@RequestMapping(value= {"/thongbao-xoa"}, method = RequestMethod.GET)
-	public String xoaCay(@RequestParam(value = "idThongBao", defaultValue = "0") String idThongBao) {
+	public String xoaThongBao(@RequestParam(value = "idThongBao", defaultValue = "0") String idThongBao) {
 		iThongBaoDAO.xoa(idThongBao);
 		return "redirect:/thongbao";
 	}
 	
 	@RequestMapping(value = {"/thongbao-sua"}, method = RequestMethod.GET)
-	public String suaCay(Model model, @RequestParam(value="idThongBao", defaultValue = "0") String idThongBao,
-			@ModelAttribute("thongBaoForm") @Validated ThongBaoMD ThongBaoMD) {
+	public String suaThongBao(Model model, @RequestParam(value="idThongBao", defaultValue = "0") String idThongBao,
+			@ModelAttribute("thongBaoForm") @Validated ThongBaoMD thongBaoMD) {
 		
 		ThongBao thongBao = null;
 		if(idThongBao != null && idThongBao != "") {
@@ -97,11 +103,15 @@ public class ThongBaoController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes
 			) {
+		thongBaoMD.setThoiGian(Calendar.getInstance().getTime());
+		
 		if (result.hasErrors()) {
+			System.out.println(thongBaoMD.getThoiGian());
+			System.out.println(result.getAllErrors());
             return "admin/thongbao/sua";
         }
 		try {
-			System.out.println("gia tri cua id : " + thongBaoMD.getIdThongBao());
+			
 			iThongBaoDAO.xoa(thongBaoMD.getIdThongBao().split(",")[0]);
 			thongBaoMD.setIdThongBao(thongBaoMD.getIdThongBao().split(",")[1]);
 			iThongBaoDAO.luu(thongBaoMD);
@@ -110,8 +120,8 @@ public class ThongBaoController {
 			String message = ex.getMessage();
             model.addAttribute("message", message);
             // Show product form.
-            return "admin/ThongBao/taomoi";
+            return "admin/thongbao/taomoi";
 		}
-		return "redirect:/ThongBao";
+		return "redirect:/thongbao";
 	}
 }

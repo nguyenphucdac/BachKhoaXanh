@@ -135,7 +135,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<th>id</th>
 										<th>Nội dung</th>
 										<th>Thời gian</th>
-										
+										<th>Id người tạo</th>
 										
 									</tr>
 								</thead>
@@ -145,7 +145,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<td>${thongBao.idThongBao }</td>
 										<td>${thongBao.noiDung}</td>
 										<td>${thongBao.thoiGian}</td>
-										
+										<td>${thongBao.idNguoiTao}</td>
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/thongbao-sua?idThongBao=${thongBao.idThongBao}"><i class="fa fa-edit"></i>edit</a></td>
 										
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/thongbao-xoa?idThongBao=${thongBao.idThongBao}"><i class="fa fa-times-circle-o"></i>Delete</a></td>

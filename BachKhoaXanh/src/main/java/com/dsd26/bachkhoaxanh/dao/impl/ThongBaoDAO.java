@@ -79,7 +79,7 @@ public class ThongBaoDAO implements IThongBaoDAO {
 	@Override
 	public PaginationResult<ThongBaoMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThongBaoMD.class.getName() 
-				+ " (p.idThongBao, p.noiDung, p.nguoiTao) " 
+				+ " (p.idThongBao, p.noiDung, p.thoiGian, p.idNguoiTao) " 
 				+ " from "
 				+ ThongBao.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

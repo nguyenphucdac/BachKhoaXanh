@@ -2,6 +2,7 @@ package com.dsd26.bachkhoaxanh.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -60,14 +61,8 @@ public class LichSuTuoiController {
 	@RequestMapping(value = { "/lichsutuoi-tao-moi" }, method = RequestMethod.POST)
 	public String luuLichSuTuoi(Model model, @ModelAttribute("lichSuTuoiForm") @Validated LichSuTuoiMD lichSuTuoiMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		
-		 
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-	    Date date = new Date();  
-		lichSuTuoiMD.setThoiGian(date);
-		
-		
+		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
+
 		if (result.hasErrors()) {
 			System.out.println("có lỗi");
 			System.out.println(result.getAllErrors());
@@ -110,10 +105,7 @@ public class LichSuTuoiController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes
 			) {
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-	    Date date = new Date();  
-		lichSuTuoiMD.setThoiGian(date);
+		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 		
 		if (result.hasErrors()) {
             return "admin/lichsutuoi/sua";

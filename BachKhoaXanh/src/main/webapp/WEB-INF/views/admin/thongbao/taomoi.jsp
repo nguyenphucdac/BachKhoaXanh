@@ -142,12 +142,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Thời gian</label>
-									<div class="col-sm-9">
-										<form:input path="thoigian" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ x" />
-									</div>
-								</div>
-								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label"> id người tạo</label>
 									<div class="col-sm-9">
 										<form:input path="idNguoiTao" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ y" />

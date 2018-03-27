@@ -132,25 +132,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
-										<form:input path="idLichSuTuoi" type="text" class="form-control" id="inputEmail3" placeholder="id" />
+										<form:input path="idLichSuTuoi" type="text" class="form-control" id="inputEmail3" value="${lichSuTuoi.idLichSuTuoi }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Id cây</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail1" placeholder="id cây" />
+										<form:input path="idCay" type="text" class="form-control" id="inputEmail1" value="${lichSuTuoi.idCay }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Id thành viên</label>
 									<div class="col-sm-9">
-										<form:input path="idThanhVien" type="text" class="form-control" id="inputPassword3" placeholder="id thành viên" />
+										<form:input path="idThanhVien" type="text" class="form-control" id="inputPassword3" value="${lichSuTuoi.idThanhVien }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước đã tưới</label>
 									<div class="col-sm-9">
-										<form:input path="luongNuocDaTuoi" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước" />
+										<form:input path="luongNuocDaTuoi" type="text" class="form-control" id="inputPassword3" value="${lichSuTuoi.luongNuocDaTuoi }"/>
 									</div>
 								</div>
 								
