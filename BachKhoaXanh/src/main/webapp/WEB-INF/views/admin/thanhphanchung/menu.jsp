@@ -34,8 +34,8 @@
 								</a>
 						<ul class="treeview-menu">
 							<li><a href="${pageContext.request.contextPath}/thongbao"><i class="fa fa-angle-right"></i> Thông báo</a></li>
-							<li><a href="${pageContext.request.contextPath}/loaicay"><i class="fa fa-angle-right"></i> Báo cáo tình trạng cây</a></li>
-							<li><a href="${pageContext.request.contextPath}/diemcapnuoc"><i class="fa fa-angle-right"></i> Báo cáo tình trạng dcn</a></li>
+							<li><a href="${pageContext.request.contextPath}/baocaotinhtrangcay"><i class="fa fa-angle-right"></i> Báo cáo tình trạng cây</a></li>
+							<li><a href="${pageContext.request.contextPath}/baocaotinhtrangdcn"><i class="fa fa-angle-right"></i> Báo cáo tình trạng điểm cấp nước</a></li>
 							
 
 						</ul></li>

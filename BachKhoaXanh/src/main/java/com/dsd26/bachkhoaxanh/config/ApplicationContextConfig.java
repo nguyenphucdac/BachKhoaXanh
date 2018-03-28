@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangCayDAO;
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
@@ -25,6 +27,8 @@ import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.IThongBaoDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.BaoCaoTinhTrangCayDAO;
+import com.dsd26.bachkhoaxanh.dao.impl.BaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.CayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.DiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.LichSuTuoiDAO;
@@ -151,7 +155,7 @@ public class ApplicationContextConfig {
    }
  
    @Bean(name="lichSuTuoiDAO")
-   public ILichSuTuoiDAO getlichSuTuoiDAO() {
+   public ILichSuTuoiDAO getLichSuTuoiDAO() {
 	   return new LichSuTuoiDAO();
    }
    
@@ -160,4 +164,13 @@ public class ApplicationContextConfig {
 	   return new ThongBaoDAO();
    }
    
+   @Bean(name="baoCaoTinhTrangCayDAO")
+   public IBaoCaoTinhTrangCayDAO getBaoCaoTinhTrangCayDAO() {
+	   return new BaoCaoTinhTrangCayDAO();
+   }
+   
+   @Bean(name="baoCaoTinhTrangDCNDAO")
+   public IBaoCaoTinhTrangDCNDAO getBaoCaoTinhTrangDCNDAO() {
+	   return new BaoCaoTinhTrangDCNDAO();
+   }
 }
