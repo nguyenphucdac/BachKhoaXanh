@@ -3,6 +3,8 @@ encoding//src/main/java/com/dsd26/bachkhoaxanh/config/ApplicationContextConfig.j
 encoding//src/main/java/com/dsd26/bachkhoaxanh/config/SpringWebAppInitializer.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/config/WebMvcConfig.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/config/WebSecurityConfig.java=UTF-8
+encoding//src/main/java/com/dsd26/bachkhoaxanh/controller/BaoCaoTinhTrangCayController.java=UTF-8
+encoding//src/main/java/com/dsd26/bachkhoaxanh/controller/BaoCaoTinhTrangDCNController.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/controller/CayController.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/controller/LichSuTuoiController.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/controller/LoaiCayController.java=UTF-8
@@ -23,6 +25,7 @@ encoding//src/main/java/com/dsd26/bachkhoaxanh/dao/impl/ThanhVienDAO.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/dao/impl/ThongBaoDAO.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/entity/Cay.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/entity/LoaiCay.java=UTF-8
+encoding//src/main/java/com/dsd26/bachkhoaxanh/model/BaoCaoTinhTrangDCNMD.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/CayMD.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/LichSuTuoiMD.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/LoaiCayMD.java=UTF-8

@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /*
-* author: Nguyen Van Cong
+* author: Vu Duc Viet
 */
 @Entity
 @Table(name="bao_cao_tinh_trang_dcn")
@@ -20,6 +22,8 @@ public class BaoCaoTinhTrangDCN {
 	private String idThanhVien;
 	private String idDiemCapNuoc;
 	private String tinhTrang;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date thoiGian;
 	
 	@Id
@@ -43,8 +47,8 @@ public class BaoCaoTinhTrangDCN {
 	public String getIdDiemCapNuoc() {
 		return idDiemCapNuoc;
 	}
-	public void setIdDiemCapNuoc(String idCay) {
-		this.idDiemCapNuoc = idCay;
+	public void setIdDiemCapNuoc(String idDiemCapNuoc) {
+		this.idDiemCapNuoc = idDiemCapNuoc;
 	}
 	
 	@Column(name = "tinh_trang", length = 50, nullable = false)
@@ -56,12 +60,12 @@ public class BaoCaoTinhTrangDCN {
 	}
 	
 	@Column(name = "thoi_gian")
+	
 	public Date getThoiGian() {
 		return thoiGian;
 	}
 	public void setThoiGian(Date thoiGian) {
 		this.thoiGian = thoiGian;
-	}
-	
+	}	
 	
 }
