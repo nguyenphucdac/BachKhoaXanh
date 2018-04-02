@@ -3,6 +3,10 @@ package com.dsd26.bachkhoaxanh.business;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
+
 public class TimDuongDi {
 	public static int MAX_COST = 1000;// gia tri chi phi lon nhat
 	public static int[][] minCost = new int[Map.Size_X][Map.Size_Y];

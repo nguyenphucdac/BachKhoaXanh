@@ -1,5 +1,9 @@
 package com.dsd26.bachkhoaxanh.business;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
+
 public class Map {
 	public static int Size_X = 34;
 	public static int Size_Y = 22;

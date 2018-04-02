@@ -1,5 +1,9 @@
 package com.dsd26.bachkhoaxanh.business;
 
+/*
+ * author: Nguyễn Phúc Đạc
+ */
+
 public class Point {
 	public int x;
 	public int y;
