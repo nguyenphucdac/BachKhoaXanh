@@ -5,7 +5,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.google.gson.Gson;
 
@@ -17,14 +20,13 @@ import com.google.gson.Gson;
 @Path("/get_cay")
 public class RESTfulService {
 	
-  
 	@Path("{idCay}")
 	@GET
 	@Produces("application/json")
 	public String getWeather_JSON(@PathParam("idCay") String idCay) {
 		System.out.println("value of :" + idCay);
 		CayMD cayMD = new CayMD("Xa_Cu_001", "Than_Go", 2, 3, 10, "Còn sống");
-
+	
 		Gson gson = new Gson();
 
 		String jsonObject = gson.toJson(cayMD);
