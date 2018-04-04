@@ -19,6 +19,7 @@ import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.google.gson.Gson;
 
 
 /*
@@ -42,6 +43,7 @@ public class CayController {
 			) {
 		final int maxResult = 10;
 		final int maxNavigationPage = 10;
+		
 		
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(page, maxResult, maxNavigationPage);
 		model.addAttribute("danhSachCay", danhSachCay);
@@ -118,4 +120,5 @@ public class CayController {
 		}
 		return "redirect:/cay";
 	}
+
 }

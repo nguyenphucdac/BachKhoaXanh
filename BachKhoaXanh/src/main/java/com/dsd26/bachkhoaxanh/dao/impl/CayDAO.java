@@ -71,6 +71,8 @@ public class CayDAO implements ICayDAO {
 		Criteria crit = session.createCriteria(Cay.class);
         crit.add(Restrictions.eq("idCay", idCay));
         return (Cay) crit.uniqueResult();
+		
+		//return new Cay();
 	}
 
 	@Override
@@ -97,7 +99,4 @@ public class CayDAO implements ICayDAO {
 		}
 		return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
 	}
-	
-	
-
 }

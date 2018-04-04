@@ -1,11 +1,11 @@
 package com.dsd26.bachkhoaxanh.api;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
@@ -17,18 +17,27 @@ import com.google.gson.Gson;
  */
 
 // class demo goi api tra ve json
-@Path("/get_cay")
+@RestController
 public class RESTfulService {
 	
-	@Path("{idCay}")
-	@GET
-	@Produces("application/json")
-	public String getWeather_JSON(@PathParam("idCay") String idCay) {
-		System.out.println("value of :" + idCay);
-		CayMD cayMD = new CayMD("Xa_Cu_001", "Than_Go", 2, 3, 10, "Còn sống");
+	@Autowired
+	private ICayDAO iCayDAO;
 	
+	@RequestMapping(value = "/get_cay/{idCay}", 
+            method = RequestMethod.GET
+           )
+    @ResponseBody
+    public String getCay(@PathVariable("idCay") String idCay)  {
+		System.out.println(idCay);
+		Cay cay = iCayDAO.timKiem(idCay);
+		
+		if(cay == null) {
+			return "bad request";
+		}
+		
+		CayMD cayMD = new CayMD(cay);
+		
 		Gson gson = new Gson();
-
 		String jsonObject = gson.toJson(cayMD);
 
 		return jsonObject;
