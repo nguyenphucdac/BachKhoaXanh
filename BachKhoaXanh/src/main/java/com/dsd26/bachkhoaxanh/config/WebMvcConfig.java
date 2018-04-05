@@ -27,10 +27,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
    // Cấu hình UTF-8 cho các trang.
    @Override
    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-       StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-       stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8)));
-       converters.add(stringConverter);
- 
+//       StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+//       stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8)));
+//       converters.add(stringConverter);
+// 
        // Add other converters ...
    }
  
