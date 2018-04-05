@@ -48,7 +48,7 @@ public class CayRESTController {
 		return danhSachCay.getList();
 	}
 	
-	@RequestMapping(value = "/get-direction-0/{idThanhVien}/{toaDoX}/{toaDoY}/{idCay}", 
+	@RequestMapping(value = "/get-direction-cay-0/{idThanhVien}/{toaDoX}/{toaDoY}/{idCay}", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
