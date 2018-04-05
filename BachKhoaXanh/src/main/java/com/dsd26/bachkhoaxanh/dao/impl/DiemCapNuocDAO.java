@@ -18,6 +18,8 @@ import com.dsd26.bachkhoaxanh.model.PaginationResult;
  * author: Vu Duc Viet
  */
 
+@Service
+@Transactional
 public class DiemCapNuocDAO implements IDiemCapNuocDAO{
 	
 	@Autowired

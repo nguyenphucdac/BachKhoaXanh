@@ -1,5 +1,7 @@
 package com.dsd26.bachkhoaxanh.model;
 
+import com.dsd26.bachkhoaxanh.entity.DiemCapNuoc;
+
 /*
 * author: Nguyen Van Cong
 */
@@ -15,6 +17,13 @@ public class DiemCapNuocMD
 	private int luongNuocToiDa;
 	private String tinhTrang;
 	
+	public DiemCapNuocMD(DiemCapNuoc diemCapNuoc) {
+		this.idDiemCapNuoc = diemCapNuoc.getIdDiemCapNuoc();
+		this.toaDoX = diemCapNuoc.getToaDoX();
+		this.toaDoY = diemCapNuoc.getToaDoY();
+		this.luongNuocToiDa = diemCapNuoc.getLuongNuocToiDa();
+		this.tinhTrang = diemCapNuoc.getTinhTrang();
+	}
 	
 	public DiemCapNuocMD(String idDiemCapNuoc, int toaDoX, int toaDoY, int luongNuocToiDa, String tinhTrang) {
 		super();
