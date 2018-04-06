@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 
 /*
@@ -37,11 +39,13 @@ public class CayDAO implements ICayDAO {
 		if(cay == null) {
 			cay = new Cay();
 		}
+		
 		cay.setIdCay(cayMD.getIdCay());
 		cay.setIdLoaiCay(cayMD.getIdLoaiCay());
 		cay.setToaDoX(cayMD.getToaDoX());
 		cay.setToaDoY(cayMD.getToaDoY());
-		cay.setLuongNuocCan(cayMD.getLuongNuocCan());
+		cay.setLuongNuocToiDa(cayMD.getLuongNuocToiDa());
+		cay.setLuongNuocDaTuoi(cayMD.getLuongNuocDaTuoi());
 		cay.setTinhTrang(cayMD.getTinhTrang());
 		
 		this.sessionFactory.getCurrentSession().persist(cay);
@@ -71,8 +75,6 @@ public class CayDAO implements ICayDAO {
 		Criteria crit = session.createCriteria(Cay.class);
         crit.add(Restrictions.eq("idCay", idCay));
         return (Cay) crit.uniqueResult();
-		
-		//return new Cay();
 	}
 
 	@Override
@@ -83,7 +85,7 @@ public class CayDAO implements ICayDAO {
 	@Override
 	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + CayMD.class.getName() 
-				+ " (p.idCay, p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocCan, p.tinhTrang) " 
+				+ " (p.idCay, p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocToiDa, p.luongNuocDaTuoi, p.tinhTrang) " 
 				+ " from "
 				+ Cay.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

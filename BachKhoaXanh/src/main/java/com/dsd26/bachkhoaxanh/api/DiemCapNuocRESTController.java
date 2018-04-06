@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dsd26.bachkhoaxanh.business.Map;
+import com.dsd26.bachkhoaxanh.business.Point;
+import com.dsd26.bachkhoaxanh.business.TimDuongDi;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.DiemCapNuoc;
 import com.dsd26.bachkhoaxanh.model.DiemCapNuocMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
@@ -40,6 +44,33 @@ public class DiemCapNuocRESTController {
 	public List<DiemCapNuocMD> getListDiemCapNuoc() {
 		PaginationResult<DiemCapNuocMD> danhsachDCN = iDiemCapNuocDAO.queryRoles(1, 20, 10);
 		return danhsachDCN.getList();
+	}
+	
+	@RequestMapping(value = "/get-direction-dcn-0/{idThanhVien}/{toaDoX}/{toaDoY}/{idDiemCapNuoc}", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Point> getDirection(
+			@PathVariable String idThanhVien, 
+			@PathVariable int toaDoX, 
+			@PathVariable int toaDoY, 
+			@PathVariable String idDiemCapNuoc) {
+
+		DiemCapNuoc diemCapNuoc = iDiemCapNuocDAO.timKiem(idDiemCapNuoc);
+		if (diemCapNuoc == null) {
+			return null;
+		}
+		
+		Point startPoint = new Point(toaDoX, toaDoY);
+		Point targetPoint = new Point(diemCapNuoc.getToaDoX(), diemCapNuoc.getToaDoY());
+		
+		Map.map[targetPoint.x][targetPoint.y] = 4;
+		
+		List<Point> trace;
+		trace = TimDuongDi.timDuongDi(startPoint, targetPoint);
+		Map.map[targetPoint.x][targetPoint.y] = 1;
+		
+		return trace;
 	}
 	
  }

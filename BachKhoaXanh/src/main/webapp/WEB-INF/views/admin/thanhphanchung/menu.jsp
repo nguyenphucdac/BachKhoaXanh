@@ -23,7 +23,9 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
-							<li class="header">MAIN NAVIGATION</li>
+							<li class="treeview"><a href="${pageContext.request.contextPath}/admin"> <i
+									class="fa fa-dashboard"></i> <span>Trang chủ</span>
+							</a></li>
 							<li class="treeview"><a href="index.html"> <i
 									class="fa fa-dashboard"></i> <span>Thống kê</span>
 							</a></li>
@@ -35,7 +37,7 @@
 						<ul class="treeview-menu">
 							<li><a href="${pageContext.request.contextPath}/thongbao"><i class="fa fa-angle-right"></i> Thông báo</a></li>
 							<li><a href="${pageContext.request.contextPath}/baocaotinhtrangcay"><i class="fa fa-angle-right"></i> Báo cáo tình trạng cây</a></li>
-							<li><a href="${pageContext.request.contextPath}/baocaotinhtrangdcn"><i class="fa fa-angle-right"></i> Báo cáo tình trạng điểm cấp nước</a></li>
+							<li><a href="${pageContext.request.contextPath}/baocaotinhtrangdcn"><i class="fa fa-angle-right"></i> Báo cáo  điểm cấp nước</a></li>
 							
 
 						</ul></li>
@@ -53,28 +55,7 @@
 							<li><a href="${pageContext.request.contextPath}/lichsutuoi"><i class="fa fa-angle-right"></i> Lịch sử tưới</a></li>
 
 						</ul></li>
-							<li class="treeview"><a href="charts.html"> <i
-									class="fa fa-pie-chart"></i> <span>Charts</span> <span
-									class="label label-primary pull-right">new</span>
-							</a></li>
-							<li class="treeview">
-							<li class="treeview"><a href="#"> <i
-									class="fa fa-laptop"></i> <span>UI Elements</span> <i
-									class="fa fa-angle-left pull-right"></i>
-							</a>
-								<ul class="treeview-menu">
-									<li><a href="general.html"><i
-											class="fa fa-angle-right"></i> General</a></li>
-									<li><a href="icons.html"><i class="fa fa-angle-right"></i>
-											Icons</a></li>
-									<li><a href="buttons.html"><i
-											class="fa fa-angle-right"></i> Buttons</a></li>
-									<li><a href="typography.html"><i
-											class="fa fa-angle-right"></i> Typography</a></li>
-								</ul></li>
-							<li><a href="widgets.html"> <i class="fa fa-th"></i> <span>Widgets</span>
-									<small class="label pull-right label-info">08</small>
-							</a></li>
+							
 							<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
 									<span>Forms</span> <i class="fa fa-angle-left pull-right"></i>
 							</a>

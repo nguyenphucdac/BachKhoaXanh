@@ -37,5 +37,7 @@ encoding//src/main/java/com/dsd26/bachkhoaxanh/model/LoaiThanhVienMD.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/PaginationResult.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/ThanhVienMD.java=UTF-8
 encoding//src/main/java/com/dsd26/bachkhoaxanh/model/ThongBaoMD.java=UTF-8
+encoding//src/main/java/com/dsd26/bachkhoaxanh/object/CayObject.java=UTF-8
 encoding//src/main/webapp/WEB-INF/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/cay/taomoi.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/trangchu/index.jsp=UTF-8

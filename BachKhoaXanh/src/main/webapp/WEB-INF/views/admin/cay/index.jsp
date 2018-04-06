@@ -136,7 +136,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<th>Loại Cây</th>
 										<th>Tọa độ x</th>
 										<th>Tọa độ y</th>
-										<th>lượng nước cần</th>
+										<th>lượng nước tối đa</th>
+										<th>lượng nước đã tưới</th>
 										<th>Tình trạng</th>
 									</tr>
 								</thead>
@@ -147,7 +148,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<td>${cay.idLoaiCay}</td>
 										<td>${cay.toaDoX}</td>
 										<td>${cay.toaDoY }</td>
-										<td>${cay.luongNuocCan}</td>
+										<td>${cay.luongNuocToiDa}</td>
+										<td>${cay.luongNuocDaTuoi}</td>
 										<td>${cay.tinhTrang}</td>
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-sua?idCay=${cay.idCay}"><i class="fa fa-edit"></i>edit</a></td>
 										

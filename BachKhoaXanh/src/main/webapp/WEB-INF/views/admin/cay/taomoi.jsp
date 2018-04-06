@@ -154,11 +154,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước cần</label>
+									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước tối đa</label>
 									<div class="col-sm-9">
-										<form:input path="luongNuocCan" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" />
+										<form:input path="luongNuocToiDa" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" />
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
 									<div class="col-sm-9">

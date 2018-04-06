@@ -1,5 +1,8 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +46,10 @@ public class CayController {
 			) {
 		final int maxResult = 10;
 		final int maxNavigationPage = 10;
-		
-		
+
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(page, maxResult, maxNavigationPage);
 		model.addAttribute("danhSachCay", danhSachCay);
+		
 		return "admin/cay/index";
 	}
 	
@@ -67,6 +70,7 @@ public class CayController {
 			return "redirect:/cay-tao-moi";
 		}
 		try {
+			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

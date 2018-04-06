@@ -19,6 +19,7 @@ public class ThanhVien {
 	private String matKhau;
 	private String tenDayDu;
 	private String idLoaiThanhVien;
+	private int trangThai;
 	
 	@Id
 	@Column(name = "id_thanh_vien", length = 20, nullable = false)
@@ -64,6 +65,15 @@ public class ThanhVien {
 	public void setIdLoaiThanhVien(String idLoaiThanhVien) {
 		this.idLoaiThanhVien = idLoaiThanhVien;
 	}
+	
+	@Column(name = "trang_thai", length = 2, nullable = false)
+	public int getTrangThai() {
+		return trangThai;
+	}
+	public void setTrangThai(int trangThai) {
+		this.trangThai = trangThai;
+	}
+	
 	
 	
 }

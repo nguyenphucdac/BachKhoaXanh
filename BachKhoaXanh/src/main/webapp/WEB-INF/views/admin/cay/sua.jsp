@@ -154,9 +154,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước cần</label>
+									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước tối đa</label>
 									<div class="col-sm-9">
-										<form:input path="luongNuocCan" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocCan}" />
+										<form:input path="luongNuocToiDa" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocToiDa}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước đã tưới</label>
+									<div class="col-sm-9">
+										<form:input path="luongNuocDaTuoi" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocDaTuoi}" />
 									</div>
 								</div>
 								<div class="form-group">

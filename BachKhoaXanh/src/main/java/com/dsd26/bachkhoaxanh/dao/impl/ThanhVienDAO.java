@@ -41,10 +41,11 @@ public class ThanhVienDAO implements IThanhVienDAO {
 		}
 		
 		thanhVien.setIdThanhVien(thanhVienMD.getIdThanhVien());
+		thanhVien.setIdLoaiThanhVien(thanhVienMD.getIdLoaiThanhVien());
 		thanhVien.setTenTaiKhoan(thanhVienMD.getTenTaiKhoan());
 		thanhVien.setMatKhau(thanhVienMD.getMatKhau());
 		thanhVien.setTenDayDu(thanhVienMD.getTenDayDu());
-		thanhVien.setIdLoaiThanhVien(thanhVienMD.getLoaiThanhVienMD().getIdLoaiThanhVien());
+		thanhVien.setTrangThai(thanhVienMD.getTrangThai());
 		
 		this.sessionFactory.getCurrentSession().persist(thanhVien);
 		
@@ -83,7 +84,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	@Override
 	public PaginationResult<ThanhVienMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThanhVienMD.class.getName() 
-				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu) " 
+				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.trangThai) " 
 				+ " from "
 				+ ThanhVien.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

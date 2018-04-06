@@ -1,5 +1,7 @@
 package com.dsd26.bachkhoaxanh.model;
 
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
+
 /*
  * author: Nguyễn Phúc Đạc
  */
@@ -11,6 +13,12 @@ public class LoaiCayMD {
 	public LoaiCayMD() {
 		super();
 	}
+	
+	public LoaiCayMD(LoaiCay loaiCay) {
+		this.idLoaiCay = loaiCay.getIdLoaiCay();
+		this.tenLoaiCay = loaiCay.getTenLoaiCay();
+	}
+	
 	public LoaiCayMD(String idLoaiCay, String tenLoaiCay) {
 		super();
 		this.idLoaiCay = idLoaiCay;

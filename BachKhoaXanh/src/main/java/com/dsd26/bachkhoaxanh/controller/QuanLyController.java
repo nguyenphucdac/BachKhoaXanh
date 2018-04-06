@@ -14,8 +14,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Transactional
 @EnableWebMvc
 public class QuanLyController {
+	@RequestMapping("/")
+	public String index1() {
+		return "/admin/trangchu/index";
+	}
+	
 	@RequestMapping("/admin")
-	public String index() {
+	public String index2() {
 		return "/admin/trangchu/index";
 	}
 }

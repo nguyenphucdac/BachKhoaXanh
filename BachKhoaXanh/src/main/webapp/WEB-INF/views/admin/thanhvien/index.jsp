@@ -136,6 +136,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<th>Tài khoản</th>
 										<th>Tên đầy đủ</th>
 										<th>Loại thành viên</th>
+										<th>Trạng thái</th>
 										
 									</tr>
 								</thead>
@@ -146,10 +147,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<td>${thanhVien.taiKhoan}</td>
 										<td>${thanhVien.tenDayDu}</td>
 										<td>${thanhVien.idLoaiThanhVien }</td>
+										<td>${thanhVien.trangThai }</td>
+										 										
 										
-<%-- 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-sua?idCay=${cay.idCay}"><i class="fa fa-edit"></i>edit</a></td> --%>
-										
-<%-- 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/cay-xoa?idCay=${cay.idCay}"><i class="fa fa-times-circle-o"></i>Delete</a></td> --%>
+										<td><a class="agile-icon" href="${pageContext.request.contextPath}/thanhvien-xoa?idThanhVien=${thanhVien.idThanhVien }"><i class="fa fa-times-circle-o"></i>Delete</a></td> 
 									</tr>
 								 </c:forEach>
 								</tbody>

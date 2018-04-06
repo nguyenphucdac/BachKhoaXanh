@@ -2,8 +2,10 @@ package com.dsd26.bachkhoaxanh.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -20,6 +22,7 @@ public class LoaiCay {
 	public String getIdLoaiCay() {
 		return idLoaiCay;
 	}
+	
 	public void setIdLoaiCay(String idLoaiCay) {
 		this.idLoaiCay = idLoaiCay;
 	}

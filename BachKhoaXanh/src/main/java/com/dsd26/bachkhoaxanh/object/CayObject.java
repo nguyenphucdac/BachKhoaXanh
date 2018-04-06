@@ -1,80 +1,88 @@
-package com.dsd26.bachkhoaxanh.entity;
+package com.dsd26.bachkhoaxanh.object;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 
-/*
- * author: Nguyễn Phúc Đạc
- */
-
-@Entity
-@Table(name="Cay")
-public class Cay {
+public class CayObject {
 	private String idCay;
-	private String idLoaiCay;
 	private int toaDoX;
 	private int toaDoY;
 	private int luongNuocToiDa;
 	private int luongNuocDaTuoi;
 	private String tinhTrang;
+	private LoaiCayMD loaiCayMD;
+
+	public CayObject() {}
 	
-	@Id
-	@Column(name = "id_cay", length = 20, nullable = false)
+	public CayObject(CayMD cayMD, LoaiCayMD loaiCayMD) {
+		this.idCay = cayMD.getIdCay();
+		this.toaDoX = cayMD.getToaDoX();
+		this.toaDoY = cayMD.getToaDoY();
+		this.luongNuocToiDa = cayMD.getLuongNuocToiDa();
+		this.luongNuocDaTuoi = cayMD.getLuongNuocDaTuoi();
+		this.tinhTrang = cayMD.getTinhTrang();
+		
+		this.loaiCayMD = loaiCayMD;
+	}
+	
+
 	public String getIdCay() {
 		return idCay;
 	}
+
 	public void setIdCay(String idCay) {
 		this.idCay = idCay;
 	}
-	
-	@Column(name = "id_loai_cay", length = 20, nullable = false)
-	public String getIdLoaiCay() {
-		return idLoaiCay;
-	}
-	public void setIdLoaiCay(String idLoaiCay) {
-		this.idLoaiCay = idLoaiCay;
-	}
-	@Column(name = "toa_do_x", length = 20, nullable = false)
+
 	public int getToaDoX() {
 		return toaDoX;
 	}
+
 	public void setToaDoX(int toaDoX) {
 		this.toaDoX = toaDoX;
 	}
-	
-	@Column(name = "toa_do_y", length = 20, nullable = false)
+
 	public int getToaDoY() {
 		return toaDoY;
 	}
+
 	public void setToaDoY(int toaDoY) {
 		this.toaDoY = toaDoY;
 	}
-	
-	@Column(name = "luong_nuoc_toi_da", length = 20, nullable = false)
+
 	public int getLuongNuocToiDa() {
 		return luongNuocToiDa;
 	}
+
 	public void setLuongNuocToiDa(int luongNuocToiDa) {
 		this.luongNuocToiDa = luongNuocToiDa;
 	}
-	
-	@Column(name = "luong_nuoc_da_tuoi", length = 20, nullable = false)
+
 	public int getLuongNuocDaTuoi() {
 		return luongNuocDaTuoi;
 	}
+
 	public void setLuongNuocDaTuoi(int luongNuocDaTuoi) {
 		this.luongNuocDaTuoi = luongNuocDaTuoi;
 	}
-	
-	@Column(name = "tinh_trang", length = 50, nullable = false)
+
 	public String getTinhTrang() {
 		return tinhTrang;
 	}
+
 	public void setTinhTrang(String tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
+
+	public LoaiCayMD getLoaiCayMD() {
+		return loaiCayMD;
+	}
+
+	public void setLoaiCayMD(LoaiCayMD loaiCayMD) {
+		this.loaiCayMD = loaiCayMD;
+	}
+
+	
 	
 	
 }
