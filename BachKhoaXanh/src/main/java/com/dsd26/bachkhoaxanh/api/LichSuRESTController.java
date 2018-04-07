@@ -52,7 +52,7 @@ public class LichSuRESTController {
 	public List<LichSuTuoiObject>  getCay(@PathVariable("idCay") String idCay) {
 		List<LichSuTuoiObject> lstLichSuTuoi = new ArrayList<>();
 		
-		PaginationResult<LichSuTuoiMD> danhSach = iLichSuTuoiDAO.queryRoles(1, 20, 10);
+		PaginationResult<LichSuTuoiMD> danhSach = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		
 		for(int i = 0 ; i < danhSach.getList().size(); i++) {
 			
@@ -85,7 +85,7 @@ public class LichSuRESTController {
 	public List<LichSuTuoiObject>  getThanhVien(@PathVariable("idThanhVien") String idThanhVien) {
 		List<LichSuTuoiObject> lstLichSuTuoi = new ArrayList<>();
 		
-		PaginationResult<LichSuTuoiMD> danhSach = iLichSuTuoiDAO.queryRoles(1, 20, 10);
+		PaginationResult<LichSuTuoiMD> danhSach = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		
 		for(int i = 0 ; i < danhSach.getList().size(); i++) {
 			
