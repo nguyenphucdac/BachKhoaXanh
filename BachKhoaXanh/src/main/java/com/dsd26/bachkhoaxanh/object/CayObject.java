@@ -1,5 +1,6 @@
 package com.dsd26.bachkhoaxanh.object;
 
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 
 public class CayObject {
@@ -13,6 +14,16 @@ public class CayObject {
 
 	public CayObject() {}
 	
+	public CayObject(Cay cay, LoaiCayObject loaiCayObject) {
+		this.idCay = cay.getIdCay();
+		this.toaDoX = cay.getToaDoX();
+		this.toaDoY = cay.getToaDoY();
+		this.luongNuocToiDa = cay.getLuongNuocToiDa();
+		this.luongNuocDaTuoi = cay.getLuongNuocDaTuoi();
+		this.tinhTrang = cay.getTinhTrang();
+		this.loaiCayObject = loaiCayObject;
+	}
+	
 	public CayObject(CayMD cayMD, LoaiCayObject loaiCayObject) {
 		this.idCay = cayMD.getIdCay();
 		this.toaDoX = cayMD.getToaDoX();
@@ -20,11 +31,10 @@ public class CayObject {
 		this.luongNuocToiDa = cayMD.getLuongNuocToiDa();
 		this.luongNuocDaTuoi = cayMD.getLuongNuocDaTuoi();
 		this.tinhTrang = cayMD.getTinhTrang();
-		
 		this.loaiCayObject = loaiCayObject;
 	}
 	
-
+	
 	public String getIdCay() {
 		return idCay;
 	}

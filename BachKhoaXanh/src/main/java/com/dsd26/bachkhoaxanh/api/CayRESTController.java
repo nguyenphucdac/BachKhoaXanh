@@ -53,13 +53,9 @@ public class CayRESTController {
 			return new ResponseEntity<>(new CayObject(), headers, HttpStatus.BAD_REQUEST);
 		}
 		
-		CayMD cayMD = new CayMD(cay);
 		LoaiCay loaiCay = iLoaiCayDAO.timKiem(cay.getIdLoaiCay());
 		LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
-		loaiCayObject.setAnhLoaiCay("http://localhost:9999/get-anh-loai-cay?idLoaiCay=" + cay.getIdLoaiCay());
-		CayObject cayObj = new CayObject(cayMD, loaiCayObject);
-		
-		headers.add("message", "successfuly");
+		CayObject cayObj = new CayObject(cay, loaiCayObject);
 		
 		return new ResponseEntity<>(cayObj, headers, HttpStatus.OK);
 	}
@@ -75,8 +71,6 @@ public class CayRESTController {
 			CayMD cayMD = danhSachCay.getList().get(i);
 			LoaiCay loaiCay = iLoaiCayDAO.timKiem(cayMD.getIdLoaiCay());
 			LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
-			loaiCayObject.setAnhLoaiCay("http://localhost:9999/get-anh-loai-cay?idLoaiCay=" + cayMD.getIdLoaiCay());
-			
 			CayObject cayObj = new CayObject(cayMD, loaiCayObject);
 			
 			lstCayObj.add(cayObj);

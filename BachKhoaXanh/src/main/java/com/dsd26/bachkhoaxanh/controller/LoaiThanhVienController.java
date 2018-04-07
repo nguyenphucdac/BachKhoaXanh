@@ -120,7 +120,7 @@ public class LoaiThanhVienController {
 		return "redirect:/loaithanhvien";
 	}
 	
-	@RequestMapping(value = { "/anh-loai-thanh-vien" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/get-anh-loai-thanh-vien" }, method = RequestMethod.GET)
 	public void memberImage(HttpServletRequest request, HttpServletResponse response, Model model,
 			@RequestParam("idLoaiThanhVien") String idLoaiThanhVien) throws IOException {
 		LoaiThanhVien loaiThanhVien = null;

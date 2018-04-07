@@ -15,13 +15,13 @@ public class ThanhVienObject {
 		super();
 	}
 	
-	public ThanhVienObject(ThanhVien thanhVien, LoaiThanhVienObject loaiThanhVien, String anhThanhVien) {
+	public ThanhVienObject(ThanhVien thanhVien, LoaiThanhVienObject loaiThanhVien) {
 		super();
 		this.idThanhVien = thanhVien.getIdThanhVien();
 		this.tenTaiKhoan = thanhVien.getTenTaiKhoan();
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
-		this.anhThanhVien = anhThanhVien;
+		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
 		this.loaiThanhVien = loaiThanhVien;
 	}
 	

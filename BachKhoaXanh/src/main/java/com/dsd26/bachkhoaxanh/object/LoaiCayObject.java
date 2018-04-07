@@ -3,6 +3,7 @@ package com.dsd26.bachkhoaxanh.object;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 
 public class LoaiCayObject {
+	
 	private String idLoaiCay;
 	private String tenLoaiCay;
 	private String anhLoaiCay;
@@ -10,6 +11,7 @@ public class LoaiCayObject {
 	public LoaiCayObject(LoaiCay loaiCay) {
 		this.idLoaiCay = loaiCay.getIdLoaiCay();
 		this.tenLoaiCay = loaiCay.getTenLoaiCay();
+		this.anhLoaiCay = Host.getHost() + "anh-loai-cay?idLoaiCay=" + loaiCay.getIdLoaiCay();
 	}
 	
 	public LoaiCayObject() {

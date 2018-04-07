@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
@@ -59,5 +64,15 @@ public class ThanhVienController {
 			response.getOutputStream().write(thanhVien.getAnhThanhVien());
 		}
 		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(value = "/get-anh-thanh-vien",method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getImage(@RequestParam("idThanhVien") String idThanhVien) throws IOException {
+	    final HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.IMAGE_PNG);
+	    ThanhVien thanhVien = this.iThanhVienDAO.timKiem(idThanhVien);
+
+	    return new ResponseEntity<byte[]>(thanhVien.getAnhThanhVien(), headers, HttpStatus.CREATED);
+
 	}
 }
