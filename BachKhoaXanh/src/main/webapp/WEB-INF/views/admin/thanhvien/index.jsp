@@ -145,7 +145,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<c:forEach items="${danhSachThanhVien.list}" var="thanhVien">
 								<tr class="active">
 										<td>${thanhVien.idThanhVien }</td>
-										<td>${thanhVien.taiKhoan}</td>
+										<td>${thanhVien.tenTaiKhoan}</td>
 										<td>${thanhVien.tenDayDu}</td>
 										<td>${thanhVien.idLoaiThanhVien }</td>
 										<td>${thanhVien.trangThai }</td>

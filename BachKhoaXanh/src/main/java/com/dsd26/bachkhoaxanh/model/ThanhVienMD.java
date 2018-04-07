@@ -30,11 +30,12 @@ public class ThanhVienMD {
 		this.trangThai = thanhVien.getTrangThai();
 	}
 	
-	public ThanhVienMD(String idThanhVien, String tenTaiKhoan, String tenDayDu, int trangThai) {
+	public ThanhVienMD(String idThanhVien, String tenTaiKhoan, String tenDayDu, String idLoaiThanhVien, int trangThai) {
 		super();
 		this.idThanhVien = idThanhVien;
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.tenDayDu = tenDayDu;
+		this.idLoaiThanhVien = idLoaiThanhVien;
 		this.trangThai = trangThai;
 	}
 

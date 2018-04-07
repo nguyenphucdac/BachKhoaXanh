@@ -78,7 +78,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	@Override
 	public ThanhVien timKiem(String idThanhVien) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Criteria crit = session.createCriteria(LoaiCay.class);
+		Criteria crit = session.createCriteria(ThanhVien.class);
         crit.add(Restrictions.eq("idThanhVien", idThanhVien));
         return (ThanhVien) crit.uniqueResult();
 	}
@@ -91,7 +91,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	@Override
 	public PaginationResult<ThanhVienMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThanhVienMD.class.getName() 
-				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.trangThai) " 
+				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.idLoaiThanhVien, p.trangThai) " 
 				+ " from "
 				+ ThanhVien.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {
