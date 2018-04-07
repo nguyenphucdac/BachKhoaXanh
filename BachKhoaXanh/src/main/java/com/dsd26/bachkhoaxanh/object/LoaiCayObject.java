@@ -1,28 +1,26 @@
-package com.dsd26.bachkhoaxanh.model;
-
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+package com.dsd26.bachkhoaxanh.object;
 
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 
-/*
- * author: Nguyễn Phúc Đạc
- */
-
-public class LoaiCayMD {
+public class LoaiCayObject {
 	private String idLoaiCay;
 	private String tenLoaiCay;
-	private CommonsMultipartFile anhLoaiCay;
+	private String anhLoaiCay;
 	
-	public LoaiCayMD() {
-		super();
+	public LoaiCayObject(LoaiCay loaiCay) {
+		this.idLoaiCay = loaiCay.getIdLoaiCay();
+		this.tenLoaiCay = loaiCay.getTenLoaiCay();
 	}
 	
-	public LoaiCayMD(String idLoaiCay, String tenLoaiCay) {
+	public LoaiCayObject() {
+		super();
+	}
+	public LoaiCayObject(String idLoaiCay, String tenLoaiCay, String anhLoaiCay) {
 		super();
 		this.idLoaiCay = idLoaiCay;
 		this.tenLoaiCay = tenLoaiCay;
+		this.anhLoaiCay = anhLoaiCay;
 	}
-	
 	public String getIdLoaiCay() {
 		return idLoaiCay;
 	}
@@ -35,15 +33,12 @@ public class LoaiCayMD {
 	public void setTenLoaiCay(String tenLoaiCay) {
 		this.tenLoaiCay = tenLoaiCay;
 	}
-
-	public CommonsMultipartFile getAnhLoaiCay() {
+	public String getAnhLoaiCay() {
 		return anhLoaiCay;
 	}
-
-	public void setAnhLoaiCay(CommonsMultipartFile anhLoaiCay) {
+	public void setAnhLoaiCay(String anhLoaiCay) {
 		this.anhLoaiCay = anhLoaiCay;
 	}
-	
 	
 	
 }

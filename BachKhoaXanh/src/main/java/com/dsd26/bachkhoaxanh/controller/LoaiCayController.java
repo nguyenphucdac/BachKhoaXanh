@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -133,4 +137,15 @@ public class LoaiCayController {
 	       }
 	       response.getOutputStream().close();
 	   }
+	
+	
+	@RequestMapping(value = "/get-anh-loai-cay",method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getImage(@RequestParam("idLoaiCay") String idLoaiCay) throws IOException {
+	    final HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.IMAGE_PNG);
+	    LoaiCay loaiCay = this.iLoaiCayDAO.timKiem(idLoaiCay);
+
+	    return new ResponseEntity<byte[]>(loaiCay.getAnhLoaiCay(), headers, HttpStatus.CREATED);
+
+	}
 }

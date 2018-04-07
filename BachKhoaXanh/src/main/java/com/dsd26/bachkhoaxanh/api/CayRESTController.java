@@ -3,8 +3,15 @@ package com.dsd26.bachkhoaxanh.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.ws.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +24,12 @@ import com.dsd26.bachkhoaxanh.business.TimDuongDi;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.object.CayObject;
+import com.dsd26.bachkhoaxanh.object.LoaiCayObject;
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -36,37 +45,45 @@ public class CayRESTController {
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public CayObject getCay(@PathVariable("idCay") String idCay) {
+	public ResponseEntity<CayObject>  getCay(@PathVariable("idCay") String idCay) {
+		final HttpHeaders headers = new HttpHeaders();
 		Cay cay = iCayDAO.timKiem(idCay);
 		if (cay == null) {
-			return null;
+			headers.add("message", "fail");
+			return new ResponseEntity<>(new CayObject(), headers, HttpStatus.BAD_REQUEST);
 		}
 		
 		CayMD cayMD = new CayMD(cay);
-		LoaiCayMD loaiCayMD = new LoaiCayMD(iLoaiCayDAO.timKiem(cay.getIdLoaiCay()));
-		CayObject cayObj = new CayObject(cayMD, loaiCayMD);
+		LoaiCay loaiCay = iLoaiCayDAO.timKiem(cay.getIdLoaiCay());
+		LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
+		loaiCayObject.setAnhLoaiCay("http://localhost:9999/get-anh-loai-cay?idLoaiCay=" + cay.getIdLoaiCay());
+		CayObject cayObj = new CayObject(cayMD, loaiCayObject);
 		
-		return cayObj;
+		headers.add("message", "successfuly");
+		
+		return new ResponseEntity<>(cayObj, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/get-list-cay", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<CayObject> getListCay() {
+	public ResponseEntity<List<CayObject>> getListCay() {
 		List<CayObject> lstCayObj = new ArrayList<CayObject>();
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, 20, 10);
 		System.out.println(danhSachCay.getList().size());
 		for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
 			
 			CayMD cayMD = danhSachCay.getList().get(i);
-			System.out.println(cayMD.getTinhTrang());
+			LoaiCay loaiCay = iLoaiCayDAO.timKiem(cayMD.getIdLoaiCay());
+			LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
+			loaiCayObject.setAnhLoaiCay("http://localhost:9999/get-anh-loai-cay?idLoaiCay=" + cayMD.getIdLoaiCay());
 			
-			LoaiCayMD loaiCayMD = new LoaiCayMD(iLoaiCayDAO.timKiem(cayMD.getIdLoaiCay()));
-			CayObject cayObj = new CayObject(cayMD, loaiCayMD);
+			CayObject cayObj = new CayObject(cayMD, loaiCayObject);
 			
 			lstCayObj.add(cayObj);
 		}
-		
-		return lstCayObj;
+		final HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "successfuly");
+		return new ResponseEntity<>(lstCayObj, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/get-direction-cay-0/{idThanhVien}/{toaDoX}/{toaDoY}/{idCay}", 
