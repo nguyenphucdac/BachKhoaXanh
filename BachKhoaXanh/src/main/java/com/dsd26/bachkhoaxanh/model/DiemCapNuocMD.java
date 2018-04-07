@@ -48,7 +48,7 @@ public class DiemCapNuocMD
 	public int getToaDoX() {
 		return toaDoX;
 	}
-	public void setToDoX(int toaDoX) {
+	public void setToaDoX(int toaDoX) {
 		this.toaDoX = toaDoX;
 	}
 	public int getToaDoY() {

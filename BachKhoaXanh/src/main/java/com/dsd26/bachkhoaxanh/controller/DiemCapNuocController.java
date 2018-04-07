@@ -64,6 +64,7 @@ public class DiemCapNuocController {
 			return "redirect:/diemcapnuoc-tao-moi";
 		}
 		try {
+			//diemCapNuocMD.setToaDoX(10);
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
