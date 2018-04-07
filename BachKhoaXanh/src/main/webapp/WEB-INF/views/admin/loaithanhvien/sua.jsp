@@ -128,7 +128,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h4>Chỉnh sửa loại thành viên :</h4>
 						</div>
 						<div class="form-body">
-							<form:form modelAttribute="loaiThanhVienForm" method="POST" class="form-horizontal">
+							<form:form modelAttribute="loaiThanhVienForm" method="POST" class="form-horizontal" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
@@ -139,6 +139,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<label for="inputEmail3" class="col-sm-2 control-label">Loại thành viên</label>
 									<div class="col-sm-9">
 										<form:input path="tenLoaiThanhVien" type="text" class="form-control" id="inputEmail1" placeholder="Tên loại thành viên" value="${loaiThanhVien.tenLoaiThanhVien }" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">icon</label>
+									<div class="col-sm-4">
+										<form:input path="anhLoaiThanhVien" type="file" class="form-control" />
+									</div>
+									<div class="col-sm-4">
+										<img src="${pageContext.request.contextPath}/anh-loai-thanh-vien?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien }" width="32"/>
 									</div>
 								</div>
 								<div class="col-sm-offset-2">

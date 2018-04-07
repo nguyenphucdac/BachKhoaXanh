@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 public class LoaiCay {
 	private String idLoaiCay;
 	private String tenLoaiCay;
+	private byte[] anhLoaiCay;
 	
 	@Id
 	@Column(name = "id_loai_cay", length = 20, nullable = false)
@@ -34,6 +36,17 @@ public class LoaiCay {
 	public void setTenLoaiCay(String tenLoaiCay) {
 		this.tenLoaiCay = tenLoaiCay;
 	}
+
+	@Lob
+    @Column(name = "anh_loai_cay", length = Integer.MAX_VALUE, nullable = true)
+	public byte[] getAnhLoaiCay() {
+		return anhLoaiCay;
+	}
+
+	public void setAnhLoaiCay(byte[] anhLoaiCay) {
+		this.anhLoaiCay = anhLoaiCay;
+	}
+	
 	
 	
 }

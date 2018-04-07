@@ -134,7 +134,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<tr>
 										<th>id</th>
 										<th>Loại thành viên</th>
-										
+										<th>Icon</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -142,7 +142,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<tr class="active">
 										<td>${loaiThanhVien.idLoaiThanhVien }</td>
 										<td>${loaiThanhVien.tenLoaiThanhVien}</td>
-										
+										<td><img src="${pageContext.request.contextPath}/anh-loai-thanh-vien?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien }" width="32"/></td>
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaithanhvien-sua?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-edit"></i>edit</a></td>
 										
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaithanhvien-xoa?idLoaiThanhVien=${loaiThanhVien.idLoaiThanhVien}"><i class="fa fa-times-circle-o"></i>Delete</a></td>

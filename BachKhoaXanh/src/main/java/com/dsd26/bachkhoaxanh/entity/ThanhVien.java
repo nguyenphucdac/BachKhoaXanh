@@ -20,6 +20,7 @@ public class ThanhVien {
 	private String tenDayDu;
 	private String idLoaiThanhVien;
 	private int trangThai;
+	private byte[] anhThanhVien;
 	
 	@Id
 	@Column(name = "id_thanh_vien", length = 20, nullable = false)
@@ -73,6 +74,15 @@ public class ThanhVien {
 	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
 	}
+	
+	@Column(name = "anh_thanh_vien", length = Integer.MAX_VALUE, nullable = true)
+	public byte[] getAnhThanhVien() {
+		return anhThanhVien;
+	}
+	public void setAnhThanhVien(byte[] anhThanhVien) {
+		this.anhThanhVien = anhThanhVien;
+	}
+	
 	
 	
 	

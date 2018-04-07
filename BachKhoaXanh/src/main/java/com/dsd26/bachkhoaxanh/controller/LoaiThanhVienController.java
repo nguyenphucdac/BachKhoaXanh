@@ -1,5 +1,9 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
+import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.LoaiThanhVien;
 import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
@@ -102,9 +107,8 @@ public class LoaiThanhVienController {
             return "admin/loaithanhvien/sua";
         }
 		try {
-			System.out.println("gia tri cua id : " + loaiThanhVienMD.getIdLoaiThanhVien());
+			
 			iLoaiThanhVienDAO.xoa(loaiThanhVienMD.getIdLoaiThanhVien().split(",")[0]);
-			loaiThanhVienMD.setIdLoaiThanhVien(loaiThanhVienMD.getIdLoaiThanhVien().split(",")[1]);
 			iLoaiThanhVienDAO.luu(loaiThanhVienMD);
 		}
 		catch(Exception ex) {
@@ -114,5 +118,19 @@ public class LoaiThanhVienController {
             return "admin/loaithanhvien/taomoi";
 		}
 		return "redirect:/loaithanhvien";
+	}
+	
+	@RequestMapping(value = { "/anh-loai-thanh-vien" }, method = RequestMethod.GET)
+	public void memberImage(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam("idLoaiThanhVien") String idLoaiThanhVien) throws IOException {
+		LoaiThanhVien loaiThanhVien = null;
+		if (idLoaiThanhVien != null) {
+			loaiThanhVien = this.iLoaiThanhVienDAO.timKiem(idLoaiThanhVien);
+		}
+		if (loaiThanhVien != null && loaiThanhVien.getAnhLoaiThanhVien() != null) {
+			response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+			response.getOutputStream().write(loaiThanhVien.getAnhLoaiThanhVien());
+		}
+		response.getOutputStream().close();
 	}
 }

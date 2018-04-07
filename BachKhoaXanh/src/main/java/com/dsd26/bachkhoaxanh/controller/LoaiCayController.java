@@ -1,5 +1,9 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,9 +107,7 @@ public class LoaiCayController {
             return "admin/loaicay/sua";
         }
 		try {
-			System.out.println("gia tri cua id : " + loaiCayMD.getIdLoaiCay());
-			iLoaiCayDAO.xoa(loaiCayMD.getIdLoaiCay().split(",")[0]);
-			loaiCayMD.setIdLoaiCay(loaiCayMD.getIdLoaiCay().split(",")[1]);
+			iLoaiCayDAO.xoa(loaiCayMD.getIdLoaiCay());
 			iLoaiCayDAO.luu(loaiCayMD);
 		}
 		catch(Exception ex) {
@@ -117,4 +119,17 @@ public class LoaiCayController {
 		return "redirect:/loaicay";
 	}
 	
+	@RequestMapping(value = { "/anh-loai-cay" }, method = RequestMethod.GET)
+	   public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
+	           @RequestParam("idLoaiCay") String idLoaiCay) throws IOException {
+	       LoaiCay loaiCay = null;
+	       if (idLoaiCay != null) {
+	    	   loaiCay = this.iLoaiCayDAO.timKiem(idLoaiCay);
+	       }
+	       if (loaiCay != null && loaiCay.getAnhLoaiCay() != null) {
+	           response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+	           response.getOutputStream().write(loaiCay.getAnhLoaiCay());
+	       }
+	       response.getOutputStream().close();
+	   }
 }

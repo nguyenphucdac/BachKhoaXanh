@@ -47,6 +47,13 @@ public class LoaiThanhVienDAO implements ILoaiThanhVienDAO {
 		loaiThanhVien.setIdLoaiThanhVien(loaiThanhVienMD.getIdLoaiThanhVien());
 		loaiThanhVien.setTenLoaiThanhVien(loaiThanhVienMD.getTenLoaiThanhVien());
 		
+		if (loaiThanhVienMD.getAnhLoaiThanhVien() != null) {
+            byte[] anhLoaiThanhVien = loaiThanhVienMD.getAnhLoaiThanhVien().getBytes();
+            if (anhLoaiThanhVien != null && anhLoaiThanhVien.length > 0) {
+            	loaiThanhVien.setAnhLoaiThanhVien(anhLoaiThanhVien);
+            }
+        }
+		
 		this.sessionFactory.getCurrentSession().persist(loaiThanhVien);
 	}
 

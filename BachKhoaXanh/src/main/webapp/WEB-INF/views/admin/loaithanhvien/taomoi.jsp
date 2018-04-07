@@ -128,7 +128,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h4>Tạo mới loại thành viên :</h4>
 						</div>
 						<div class="form-body">
-							<form:form modelAttribute="loaiThanhVienForm" method="POST" class="form-horizontal">
+							<form:form modelAttribute="loaiThanhVienForm" method="POST" class="form-horizontal" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
@@ -141,7 +141,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<form:input path="tenLoaiThanhVien" type="text" class="form-control" id="inputEmail1" placeholder="loại cây" />
 									</div>
 								</div>
-								
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Icon</label>
+									<div class="col-sm-9">
+										<form:input path="anhLoaiThanhVien" type="file" class="form-control" />
+									</div>
+								</div>
 								<div class="col-sm-offset-2">
 									<button type="submit" class="btn btn-default">Tạo mới</button>
 								</div>

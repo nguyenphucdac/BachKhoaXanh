@@ -3,6 +3,7 @@ package com.dsd26.bachkhoaxanh.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -16,6 +17,7 @@ public class LoaiThanhVien {
 	
 	private String idLoaiThanhVien;
 	private String tenLoaiThanhVien;
+	private byte[] anhLoaiThanhVien;
 	
 	@Id
 	@Column(name = "id_loai_thanh_vien", length = 10, nullable = false)
@@ -32,6 +34,15 @@ public class LoaiThanhVien {
 	}
 	public void setTenLoaiThanhVien(String tenLoaiThanhVien) {
 		this.tenLoaiThanhVien = tenLoaiThanhVien;
+	}
+	
+	@Lob
+    @Column(name = "anh_loai_thanh_vien", length = Integer.MAX_VALUE, nullable = true)
+	public byte[] getAnhLoaiThanhVien() {
+		return anhLoaiThanhVien;
+	}
+	public void setAnhLoaiThanhVien(byte[] anhLoaiThanhVien) {
+		this.anhLoaiThanhVien = anhLoaiThanhVien;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.dsd26.bachkhoaxanh.model;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 
 /*
@@ -15,6 +17,7 @@ public class ThanhVienMD {
 	private String matKhau;
 	private String tenDayDu;
 	private int trangThai;
+	private CommonsMultipartFile anhThanhVien;
 	
 	public ThanhVienMD() {}
 	
@@ -81,6 +84,14 @@ public class ThanhVienMD {
 
 	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
+	}
+
+	public CommonsMultipartFile getAnhThanhVien() {
+		return anhThanhVien;
+	}
+
+	public void setAnhThanhVien(CommonsMultipartFile anhThanhVien) {
+		this.anhThanhVien = anhThanhVien;
 	}
 	
 	

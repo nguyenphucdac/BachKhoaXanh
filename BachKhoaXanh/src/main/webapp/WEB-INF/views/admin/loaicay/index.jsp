@@ -134,7 +134,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<tr>
 										<th>id</th>
 										<th>Tên</th>
-										<th></th>
+										<th>icon</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -143,7 +143,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<tr class="active">
 										<td>${loaiCay.idLoaiCay }</td>
 										<td>${loaiCay.tenLoaiCay}</td>
-										<th></th>
+										<td><img src="${pageContext.request.contextPath}/anh-loai-cay?idLoaiCay=${loaiCay.idLoaiCay }" width="32"/></td>
 										<th></th>
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/loaicay-sua?idLoaiCay=${loaiCay.idLoaiCay}"><i class="fa fa-edit"></i>edit</a></td>
 										

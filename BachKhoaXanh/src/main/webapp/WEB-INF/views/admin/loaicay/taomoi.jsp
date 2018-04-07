@@ -128,7 +128,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h4>Tạo mới cây :</h4>
 						</div>
 						<div class="form-body">
-							<form:form modelAttribute="loaiCayForm" method="POST" class="form-horizontal">
+							<form:form modelAttribute="loaiCayForm" method="POST" class="form-horizontal" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
 									<div class="col-sm-9">
@@ -141,7 +141,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<form:input path="tenLoaiCay" type="text" class="form-control" id="inputEmail1" placeholder="tên loại cây" />
 									</div>
 								</div>
-								
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">icon</label>
+									<div class="col-sm-9">
+										<form:input path="anhLoaiCay" type="file" class="form-control" />
+									</div>
+								</div>
 								<div class="col-sm-offset-2">
 									<button type="submit" class="btn btn-default">Tạo mới</button>
 								</div>
