@@ -47,7 +47,7 @@ public class ThanhVienController {
 		return "admin/thanhvien/index";
 	}
 	
-	@RequestMapping(value = { "/anh-loai-thanh-vien" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/anh-thanh-vien" }, method = RequestMethod.GET)
 	public void memberImage(HttpServletRequest request, HttpServletResponse response, Model model,
 			@RequestParam("idThanhVien") String idThanhVien) throws IOException {
 		ThanhVien thanhVien = null;
