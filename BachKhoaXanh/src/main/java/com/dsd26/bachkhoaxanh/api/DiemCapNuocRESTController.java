@@ -78,7 +78,9 @@ public class DiemCapNuocRESTController {
 							String toaDoY
 			) {
 		List<Point> trace = new ArrayList<>();
+		trace.clear();
 		List<Point> temp = new ArrayList<>();
+		temp.clear();
 		List<DiemCapNuocMD> lstDCNRequire = new ArrayList<>();
 		int minRoad = Integer.MAX_VALUE;
 		
@@ -95,20 +97,30 @@ public class DiemCapNuocRESTController {
 		if(lstDCNRequire.size() >= 1 ) {
 			for(int i = 0; i< lstDCNRequire.size(); i++) {
 				Point startPoint = new Point(Integer.parseInt(toaDoX), Integer.parseInt(toaDoY));
-				Point targetPoint = new Point(diemCapNuocMD.getToaDoX(), diemCapNuocMD.getToaDoY());
+				Point targetPoint = new Point(lstDCNRequire.get(i).getToaDoX(), lstDCNRequire.get(i).getToaDoY());
 				
 				Map.map[targetPoint.x][targetPoint.y] = 4;
 				temp = TimDuongDi.timDuongDi(startPoint, targetPoint);
 				Map.map[targetPoint.x][targetPoint.y] = 1;
 				
+				System.out.println(temp.size());
 				if(temp.size() < minRoad) {
-					trace = temp;
+					trace.clear();
+					copy(trace, temp);
+					minRoad = trace.size();
+					temp.clear();
 				}
 			}
 		}
 		
 		return trace;
 		
+	}
+	
+	public void copy(List<Point> lstFist, List<Point> lstSecond) {
+		for(Point point : lstSecond) {
+			lstFist.add(point.clone());
+		}
 	}
 	
  }

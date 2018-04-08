@@ -1,10 +1,10 @@
 package com.dsd26.bachkhoaxanh.object;
 
-public class PhanHoiObject {
+public class ThongDiepObject {
 	private String code;
 	private String message;
 	
-	public PhanHoiObject(String code, String message) {
+	public ThongDiepObject(String code, String message) {
 		super();
 		this.code = code;
 		this.message = message;

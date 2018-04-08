@@ -102,8 +102,8 @@ public class CayRESTController {
 							String toaDoX,
 							String toaDoY
 			) {
-		List<Point> trace = new ArrayList<>();
-		List<Point> temp = new ArrayList<>();
+		List<Point> trace = new ArrayList<>();trace.clear();
+		List<Point> temp = new ArrayList<>(); temp.clear();
 		List<CayMD> lstCayRequire = new ArrayList<>();
 		int minAccept = 2;
 		int minRoad = Integer.MAX_VALUE;
@@ -130,16 +130,24 @@ public class CayRESTController {
 				
 				System.out.println(temp.size());
 				if(temp.size() < minRoad) {
-					trace = null;
-					trace = temp;
+					trace.clear();
+					copy(trace, temp);
 					minRoad = trace.size();
+					temp.clear();
 				}
 				
-				temp = null;
+				
 			}
 		}
 		
 		return trace;
 		
 	}
+	
+	public void copy(List<Point> lstFist, List<Point> lstSecond) {
+		for(Point point : lstSecond) {
+			lstFist.add(point.clone());
+		}
+	}
+	
 }

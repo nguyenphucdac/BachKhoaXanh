@@ -109,6 +109,9 @@ public class TimDuongDi {
 	}
 
 	public static void initValue(Point startPoint) {
+		resultWay = new ArrayList<>();
+		trace = new Point[Map.Size_X][Map.Size_Y];
+		
 		for (int i = 0; i < Map.Size_X; i++) {
 			for (int j = 0; j < Map.Size_Y; j++) {
 				if (Map.map[i][j] == 4) {
