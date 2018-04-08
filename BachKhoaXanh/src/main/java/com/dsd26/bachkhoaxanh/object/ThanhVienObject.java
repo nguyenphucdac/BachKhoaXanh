@@ -1,6 +1,7 @@
 package com.dsd26.bachkhoaxanh.object;
 
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
 public class ThanhVienObject {
 	private String idThanhVien;
@@ -8,23 +9,56 @@ public class ThanhVienObject {
 	private String matKhau;
 	private String tenDayDu;
 	private int trangThai;
+	private int toaDoX;
+	private int toaDoY;
 	private String anhThanhVien;
-	private LoaiThanhVienObject loaiThanhVien;
+	private LoaiThanhVienObject loaiThanhVienObject;
 	
 	public ThanhVienObject() {
 		super();
 	}
 	
-	public ThanhVienObject(ThanhVien thanhVien, LoaiThanhVienObject loaiThanhVien) {
+	public ThanhVienObject(ThanhVien thanhVien, LoaiThanhVienObject loaiThanhVienObject) {
 		super();
 		this.idThanhVien = thanhVien.getIdThanhVien();
 		this.tenTaiKhoan = thanhVien.getTenTaiKhoan();
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
+		this.toaDoX = thanhVien.getToaDoX();
+		this.toaDoY = thanhVien.getToaDoY();
 		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
-		this.loaiThanhVien = loaiThanhVien;
+		this.loaiThanhVienObject = loaiThanhVienObject;
 	}
 	
+	public ThanhVienObject(ThanhVienMD thanhVienMD, LoaiThanhVienObject loaiThanhVienObject) {
+		super();
+		this.idThanhVien = thanhVienMD.getIdThanhVien();
+		this.tenTaiKhoan = thanhVienMD.getTenTaiKhoan();
+		this.tenDayDu = thanhVienMD.getTenDayDu();
+		this.trangThai = thanhVienMD.getTrangThai();
+		this.toaDoX = thanhVienMD.getToaDoX();
+		this.toaDoY = thanhVienMD.getToaDoY();
+		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVienMD.getIdThanhVien();
+		this.loaiThanhVienObject = loaiThanhVienObject;
+	}
+	
+	
+	public int getToaDoX() {
+		return toaDoX;
+	}
+
+	public void setToaDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
+	}
+
+	public int getToaDoY() {
+		return toaDoY;
+	}
+
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
+	}
+
 	public String getIdThanhVien() {
 		return idThanhVien;
 	}
@@ -62,10 +96,10 @@ public class ThanhVienObject {
 		this.anhThanhVien = anhThanhVien;
 	}
 	public LoaiThanhVienObject getLoaiThanhVien() {
-		return loaiThanhVien;
+		return loaiThanhVienObject;
 	}
-	public void setLoaiThanhVien(LoaiThanhVienObject loaiThanhVien) {
-		this.loaiThanhVien = loaiThanhVien;
+	public void setLoaiThanhVien(LoaiThanhVienObject loaiThanhVienObject) {
+		this.loaiThanhVienObject = loaiThanhVienObject;
 	}
 	
 	
