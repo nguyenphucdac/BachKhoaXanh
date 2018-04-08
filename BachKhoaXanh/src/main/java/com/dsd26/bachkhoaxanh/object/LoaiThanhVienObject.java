@@ -1,5 +1,6 @@
 package com.dsd26.bachkhoaxanh.object;
 
+import com.dsd26.bachkhoaxanh.entity.LoaiThanhVien;
 import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 
 public class LoaiThanhVienObject {
@@ -7,16 +8,23 @@ public class LoaiThanhVienObject {
 	private String tenLoaiThanhVien;
 	private String anhLoaiThanhVien;
 	
-	
 	public LoaiThanhVienObject() {
 		super();
 	}
+	
+	public LoaiThanhVienObject(LoaiThanhVien loaiThanhVien) {
+		this.idLoaiThanhVien = loaiThanhVien.getIdLoaiThanhVien();
+		this.tenLoaiThanhVien = loaiThanhVien.getTenLoaiThanhVien();
+		this.anhLoaiThanhVien = Host.getHost() + "anh-loai-thanhvien?idLoaiThanhVien=" + loaiThanhVien.getIdLoaiThanhVien();
+	}
+	
 	public LoaiThanhVienObject(LoaiThanhVienMD loaiThanhVienMD) {
 		super();
 		this.idLoaiThanhVien = loaiThanhVienMD.getIdLoaiThanhVien();
 		this.tenLoaiThanhVien = loaiThanhVienMD.getTenLoaiThanhVien();
 		this.anhLoaiThanhVien = Host.getHost() + "anh-loai-thanh-vien?idLoaiThanhVien=" + loaiThanhVienMD.getIdLoaiThanhVien();
 	}
+	
 	public String getIdLoaiThanhVien() {
 		return idLoaiThanhVien;
 	}
