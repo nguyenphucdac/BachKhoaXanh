@@ -26,7 +26,7 @@ public class ThanhVienObject {
 		this.trangThai = thanhVien.getTrangThai();
 		this.toaDoX = thanhVien.getToaDoX();
 		this.toaDoY = thanhVien.getToaDoY();
-		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
+		this.anhThanhVien = Host.getHost() + "get-anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
 		this.loaiThanhVienObject = loaiThanhVienObject;
 	}
 	
@@ -38,7 +38,7 @@ public class ThanhVienObject {
 		this.trangThai = thanhVienMD.getTrangThai();
 		this.toaDoX = thanhVienMD.getToaDoX();
 		this.toaDoY = thanhVienMD.getToaDoY();
-		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVienMD.getIdThanhVien();
+		this.anhThanhVien = Host.getHost() + "get-anh-thanh-vien?idThanhVien=" + thanhVienMD.getIdThanhVien();
 		this.loaiThanhVienObject = loaiThanhVienObject;
 	}
 	
