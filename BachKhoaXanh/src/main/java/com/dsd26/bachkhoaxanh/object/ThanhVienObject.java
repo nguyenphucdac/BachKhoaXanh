@@ -9,6 +9,8 @@ public class ThanhVienObject {
 	private String tenDayDu;
 	private int trangThai;
 	private String anhThanhVien;
+	private int toaDoX;
+	private int toaDoY;
 	private LoaiThanhVienObject loaiThanhVien;
 	
 	public ThanhVienObject() {
@@ -22,6 +24,8 @@ public class ThanhVienObject {
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
 		this.anhThanhVien = Host.getHost() + "anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
+		this.toaDoX = thanhVien.getToaDoX();
+		this.toaDoY = thanhVien.getToaDoY();
 		this.loaiThanhVien = loaiThanhVien;
 	}
 	
@@ -67,9 +71,22 @@ public class ThanhVienObject {
 	public void setLoaiThanhVien(LoaiThanhVienObject loaiThanhVien) {
 		this.loaiThanhVien = loaiThanhVien;
 	}
-	
-	
-	
+
+	public int getToaDoX() {
+		return toaDoX;
+	}
+
+	public void setToaDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
+	}
+
+	public int getToaDoY() {
+		return toaDoY;
+	}
+
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
+	}
 	
 	
 }

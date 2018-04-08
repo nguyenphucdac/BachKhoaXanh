@@ -20,6 +20,8 @@ public class ThanhVien {
 	private String tenDayDu;
 	private String idLoaiThanhVien;
 	private int trangThai;
+	private int toaDoX;
+	private int toaDoY;
 	private byte[] anhThanhVien;
 	
 	@Id
@@ -75,6 +77,23 @@ public class ThanhVien {
 		this.trangThai = trangThai;
 	}
 	
+	
+	@Column(name = "toa_do_x", length = 5, nullable = true)
+	public int getToaDoX() {
+		return toaDoX;
+	}
+	public void setToaDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
+	}
+	
+	@Column(name = "toa_do_y", length = 5, nullable = true)
+	public int getToaDoY() {
+		return toaDoY;
+	}
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
+	}
+	
 	@Column(name = "anh_thanh_vien", length = Integer.MAX_VALUE, nullable = true)
 	public byte[] getAnhThanhVien() {
 		return anhThanhVien;
@@ -82,8 +101,6 @@ public class ThanhVien {
 	public void setAnhThanhVien(byte[] anhThanhVien) {
 		this.anhThanhVien = anhThanhVien;
 	}
-	
-	
 	
 	
 }

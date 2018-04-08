@@ -18,6 +18,8 @@ public class ThanhVienMD {
 	private String tenDayDu;
 	private int trangThai;
 	private CommonsMultipartFile anhThanhVien;
+	private int toaDoX;
+	private int toaDoY;
 	
 	public ThanhVienMD() {}
 	
@@ -28,15 +30,27 @@ public class ThanhVienMD {
 		this.matKhau = "";
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
+		this.toaDoX = thanhVien.getToaDoX();
+		this.toaDoY = thanhVien.getToaDoY();
 	}
 	
-	public ThanhVienMD(String idThanhVien, String tenTaiKhoan, String tenDayDu, String idLoaiThanhVien, int trangThai) {
+	public ThanhVienMD(
+			String idThanhVien, 
+			String tenTaiKhoan, 
+			String tenDayDu, 
+			String idLoaiThanhVien, 
+			int trangThai,
+			int toaDoX,
+			int toaDoY
+			) {
 		super();
 		this.idThanhVien = idThanhVien;
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.tenDayDu = tenDayDu;
 		this.idLoaiThanhVien = idLoaiThanhVien;
 		this.trangThai = trangThai;
+		this.toaDoX = toaDoX;
+		this.toaDoY = toaDoY;
 	}
 
 	public String getIdThanhVien() {
@@ -94,6 +108,23 @@ public class ThanhVienMD {
 	public void setAnhThanhVien(CommonsMultipartFile anhThanhVien) {
 		this.anhThanhVien = anhThanhVien;
 	}
+
+	public int getToaDoX() {
+		return toaDoX;
+	}
+
+	public void setToaDoX(int toaDoX) {
+		this.toaDoX = toaDoX;
+	}
+
+	public int getToaDoY() {
+		return toaDoY;
+	}
+
+	public void setToaDoY(int toaDoY) {
+		this.toaDoY = toaDoY;
+	}
+	
 	
 	
 

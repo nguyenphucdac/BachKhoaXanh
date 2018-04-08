@@ -14,14 +14,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
+import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
@@ -51,6 +56,38 @@ public class ThanhVienController {
 		model.addAttribute("danhSachThanhVien", danhSachThanhVien);
 		return "admin/thanhvien/index";
 	}
+	
+	public String taoMoiThanhVien(ThanhVienMD thanhVienMD) {
+		try {
+			thanhVienMD.setToaDoX(0);
+			thanhVienMD.setToaDoY(0);
+			iThanhVienDAO.luu(thanhVienMD);
+		} catch (Exception ex) {
+			String message = ex.getMessage();
+			System.out.println(message);
+			return "Thất bại";
+		}
+		return "Thành công";
+	}
+	
+	public String suaThanhVien(ThanhVienMD thanhVienMD) {
+		try {
+			iThanhVienDAO.xoa(thanhVienMD.getIdThanhVien());
+			iThanhVienDAO.luu(thanhVienMD);
+		}
+		catch(Exception ex) {
+			String message = ex.getMessage();
+			return "Thất bại";
+		}
+		return "Thành công";
+	}
+	
+	@RequestMapping(value= {"/thanhvien-xoa"}, method = RequestMethod.GET)
+	public String xoaThanhVien(@RequestParam(value = "idThanhVien", defaultValue = "0") String idThanhVien) {
+		iThanhVienDAO.xoa(idThanhVien);
+		return "redirect:/thanhvien";
+	}
+	
 	
 	@RequestMapping(value = { "/anh-thanh-vien" }, method = RequestMethod.GET)
 	public void memberImage(HttpServletRequest request, HttpServletResponse response, Model model,

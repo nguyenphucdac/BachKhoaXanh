@@ -46,6 +46,8 @@ public class ThanhVienDAO implements IThanhVienDAO {
 		thanhVien.setMatKhau(thanhVienMD.getMatKhau());
 		thanhVien.setTenDayDu(thanhVienMD.getTenDayDu());
 		thanhVien.setTrangThai(thanhVienMD.getTrangThai());
+		thanhVien.setToaDoX(thanhVienMD.getToaDoX());
+		thanhVien.setToaDoY(thanhVienMD.getToaDoY());
 		
 		if (thanhVienMD.getAnhThanhVien() != null) {
             byte[] anhThanhVien = thanhVienMD.getAnhThanhVien().getBytes();
@@ -91,7 +93,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	@Override
 	public PaginationResult<ThanhVienMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThanhVienMD.class.getName() 
-				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.idLoaiThanhVien, p.trangThai) " 
+				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.idLoaiThanhVien, p.trangThai, p.toaDoX, p.toaDoY) " 
 				+ " from "
 				+ ThanhVien.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {
