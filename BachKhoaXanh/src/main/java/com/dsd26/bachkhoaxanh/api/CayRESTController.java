@@ -61,6 +61,8 @@ public class CayRESTController {
 		System.out.println(danhSachCay.getList().size());
 		for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
 			
+			System.out.println(danhSachCay.getList().get(i).getToaDoX() + "| " + danhSachCay.getList().get(i).getToaDoY());
+			
 			CayMD cayMD = danhSachCay.getList().get(i);
 			LoaiCay loaiCay = iLoaiCayDAO.timKiem(cayMD.getIdLoaiCay());
 			LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
@@ -123,6 +125,8 @@ public class CayRESTController {
 				
 				Point startPoint = new Point(Integer.parseInt(toaDoX), Integer.parseInt(toaDoY));
 				Point targetPoint = new Point(lstCayRequire.get(i).getToaDoX(), lstCayRequire.get(i).getToaDoY());
+				
+				System.out.println("x= " + targetPoint.x + "| y = " + targetPoint.y);
 				
 				Map.map[targetPoint.x][targetPoint.y] = 4;
 				temp = TimDuongDi.timDuongDi(startPoint, targetPoint);
