@@ -19,7 +19,7 @@ public class ThongBao {
 	private String idThongBao;
 	private String noiDung;
 	private Date thoiGian;
-	private String idNguoiTao;
+	private String idThanhVien;
 	
 	
 	@Id
@@ -47,12 +47,12 @@ public class ThongBao {
 		this.thoiGian = thoiGian;
 	}
 	
-	@Column(name = "id_nguoi_tao", length = 20, nullable = false)
-	public String getIdNguoiTao() {
-		return idNguoiTao;
+	@Column(name = "id_thanh_vien", length = 20, nullable = false)
+	public String getIdThanhVien() {
+		return idThanhVien;
 	}
-	public void setIdNguoiTao(String idNguoiTao) {
-		this.idNguoiTao = idNguoiTao;
+	public void setIdThanhVien(String idThanhVien) {
+		this.idThanhVien = idThanhVien;
 	}
 	
 	

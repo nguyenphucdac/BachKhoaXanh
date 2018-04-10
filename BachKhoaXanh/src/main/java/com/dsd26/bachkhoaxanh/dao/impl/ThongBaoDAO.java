@@ -40,7 +40,7 @@ public class ThongBaoDAO implements IThongBaoDAO {
 		thongBao.setIdThongBao(thongBaoMD.getIdThongBao());
 		thongBao.setNoiDung(thongBaoMD.getNoiDung());
 		thongBao.setThoiGian(thongBaoMD.getThoiGian());
-		thongBao.setIdNguoiTao(thongBaoMD.getIdNguoiTao());
+		thongBao.setIdThanhVien(thongBaoMD.getIdThanhVien());
 		
 		this.sessionFactory.getCurrentSession().persist(thongBao);
 		
@@ -79,7 +79,7 @@ public class ThongBaoDAO implements IThongBaoDAO {
 	@Override
 	public PaginationResult<ThongBaoMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThongBaoMD.class.getName() 
-				+ " (p.idThongBao, p.noiDung, p.thoiGian, p.idNguoiTao) " 
+				+ " (p.idThongBao, p.noiDung, p.thoiGian, p.idThanhVien) " 
 				+ " from "
 				+ ThongBao.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

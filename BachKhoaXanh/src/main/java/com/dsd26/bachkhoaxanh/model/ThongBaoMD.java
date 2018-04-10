@@ -13,7 +13,7 @@ public class ThongBaoMD {
 	private String idThongBao;
 	private String noiDung;
 	private Date thoiGian;
-	private String idNguoiTao;
+	private String idThanhVien;
 	
 
 	public ThongBaoMD() {
@@ -24,15 +24,15 @@ public class ThongBaoMD {
 		this.idThongBao = thongBao.getIdThongBao();
 		this.noiDung = thongBao.getNoiDung();
 		this.thoiGian = thongBao.getThoiGian();
-		this.idNguoiTao = thongBao.getIdNguoiTao();
+		this.idThanhVien = thongBao.getIdThanhVien();
 	}
 	
-	public ThongBaoMD(String idThongBao, String noiDung, Date thoiGian, String idNguoiTao) {
+	public ThongBaoMD(String idThongBao, String noiDung, Date thoiGian, String idThanhVien) {
 		super();
 		this.idThongBao = idThongBao;
 		this.noiDung = noiDung;
 		this.thoiGian = thoiGian;
-		this.idNguoiTao = idNguoiTao;
+		this.idThanhVien = idThanhVien;
 	}
 	public String getIdThongBao() {
 		return idThongBao;
@@ -52,11 +52,11 @@ public class ThongBaoMD {
 	public void setThoiGian(Date thoiGian) {
 		this.thoiGian = thoiGian;
 	}
-	public String getIdNguoiTao() {
-		return idNguoiTao;
+	public String getIdThanhVien() {
+		return idThanhVien;
 	}
-	public void setIdNguoiTao(String idNguoiTao) {
-		this.idNguoiTao = idNguoiTao;
+	public void setIdThanhVien(String idThanhVien) {
+		this.idThanhVien = idThanhVien;
 	}
 	
 	

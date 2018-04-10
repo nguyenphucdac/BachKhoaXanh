@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.IThongBaoDAO;
 import com.dsd26.bachkhoaxanh.entity.ThongBao;
 import com.dsd26.bachkhoaxanh.model.ThongBaoMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
 /*
 * author: Nguyễn Phúc Đạc
@@ -35,6 +37,8 @@ public class ThongBaoController {
 
 	@Autowired
 	private IThongBaoDAO iThongBaoDAO;
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
 	
 	@RequestMapping("/thongbao")
 	public String index(
@@ -53,7 +57,11 @@ public class ThongBaoController {
 	@RequestMapping(value = { "/thongbao-tao-moi" }, method = RequestMethod.GET)
 	public String taoMoiThongBao(Model model) {
 		ThongBaoMD thongBaoMD = new ThongBaoMD();
+		PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
 		model.addAttribute("thongBaoForm", thongBaoMD);
+		model.addAttribute("danhSachThanhVien", danhSachThanhVien);
+		
 		return "admin/thongbao/taomoi";
 	}
 	
