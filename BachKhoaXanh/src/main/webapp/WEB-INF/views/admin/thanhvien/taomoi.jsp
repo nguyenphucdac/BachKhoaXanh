@@ -125,76 +125,49 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div class=" form-grids row form-grids-right">
 					<div class="widget-shadow " data-example-id="basic-forms">
 						<div class="form-title">
-							<h4>Chỉnh sửa cây :</h4>
+							<h4>Tạo mới thành viên :</h4>
 						</div>
 						<div class="form-body">
-							<form:form modelAttribute="cayForm" method="POST" class="form-horizontal">
+							<form:form modelAttribute="thanhVienForm" method="POST" class="form-horizontal" enctype="multipart/form-data">
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Tên tài khoản</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${cay.idCay}" />
+										<form:input path="tenTaiKhoan" type="text" class="form-control" id="inputEmail3"  />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Loại cây</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Mật khẩu</label>
 									<div class="col-sm-9">
-										<form:select path="idLoaiCay" class="form-control" itemValue="${cay.idLoaiCay}">
-											<c:forEach items="${danhSachLoaiCay.list}" var="loaiCay">
-												<c:choose>
-												<c:when test="${loaiCay.idLoaiCay eq cay.idLoaiCay}">
-													<option value="${loaiCay.idLoaiCay}" selected="true">${loaiCay.idLoaiCay}</option>
-												</c:when>
-												<c:otherwise>
-													<option value="${loaiCay.idLoaiCay}">${loaiCay.idLoaiCay}</option>
-												</c:otherwise>
-											</c:choose>
+										<form:input path="matKhau" type="password" class="form-control" id="inputEmail1"  />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Tên đầy đủ</label>
+									<div class="col-sm-9">
+										<form:input path="tenDayDu" type="text" class="form-control" id="inputEmail1" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Loại thành viên</label>
+									<div class="col-sm-9">
+										<form:select path="idLoaiThanhVien" class="form-control">
+											<c:forEach items="${danhSachLoaiThanhVien.list}" var="loaiThanhVien">
+												<option value="${loaiThanhVien.idLoaiThanhVien}">
+        												${loaiThanhVien.tenLoaiThanhVien}
+   												 </option>
 											</c:forEach>
 
 										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ x</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Icon</label>
 									<div class="col-sm-9">
-										<form:input path="toaDoX" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ x" value="${cay.toaDoX}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ y</label>
-									<div class="col-sm-9">
-										<form:input path="toaDoY" type="text" class="form-control" id="inputPassword3" placeholder="tọa độ y" value="${cay.toaDoY}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước tối đa</label>
-									<div class="col-sm-9">
-										<form:input path="luongNuocToiDa" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocToiDa}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Lượng nước đã tưới</label>
-									<div class="col-sm-9">
-										<form:input path="luongNuocDaTuoi" type="text" class="form-control" id="inputPassword3" placeholder="lượng nước cần" value="${cay.luongNuocDaTuoi}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
-									<div class="col-sm-9">
-										<form:select path="tinhTrang" class="form-control" itemValue="${cay.tinhTrang}">
-											<option value="tốt">
-        										tốt
-   											</option>
-   											<option value="bình thường">
-        										bình thường
-   											</option>
-   											<option value="xấu">
-        										xấu
-   											</option>
-										</form:select>
+										<form:input path="anhThanhVien" type="file" class="form-control" />
 									</div>
 								</div>
 								<div class="col-sm-offset-2">
-									<button type="submit" class="btn btn-default">Xác nhận</button>
+									<button type="submit" class="btn btn-default">Tạo mới</button>
 								</div>
 							</form:form>
 						</div>

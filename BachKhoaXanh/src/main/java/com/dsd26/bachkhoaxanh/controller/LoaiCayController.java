@@ -72,6 +72,10 @@ public class LoaiCayController {
 			return "redirect:/loaicay-tao-moi";
 		}
 		try {
+			
+			PaginationResult<LoaiCayMD> danhSachLoaiCay = iLoaiCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			loaiCayMD.setIdLoaiCay("loai_cay_" + (danhSachLoaiCay.getList().size() + 1));
+			System.out.println(loaiCayMD.getIdLoaiCay());
 			iLoaiCayDAO.luu(loaiCayMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

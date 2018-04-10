@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
@@ -42,6 +45,8 @@ public class ThanhVienController {
 
 	@Autowired
 	private IThanhVienDAO iThanhVienDAO;
+	@Autowired
+	private ILoaiThanhVienDAO iLoaiThanhVienDAO;
 	
 	@RequestMapping("/thanhvien")
 	public String index(
@@ -57,29 +62,38 @@ public class ThanhVienController {
 		return "admin/thanhvien/index";
 	}
 	
-	public String taoMoiThanhVien(ThanhVienMD thanhVienMD) {
+	@RequestMapping(value = { "/thanhvien-tao-moi" }, method = RequestMethod.GET)
+	public String taoMoiLoaiCay(Model model) {
+		ThanhVienMD thanhVienMD = new ThanhVienMD();
+		PaginationResult<LoaiThanhVienMD> danhSachLoaiThanhVien = iLoaiThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		model.addAttribute("thanhVienForm", thanhVienMD);
+		model.addAttribute("danhSachLoaiThanhVien", danhSachLoaiThanhVien);
+		
+		return "admin/thanhvien/taomoi";
+	}
+	
+	@RequestMapping(value = { "/thanhvien-tao-moi" }, method = RequestMethod.POST)
+	public String luuLoaiCay(Model model, @ModelAttribute("thanhVienForm") @Validated ThanhVienMD thanhVienMD, BindingResult result,
+			final RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			return "redirect:/thanhvien-tao-moi";
+		}
 		try {
+			
+			PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			thanhVienMD.setIdThanhVien("thanh_vien_" + (danhSachThanhVien.getList().size() + 1));
+			thanhVienMD.setTrangThai(0);
 			thanhVienMD.setToaDoX(0);
 			thanhVienMD.setToaDoY(0);
 			iThanhVienDAO.luu(thanhVienMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
-			System.out.println(message);
-			return "Thất bại";
+			model.addAttribute("message", message);
+			
+			return "redirect:/thanhvien-tao-moi";
 		}
-		return "Thành công";
-	}
-	
-	public String suaThanhVien(ThanhVienMD thanhVienMD) {
-		try {
-			iThanhVienDAO.xoa(thanhVienMD.getIdThanhVien());
-			iThanhVienDAO.luu(thanhVienMD);
-		}
-		catch(Exception ex) {
-			String message = ex.getMessage();
-			return "Thất bại";
-		}
-		return "Thành công";
+		return "redirect:/thanhvien";
 	}
 	
 	@RequestMapping(value= {"/thanhvien-xoa"}, method = RequestMethod.GET)

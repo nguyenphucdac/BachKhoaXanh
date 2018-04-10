@@ -67,6 +67,8 @@ public class ThongBaoController {
 			return "redirect:/thongbao-tao-moi";
 		}
 		try {
+			PaginationResult<ThongBaoMD> danhSachThongBao = iThongBaoDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			thongBaoMD.setIdThongBao("thong_bao_" + (danhSachThongBao.getList().size() + 1));
 			iThongBaoDAO.luu(thongBaoMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

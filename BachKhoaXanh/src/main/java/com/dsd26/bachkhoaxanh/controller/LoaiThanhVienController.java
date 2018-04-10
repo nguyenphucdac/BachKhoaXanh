@@ -56,7 +56,10 @@ public class LoaiThanhVienController {
 	@RequestMapping(value = { "/loaithanhvien-tao-moi" }, method = RequestMethod.GET)
 	public String taoMoiLoaiThanhVien(Model model) {
 		LoaiThanhVienMD loaiThanhVienMD = new LoaiThanhVienMD();
+		PaginationResult<LoaiThanhVienMD> danhSachLoaiThanhVien = iLoaiThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
 		model.addAttribute("loaiThanhVienForm", loaiThanhVienMD);
+		model.addAttribute("danhSachLoaiThanhVien", danhSachLoaiThanhVien);
 		return "admin/loaithanhvien/taomoi";
 	}
 	
@@ -67,6 +70,8 @@ public class LoaiThanhVienController {
 			return "redirect:/loaithanhvien-tao-moi";
 		}
 		try {
+			PaginationResult<LoaiThanhVienMD> danhSachLoaiThanhVien = iLoaiThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			loaiThanhVienMD.setIdLoaiThanhVien("loai_thanh_vien_" + (danhSachLoaiThanhVien.getList().size() + 1));
 			iLoaiThanhVienDAO.luu(loaiThanhVienMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

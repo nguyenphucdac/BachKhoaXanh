@@ -64,7 +64,8 @@ public class DiemCapNuocController {
 			return "redirect:/diemcapnuoc-tao-moi";
 		}
 		try {
-			//diemCapNuocMD.setToaDoX(10);
+			PaginationResult<DiemCapNuocMD> danhSachDiemCapNuoc = iDiemCapNuocDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			diemCapNuocMD.setIdDiemCapNuoc("diem_cap_nuoc_" + (danhSachDiemCapNuoc.getList().size() + 1));
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

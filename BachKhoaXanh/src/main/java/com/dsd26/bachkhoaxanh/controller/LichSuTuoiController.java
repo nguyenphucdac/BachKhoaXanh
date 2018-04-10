@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.entity.LichSuTuoi;
+import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
 /*
 * author: Nguyễn Phúc Đạc
@@ -36,6 +40,10 @@ import com.dsd26.bachkhoaxanh.model.PaginationResult;
 public class LichSuTuoiController {
 	@Autowired
 	private ILichSuTuoiDAO iLichSuTuoiDAO;
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
+	@Autowired
+	private ICayDAO iCayDAO;
 	
 	@RequestMapping("/lichsutuoi")
 	public String index(
@@ -55,6 +63,13 @@ public class LichSuTuoiController {
 	public String taoMoiLichSuTuoi(Model model) {
 		LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
 		model.addAttribute("lichSuTuoiForm", lichSuTuoiMD);
+		
+		PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		model.addAttribute("danhSachThanhVien", danhSachThanhVien);
+		model.addAttribute("danhSachCay", danhSachCay);
+		
 		return "admin/lichsutuoi/taomoi";
 	}
 	
@@ -69,6 +84,8 @@ public class LichSuTuoiController {
 			return "redirect:/lichsutuoi-tao-moi";
 		}
 		try {
+			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
@@ -94,6 +111,12 @@ public class LichSuTuoiController {
 			lichSuTuoi = iLichSuTuoiDAO.timKiem(idLichSuTuoi);
 		}
 		model.addAttribute("lichSuTuoi", lichSuTuoi);
+		
+		PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		model.addAttribute("danhSachThanhVien", danhSachThanhVien);
+		model.addAttribute("danhSachCay", danhSachCay);
 		
 		return "admin/lichsutuoi/sua";
 	}

@@ -19,8 +19,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.google.gson.Gson;
 
@@ -37,6 +39,8 @@ import com.google.gson.Gson;
 public class CayController {
 	@Autowired
 	private ICayDAO iCayDAO;
+	@Autowired
+	private ILoaiCayDAO iLoaiCayDAO;
 	
 	@RequestMapping("/cay")
 	public String index(
@@ -59,6 +63,9 @@ public class CayController {
 	public String taoMoiCay(Model model) {
 		CayMD cayMD = new CayMD();
 		model.addAttribute("cayForm", cayMD);
+		PaginationResult<LoaiCayMD> danhSachLoaiCay = iLoaiCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		model.addAttribute("danhSachLoaiCay", danhSachLoaiCay);
+		
 		return "admin/cay/taomoi";
 	}
 
@@ -70,6 +77,9 @@ public class CayController {
 			return "redirect:/cay-tao-moi";
 		}
 		try {
+			
+			System.out.println("idLoaicay ="+cayMD.getIdLoaiCay());
+			
 			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
 		} catch (Exception ex) {
@@ -96,6 +106,8 @@ public class CayController {
 			cay = iCayDAO.timKiem(idCay);
 		}
 		model.addAttribute("cay", cay);
+		PaginationResult<LoaiCayMD> danhSachLoaiCay = iLoaiCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		model.addAttribute("danhSachLoaiCay", danhSachLoaiCay);
 		
 		return "admin/cay/sua";
 	}

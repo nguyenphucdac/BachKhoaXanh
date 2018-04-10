@@ -129,12 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="thongBaoForm" method="POST" class="form-horizontal">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idThongBao" type="text" class="form-control" id="inputEmail3" placeholder="id" />
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Nội dung</label>
 									<div class="col-sm-9">

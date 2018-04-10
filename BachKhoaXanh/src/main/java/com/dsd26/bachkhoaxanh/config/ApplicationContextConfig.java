@@ -49,7 +49,7 @@ import com.dsd26.bachkhoaxanh.socket.ServerConnection;
 @PropertySource("classpath:ds-hibernate-cfg.properties")
 public class ApplicationContextConfig {
 
-	ServerConnection ServerConnection = new ServerConnection();
+	//ServerConnection ServerConnection = new ServerConnection();
    // Lưu trữ các giá thuộc tính load bởi @PropertySource.
    @Autowired
    private Environment env;

@@ -129,22 +129,31 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="lichSuTuoiForm" method="POST" class="form-horizontal">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idLichSuTuoi" type="text" class="form-control" id="inputEmail3" placeholder="id" />
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Id cây</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail1" placeholder="id cây" />
+										<form:select path="idCay" class="form-control">
+											<c:forEach items="${danhSachCay.list}" var="cay">
+												<option value="${cay.idCay}">
+        												${cay.idCay}
+   												 </option>
+											</c:forEach>
+
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Id thành viên</label>
 									<div class="col-sm-9">
-										<form:input path="idThanhVien" type="text" class="form-control" id="inputPassword3" placeholder="id thành viên" />
+										<form:select path="idThanhVien" class="form-control">
+											<c:forEach items="${danhSachThanhVien.list}" var="thanhVien">
+												<option value="${thanhVien.idThanhVien}">
+        												${thanhVien.idThanhVien}
+   												 </option>
+											</c:forEach>
+
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">

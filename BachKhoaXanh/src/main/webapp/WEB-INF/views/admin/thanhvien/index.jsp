@@ -126,7 +126,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="widget-shadow " data-example-id="basic-forms">
 						<div class="form-title col-md-12">
 							<h4 class="col-md-10">Thành viên :</h4>
-							
+							<a class="agile-icon" href="${pageContext.request.contextPath}/thanhvien-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
 							
 						</div>
 							<table class="table">

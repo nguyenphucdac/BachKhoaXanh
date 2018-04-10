@@ -138,13 +138,37 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Id cây</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail1" value="${lichSuTuoi.idCay }" />
+										<form:select path="idCay" class="form-control" >
+											<c:forEach items="${danhSachCay.list}" var="cay">
+												<c:choose>
+												<c:when test="${cay.idCay eq lichSuTuoi.idCay}">
+													<option value="${lichSuTuoi.idCay}" selected="true">${lichSuTuoi.idCay}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${lichSuTuoi.idCay}">${lichSuTuoi.idCay}</option>
+												</c:otherwise>
+											</c:choose>
+											</c:forEach>
+
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Id thành viên</label>
 									<div class="col-sm-9">
-										<form:input path="idThanhVien" type="text" class="form-control" id="inputPassword3" value="${lichSuTuoi.idThanhVien }" />
+										<form:select path="idCay" class="form-control" >
+											<c:forEach items="${danhSachThanhVien.list}" var="thanhVien">
+												<c:choose>
+												<c:when test="${thanhVien.idThanhVien eq lichSuTuoi.idThanhVien}">
+													<option value="${lichSuTuoi.idThanhVien}" selected="true">${lichSuTuoi.idThanhVien}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${lichSuTuoi.idThanhVien}">${lichSuTuoi.idThanhVien}</option>
+												</c:otherwise>
+											</c:choose>
+											</c:forEach>
+
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
