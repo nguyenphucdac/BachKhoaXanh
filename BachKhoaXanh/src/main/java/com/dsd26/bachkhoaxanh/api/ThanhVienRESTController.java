@@ -23,6 +23,7 @@ import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.object.ThanhVienObject;
+import com.dsd26.bachkhoaxanh.object.ThongDiepObject;
 import com.dsd26.bachkhoaxanh.object.LoaiThanhVienObject;
 
 /*
@@ -99,6 +100,26 @@ public class ThanhVienRESTController {
 		thanhVienObject.setTrangThai(1);
 		
 		return thanhVienObject;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ThongDiepObject logout(@RequestBody(required = true) String body, String idThanhVien) {
+		
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
+		if(thanhVien == null) {
+			return new ThongDiepObject("1001", "Đăng xuất thất bại");
+		}
+		
+		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
+		thanhVienMD.setTrangThai(0);
+		thanhVienMD.setMatKhau(thanhVien.getMatKhau());
+		
+		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
+		iThanhVienDAO.luu(thanhVienMD);
+		
+		
+		return new ThongDiepObject("1000", "Đăng xuất thành công");
 	}
 	
 }
