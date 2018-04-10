@@ -36,6 +36,7 @@ import com.dsd26.bachkhoaxanh.dao.impl.LoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.LoaiThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.ThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.ThongBaoDAO;
+import com.dsd26.bachkhoaxanh.socket.ServerConnection;
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -47,9 +48,8 @@ import com.dsd26.bachkhoaxanh.dao.impl.ThongBaoDAO;
 // Load to Environment.
 @PropertySource("classpath:ds-hibernate-cfg.properties")
 public class ApplicationContextConfig {
- 
-  
- 
+
+	ServerConnection ServerConnection = new ServerConnection();
    // Lưu trữ các giá thuộc tính load bởi @PropertySource.
    @Autowired
    private Environment env;

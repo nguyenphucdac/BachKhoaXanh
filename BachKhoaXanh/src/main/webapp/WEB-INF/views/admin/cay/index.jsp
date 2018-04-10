@@ -91,6 +91,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
            
         });
+        
+        
 
     </script>
 <!-- //pie-chart -->
@@ -113,6 +115,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- //requried-jsfiles-for owl -->
 </head>
 <body class="cbp-spmenu-push">
+
+
 	<div class="main-content">
 		
 		<jsp:include page="../thanhphanchung/menu.jsp"></jsp:include>
@@ -127,7 +131,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="form-title col-md-12">
 							<h4 class="col-md-8">Cây :</h4>
 							<a class="agile-icon" href="${pageContext.request.contextPath}/cay-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
-							
 						</div>
 							<table class="table">
 								<thead>
@@ -175,6 +178,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<script src="js/utils.js"></script>
 
 	<script>
+		
         var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var color = Chart.helpers.color;
         var barChartData = {

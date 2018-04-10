@@ -11,7 +11,7 @@ public class LoaiCayObject {
 	public LoaiCayObject(LoaiCay loaiCay) {
 		this.idLoaiCay = loaiCay.getIdLoaiCay();
 		this.tenLoaiCay = loaiCay.getTenLoaiCay();
-		this.anhLoaiCay = Host.getHost() + "anh-loai-cay?idLoaiCay=" + loaiCay.getIdLoaiCay();
+		this.anhLoaiCay = "/anh-loai-cay?idLoaiCay=" + loaiCay.getIdLoaiCay();
 	}
 	
 	public LoaiCayObject() {
