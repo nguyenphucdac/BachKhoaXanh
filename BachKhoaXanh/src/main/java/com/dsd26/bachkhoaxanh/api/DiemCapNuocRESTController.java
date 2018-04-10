@@ -35,7 +35,7 @@ public class DiemCapNuocRESTController {
 	public DiemCapNuocMD getDiemCapNuoc(@PathVariable("idDiemCapNuoc") String idDiemCapNuoc) {
 		DiemCapNuoc diemCapNuoc = iDiemCapNuocDAO.timKiem(idDiemCapNuoc);
 		if (diemCapNuoc == null) {
-			return new DiemCapNuocMD();
+			return null;
 		}
 		DiemCapNuocMD diemCapNuocMD = new DiemCapNuocMD(diemCapNuoc);
 		return diemCapNuocMD;
@@ -44,8 +44,14 @@ public class DiemCapNuocRESTController {
 	@RequestMapping(value = "/get-list-dcn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<DiemCapNuocMD> getListDiemCapNuoc() {
-		PaginationResult<DiemCapNuocMD> danhsachDCN = iDiemCapNuocDAO.queryRoles(1, 20, 10);
-		return danhsachDCN.getList();
+		List<DiemCapNuocMD> lstDiemCapNuoc = new ArrayList<>();
+		PaginationResult<DiemCapNuocMD> danhsachDCN = iDiemCapNuocDAO.queryRoles(1, Integer.MAX_VALUE, 10);
+		
+		if(danhsachDCN.getList().size()<=0) {
+			return lstDiemCapNuoc;
+		}
+		lstDiemCapNuoc = danhsachDCN.getList();
+		return lstDiemCapNuoc;
 	}
 	
 	@RequestMapping(value = "/get-trace-dcn-1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

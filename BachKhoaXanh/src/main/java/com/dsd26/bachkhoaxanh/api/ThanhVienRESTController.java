@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,24 +39,23 @@ public class ThanhVienRESTController {
 
 	@RequestMapping(value = "/get-thanhvien/{idThanhVien}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<ThanhVienObject>  getThanhVien(@PathVariable("idThanhVien") String idThanhVien) {
-		final HttpHeaders headers = new HttpHeaders();
+	public ThanhVienObject  getThanhVien(@PathVariable("idThanhVien") String idThanhVien) {
 		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		if (thanhVien == null) {
-			headers.add("message", "fail");
-			return new ResponseEntity<>(new ThanhVienObject(), headers, HttpStatus.BAD_REQUEST);
+			
+			return null;
 		}
 		
 		LoaiThanhVien loaiThanhVien = iLoaiThanhVienDAO.timKiem(thanhVien.getIdLoaiThanhVien());
 		LoaiThanhVienObject loaiThanhVienObject = new LoaiThanhVienObject(loaiThanhVien);
 		ThanhVienObject thanhVienObj = new ThanhVienObject(thanhVien, loaiThanhVienObject);
 		
-		return new ResponseEntity<>(thanhVienObj, headers, HttpStatus.OK);
+		return thanhVienObj;
 	}
 	
 	@RequestMapping(value = "/get-list-thanhvien", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<ThanhVienObject>> getListThanhVien() {
+	public List<ThanhVienObject> getListThanhVien() {
 		List<ThanhVienObject> listThanhVienObj = new ArrayList<ThanhVienObject>();
 		PaginationResult<ThanhVienMD> danhSachTV = iThanhVienDAO.queryRoles(1, 20, 10);
 		System.out.println(danhSachTV.getList().size());
@@ -68,9 +68,37 @@ public class ThanhVienRESTController {
 			
 			listThanhVienObj.add(thanhVienObj);
 		}
-		final HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "successfuly");
-		return new ResponseEntity<>(listThanhVienObj, headers, HttpStatus.OK);
+		
+		return listThanhVienObj;
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ThanhVienObject login(@RequestBody(required = true) String body, String tenTaiKhoan, String matKhau) {
+		ThanhVienObject  thanhVienObject = new ThanhVienObject();
+		
+		ThanhVien thanhVien = iThanhVienDAO.layTaiKhoan(tenTaiKhoan);
+		if(thanhVien == null) {
+			return null;
+		}
+		System.out.println(thanhVien.getMatKhau() +": " + matKhau);
+		if(!thanhVien.getMatKhau().toString().equals(matKhau)) {
+			return null;
+		}
+		
+		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
+		thanhVienMD.setTrangThai(1);
+		thanhVienMD.setMatKhau(matKhau);
+		
+		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
+		iThanhVienDAO.luu(thanhVienMD);
+		
+		LoaiThanhVien loaiThanhVien = iLoaiThanhVienDAO.timKiem(thanhVien.getIdLoaiThanhVien());
+		LoaiThanhVienObject loaiThanhVienObject = new LoaiThanhVienObject(loaiThanhVien);
+		thanhVienObject = new ThanhVienObject(thanhVien, loaiThanhVienObject);
+		thanhVienObject.setTrangThai(1);
+		
+		return thanhVienObject;
 	}
 	
 }

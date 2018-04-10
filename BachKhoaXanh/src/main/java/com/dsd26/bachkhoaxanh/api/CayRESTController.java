@@ -40,22 +40,22 @@ public class CayRESTController {
 	private ILoaiCayDAO iLoaiCayDAO;
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CayObject>  getCay(@PathVariable("idCay") String idCay) {
+	public CayObject  getCay(@PathVariable("idCay") String idCay) {
 		Cay cay = iCayDAO.timKiem(idCay);
 		if (cay == null) {
-			return new ResponseEntity<>(new CayObject(), HttpStatus.BAD_REQUEST);
+			return null;
 		}
 		
 		LoaiCay loaiCay = iLoaiCayDAO.timKiem(cay.getIdLoaiCay());
 		LoaiCayObject loaiCayObject = new LoaiCayObject(loaiCay);
 		CayObject cayObj = new CayObject(cay, loaiCayObject);
 		
-		return new ResponseEntity<>(cayObj, HttpStatus.OK);
+		return cayObj;
 	}
 	
 	@RequestMapping(value = "/get-list-cay", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<CayObject>> getListCay() {
+	public List<CayObject> getListCay() {
 		List<CayObject> lstCayObj = new ArrayList<CayObject>();
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		System.out.println(danhSachCay.getList().size());
@@ -72,7 +72,7 @@ public class CayRESTController {
 		}
 		final HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "successfuly");
-		return new ResponseEntity<>(lstCayObj, headers, HttpStatus.OK);
+		return lstCayObj;
 	}
 	
 	@RequestMapping(value = "/get-trace-cay-1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

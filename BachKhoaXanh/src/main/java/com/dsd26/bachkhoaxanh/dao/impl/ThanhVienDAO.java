@@ -78,6 +78,14 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	}
 
 	@Override
+	public ThanhVien layTaiKhoan(String tenTaiKhoan) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(ThanhVien.class);
+        crit.add(Restrictions.eq("tenTaiKhoan", tenTaiKhoan));
+        return (ThanhVien) crit.uniqueResult();
+	}
+	
+	@Override
 	public ThanhVien timKiem(String idThanhVien) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria crit = session.createCriteria(ThanhVien.class);
@@ -109,5 +117,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 		}
 		return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
 	}
+
+	
 
 }
