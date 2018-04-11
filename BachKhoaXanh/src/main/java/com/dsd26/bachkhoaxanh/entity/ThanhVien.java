@@ -19,7 +19,7 @@ public class ThanhVien {
 	private String matKhau;
 	private String tenDayDu;
 	private String idLoaiThanhVien;
-	private int trangThai;
+	private String trangThai;
 	private int toaDoX;
 	private int toaDoY;
 	private byte[] anhThanhVien;
@@ -70,11 +70,11 @@ public class ThanhVien {
 	}
 	
 	@Column(name = "trang_thai", length = 2, nullable = false)
-	public int getTrangThai() {
+	public String getTrangThai() {
 		return trangThai;
 	}
-	public void setTrangThai(int trangThai) {
-		this.trangThai = trangThai;
+	public void setTrangThai(String String) {
+		this.trangThai = String;
 	}
 	
 	

@@ -144,9 +144,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<tr class="active">
 										<td><img src="${pageContext.request.contextPath}/get-anh-thanh-vien?idThanhVien=${thanhVien.idThanhVien }" width="32"/></td>
 										<td>${thanhVien.tenTaiKhoan}</td>
-										<td>${thanhVien.trangThai }</td>
-	
-										
+										<td>${thanhVien.trangThai}</td>
 								 </c:forEach>
 								</tbody>
 							</table>

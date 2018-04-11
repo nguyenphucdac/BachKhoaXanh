@@ -83,7 +83,7 @@ public class ThanhVienController {
 			
 			PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			thanhVienMD.setIdThanhVien("thanh_vien_" + (danhSachThanhVien.getList().size() + 1));
-			thanhVienMD.setTrangThai(0);
+			thanhVienMD.setTrangThai("off");
 			thanhVienMD.setToaDoX(0);
 			thanhVienMD.setToaDoY(0);
 			iThanhVienDAO.luu(thanhVienMD);

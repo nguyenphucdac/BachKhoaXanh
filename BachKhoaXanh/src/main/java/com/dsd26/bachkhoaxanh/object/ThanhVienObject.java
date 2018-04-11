@@ -8,7 +8,7 @@ public class ThanhVienObject {
 	private String tenTaiKhoan;
 	private String matKhau;
 	private String tenDayDu;
-	private int trangThai;
+	private String trangThai;
 	private int toaDoX;
 	private int toaDoY;
 	private String anhThanhVien;
@@ -83,10 +83,10 @@ public class ThanhVienObject {
 	public void setTenDayDu(String tenDayDu) {
 		this.tenDayDu = tenDayDu;
 	}
-	public int getTrangThai() {
+	public String getTrangThai() {
 		return trangThai;
 	}
-	public void setTrangThai(int trangThai) {
+	public void setTrangThai(String trangThai) {
 		this.trangThai = trangThai;
 	}
 	public String getAnhThanhVien() {

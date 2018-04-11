@@ -16,7 +16,7 @@ public class ThanhVienMD {
 	private String tenTaiKhoan;
 	private String matKhau;
 	private String tenDayDu;
-	private int trangThai;
+	private String trangThai;
 	private CommonsMultipartFile anhThanhVien;
 	private int toaDoX;
 	private int toaDoY;
@@ -39,7 +39,7 @@ public class ThanhVienMD {
 			String tenTaiKhoan, 
 			String tenDayDu, 
 			String idLoaiThanhVien, 
-			int trangThai,
+			String trangThai,
 			int toaDoX,
 			int toaDoY
 			) {
@@ -93,11 +93,11 @@ public class ThanhVienMD {
 		this.tenDayDu = tenDayDu;
 	}
 
-	public int getTrangThai() {
+	public String getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(int trangThai) {
+	public void setTrangThai(String trangThai) {
 		this.trangThai = trangThai;
 	}
 
