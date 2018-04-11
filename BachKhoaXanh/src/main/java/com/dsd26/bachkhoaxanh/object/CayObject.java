@@ -5,6 +5,7 @@ import com.dsd26.bachkhoaxanh.model.CayMD;
 
 public class CayObject {
 	private String idCay;
+	private String tenCay;
 	private int toaDoX;
 	private int toaDoY;
 	private int luongNuocToiDa;
@@ -16,6 +17,7 @@ public class CayObject {
 	
 	public CayObject(Cay cay, LoaiCayObject loaiCayObject) {
 		this.idCay = cay.getIdCay();
+		this.tenCay = cay.getTenCay();
 		this.toaDoX = cay.getToaDoX();
 		this.toaDoY = cay.getToaDoY();
 		this.luongNuocToiDa = cay.getLuongNuocToiDa();
@@ -26,6 +28,7 @@ public class CayObject {
 	
 	public CayObject(CayMD cayMD, LoaiCayObject loaiCayObject) {
 		this.idCay = cayMD.getIdCay();
+		this.tenCay = cayMD.getTenCay();
 		this.toaDoX = cayMD.getToaDoX();
 		this.toaDoY = cayMD.getToaDoY();
 		this.luongNuocToiDa = cayMD.getLuongNuocToiDa();
@@ -91,7 +94,12 @@ public class CayObject {
 		this.loaiCayObject = loaiCayObject;
 	}
 
-	
+	public String getTenCay() {
+		return tenCay;
+	}
+	public void setTenCay(String tenCay) {
+		this.tenCay = tenCay;
+	}
 	
 	
 }

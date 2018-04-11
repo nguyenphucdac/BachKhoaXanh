@@ -130,12 +130,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="form-body">
 							<form:form modelAttribute="lichSuTuoiForm" method="POST" class="form-horizontal">
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idLichSuTuoi" type="text" class="form-control" id="inputEmail3" value="${lichSuTuoi.idLichSuTuoi }" />
-									</div>
-								</div>
-								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Id cây</label>
 									<div class="col-sm-9">
 										<form:select path="idCay" class="form-control" >

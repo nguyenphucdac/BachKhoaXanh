@@ -40,6 +40,7 @@ public class CayDAO implements ICayDAO {
 			cay = new Cay();
 		}
 		cay.setIdCay(cayMD.getIdCay());
+		cay.setTenCay(cayMD.getTenCay());
 		cay.setIdLoaiCay(cayMD.getIdLoaiCay());
 		cay.setToaDoX(cayMD.getToaDoX());
 		cay.setToaDoY(cayMD.getToaDoY());
@@ -47,11 +48,7 @@ public class CayDAO implements ICayDAO {
 		cay.setLuongNuocDaTuoi(cayMD.getLuongNuocDaTuoi());
 		cay.setTinhTrang(cayMD.getTinhTrang());
 		
-		System.out.println(cay.getIdCay());
 		this.sessionFactory.getCurrentSession().persist(cay);
-	
-		
-		
 	}
 
 	@Override
@@ -87,7 +84,7 @@ public class CayDAO implements ICayDAO {
 	@Override
 	public PaginationResult<CayMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + CayMD.class.getName() 
-				+ " (p.idCay, p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocToiDa, p.luongNuocDaTuoi, p.tinhTrang) " 
+				+ " (p.idCay,p.tenCay , p.idLoaiCay, p.toaDoX, p.toaDoY, p.luongNuocToiDa, p.luongNuocDaTuoi, p.tinhTrang) " 
 				+ " from "
 				+ Cay.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

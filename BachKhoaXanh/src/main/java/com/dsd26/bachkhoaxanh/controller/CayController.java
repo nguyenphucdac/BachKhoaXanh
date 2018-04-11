@@ -78,8 +78,9 @@ public class CayController {
 		}
 		try {
 			
-			System.out.println("idLoaicay ="+cayMD.getIdLoaiCay());
+			PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			
+			cayMD.setIdCay("cay_" + (danhSachCay.getList().size() + 1));
 			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
 		} catch (Exception ex) {

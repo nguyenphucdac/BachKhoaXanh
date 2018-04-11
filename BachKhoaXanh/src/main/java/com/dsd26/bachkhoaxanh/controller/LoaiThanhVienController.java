@@ -113,7 +113,7 @@ public class LoaiThanhVienController {
         }
 		try {
 			
-			iLoaiThanhVienDAO.xoa(loaiThanhVienMD.getIdLoaiThanhVien().split(",")[0]);
+			iLoaiThanhVienDAO.xoa(loaiThanhVienMD.getIdLoaiThanhVien());
 			iLoaiThanhVienDAO.luu(loaiThanhVienMD);
 		}
 		catch(Exception ex) {

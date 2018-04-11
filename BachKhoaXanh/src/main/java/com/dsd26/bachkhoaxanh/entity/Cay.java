@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Table(name="Cay")
 public class Cay {
 	private String idCay;
+	private String tenCay;
 	private String idLoaiCay;
 	private int toaDoX;
 	private int toaDoY;
@@ -75,6 +76,16 @@ public class Cay {
 	public void setTinhTrang(String tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
+	
+	@Column(name = "ten_cay", length = 30, nullable = false)
+	public String getTenCay() {
+		return tenCay;
+	}
+	public void setTenCay(String tenCay) {
+		this.tenCay = tenCay;
+	}
+	
+	
 	
 	
 }

@@ -116,6 +116,7 @@ public class LoaiCayController {
             return "admin/loaicay/sua";
         }
 		try {
+			iLoaiCayDAO.xoa(loaiCayMD.getIdLoaiCay());
 			iLoaiCayDAO.luu(loaiCayMD);
 		}
 		catch(Exception ex) {

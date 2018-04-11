@@ -138,10 +138,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<form:form modelAttribute="cayForm" method="POST"
 								class="form-horizontal">
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Tên cây</label>
 									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control"
-											id="inputEmail3" placeholder="id" />
+										<form:input path="tenCay" type="text" class="form-control"
+										 />
 									</div>
 								</div>
 								<div class="form-group">

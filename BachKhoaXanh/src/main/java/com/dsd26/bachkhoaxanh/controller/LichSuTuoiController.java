@@ -135,8 +135,7 @@ public class LichSuTuoiController {
         }
 		try {
 			
-			iLichSuTuoiDAO.xoa(lichSuTuoiMD.getIdLichSuTuoi().split(",")[0]);
-			lichSuTuoiMD.setIdLichSuTuoi(lichSuTuoiMD.getIdLichSuTuoi().split(",")[1]);
+			iLichSuTuoiDAO.xoa(lichSuTuoiMD.getIdLichSuTuoi());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		}
 		catch(Exception ex) {
