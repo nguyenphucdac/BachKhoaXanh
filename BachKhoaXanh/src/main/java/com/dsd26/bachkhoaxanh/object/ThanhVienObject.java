@@ -21,6 +21,7 @@ public class ThanhVienObject {
 	public ThanhVienObject(ThanhVien thanhVien, LoaiThanhVienObject loaiThanhVienObject) {
 		super();
 		this.idThanhVien = thanhVien.getIdThanhVien();
+		this.matKhau = thanhVien.getMatKhau();
 		this.tenTaiKhoan = thanhVien.getTenTaiKhoan();
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
@@ -34,6 +35,7 @@ public class ThanhVienObject {
 		super();
 		this.idThanhVien = thanhVienMD.getIdThanhVien();
 		this.tenTaiKhoan = thanhVienMD.getTenTaiKhoan();
+		this.matKhau = thanhVienMD.getMatKhau();
 		this.tenDayDu = thanhVienMD.getTenDayDu();
 		this.trangThai = thanhVienMD.getTrangThai();
 		this.toaDoX = thanhVienMD.getToaDoX();

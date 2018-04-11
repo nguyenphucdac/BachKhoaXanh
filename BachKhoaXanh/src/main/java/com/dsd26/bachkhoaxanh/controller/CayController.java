@@ -1,10 +1,25 @@
 package com.dsd26.bachkhoaxanh.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.omg.CORBA.portable.OutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -83,6 +98,8 @@ public class CayController {
 			cayMD.setIdCay("cay_" + (danhSachCay.getList().size() + 1));
 			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
+			
+			postToNode("Vừa có cây mới nhé ");
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
@@ -134,6 +151,82 @@ public class CayController {
             return "admin/cay/taomoi";
 		}
 		return "redirect:/cay";
+	}
+	
+	public void postToNode(String jsonObject) {
+		String host = "http://10.10.169.108:3000/add-tree";
+		HttpURLConnection connection = null;
+		
+//		URL obj;
+//		try {
+//			System.out.println("dang gui...");
+//			obj = new URL(hostNode);
+//			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//			con.setRequestMethod("POST");
+//			con.setRequestProperty("username", "Nguyễn Phúc Đạc from java server");
+//			System.out.println("da gui...");
+//			
+//			con.setDoOutput(true);
+//			java.io.OutputStream os = con.getOutputStream();
+//			os.write("username=dacfromserverjava?email=nguyenphucdac".getBytes());
+//			
+//			os.flush();
+//			os.close();
+//			
+//			int responseCode = con.getResponseCode();
+//			System.out.println("POST Response Code :: " + responseCode);
+//			
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ProtocolException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		URL url;
+		try {
+			System.out.println("dang gui...");
+			url = new URL(host);
+			Map<String,Object> params = new LinkedHashMap<>();
+	        params.put("username", "Freddie the Fish");
+	        params.put("email", "fishie@seamail.example.com");
+	       
+	        StringBuilder postData = new StringBuilder();
+	        for (Map.Entry<String,Object> param : params.entrySet()) {
+	            if (postData.length() != 0) postData.append('&');
+	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+	            postData.append('=');
+	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+	        }
+	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	        conn.setDoOutput(true);
+	        conn.getOutputStream().write(postDataBytes);
+
+	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+	        for (int c; (c = in.read()) >= 0;)
+	            System.out.print((char)c);
+	        System.out.println("da gui...");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
