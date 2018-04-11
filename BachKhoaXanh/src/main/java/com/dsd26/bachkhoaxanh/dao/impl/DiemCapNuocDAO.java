@@ -35,21 +35,33 @@ public class DiemCapNuocDAO implements IDiemCapNuocDAO{
 		}
 		if(diemCapNuoc == null) {
 			diemCapNuoc = new DiemCapNuoc();
+			
+			diemCapNuoc.setIdDiemCapNuoc(diemCapNuocMD.getIdDiemCapNuoc());
+			diemCapNuoc.setToaDoX(diemCapNuocMD.getToaDoX());
+			diemCapNuoc.setToaDoY(diemCapNuocMD.getToaDoY());
+			diemCapNuoc.setLuongNuocToiDa(diemCapNuocMD.getLuongNuocToiDa());
+			diemCapNuoc.setTinhTrang(diemCapNuocMD.getTinhTrang());
+			
+			this.sessionFactory.getCurrentSession().persist(diemCapNuoc);
 		}
-		diemCapNuoc.setIdDiemCapNuoc(diemCapNuocMD.getIdDiemCapNuoc());
-		diemCapNuoc.setToaDoX(diemCapNuocMD.getToaDoX());
-		diemCapNuoc.setToaDoY(diemCapNuocMD.getToaDoY());
-		diemCapNuoc.setLuongNuocToiDa(diemCapNuocMD.getLuongNuocToiDa());
-		diemCapNuoc.setTinhTrang(diemCapNuocMD.getTinhTrang());
+		else {
+			diemCapNuoc.setIdDiemCapNuoc(diemCapNuocMD.getIdDiemCapNuoc());
+			diemCapNuoc.setToaDoX(diemCapNuocMD.getToaDoX());
+			diemCapNuoc.setToaDoY(diemCapNuocMD.getToaDoY());
+			diemCapNuoc.setLuongNuocToiDa(diemCapNuocMD.getLuongNuocToiDa());
+			diemCapNuoc.setTinhTrang(diemCapNuocMD.getTinhTrang());
+			
+			this.xoa(idDiemCapNuoc);
+			this.sessionFactory.getCurrentSession().persist(diemCapNuoc);
+		}
 		
-		this.sessionFactory.getCurrentSession().persist(diemCapNuoc);
 		
 	}
 
 	@Override
 	public boolean xoa(String idDiemCapNuoc) {
 		String sql = "";
-		System.out.println("gia tri cua idDiemCapNuoc la:" + idDiemCapNuoc);
+		
 		if(idDiemCapNuoc == null || idDiemCapNuoc.equals("")) {
 			return false;
 		}

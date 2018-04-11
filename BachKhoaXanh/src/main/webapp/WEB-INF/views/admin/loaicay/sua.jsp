@@ -129,12 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="loaiCayForm" method="POST" class="form-horizontal" enctype="multipart/form-data">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idLoaiCay" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${loaiCay.idLoaiCay }" />
-									</div>
-								</div>
+								<form:input path="idLoaiCay" type="hidden" class="form-control" id="inputEmail3" placeholder="id" value="${loaiCay.idLoaiCay }" />
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Tên loại cây</label>
 									<div class="col-sm-9">

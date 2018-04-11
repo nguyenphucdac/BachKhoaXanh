@@ -39,7 +39,6 @@ public class CayDAO implements ICayDAO {
 		if(cay == null) {
 			cay = new Cay();
 		}
-		
 		cay.setIdCay(cayMD.getIdCay());
 		cay.setIdLoaiCay(cayMD.getIdLoaiCay());
 		cay.setToaDoX(cayMD.getToaDoX());
@@ -48,7 +47,10 @@ public class CayDAO implements ICayDAO {
 		cay.setLuongNuocDaTuoi(cayMD.getLuongNuocDaTuoi());
 		cay.setTinhTrang(cayMD.getTinhTrang());
 		
+		System.out.println(cay.getIdCay());
 		this.sessionFactory.getCurrentSession().persist(cay);
+	
+		
 		
 	}
 

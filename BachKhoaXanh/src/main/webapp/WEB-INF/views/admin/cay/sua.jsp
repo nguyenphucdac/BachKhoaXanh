@@ -129,16 +129,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="cayForm" method="POST" class="form-horizontal">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idCay" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${cay.idCay}" />
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Loại cây</label>
 									<div class="col-sm-9">
-										<form:select path="idLoaiCay" class="form-control" itemValue="${cay.idLoaiCay}">
+										<form:select path="idLoaiCay" class="form-control">
 											<c:forEach items="${danhSachLoaiCay.list}" var="loaiCay">
 												<c:choose>
 												<c:when test="${loaiCay.idLoaiCay eq cay.idLoaiCay}">

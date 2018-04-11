@@ -38,19 +38,35 @@ public class LoaiCayDAO implements ILoaiCayDAO {
 		}
 		if(loaiCay == null) {
 			loaiCay = new LoaiCay();
+			loaiCay.setIdLoaiCay(loaiCayMD.getIdLoaiCay());
+			loaiCay.setTenLoaiCay(loaiCayMD.getTenLoaiCay());
+			
+			if (loaiCayMD.getAnhLoaiCay() != null) {
+	            byte[] anhLoaiCay = loaiCayMD.getAnhLoaiCay().getBytes();
+	            if (anhLoaiCay != null && anhLoaiCay.length > 0) {
+	            	loaiCay.setAnhLoaiCay(anhLoaiCay);
+	            }
+	        }
+			this.sessionFactory.getCurrentSession().persist(loaiCay);
+		}
+		else {
+			loaiCay.setIdLoaiCay(loaiCayMD.getIdLoaiCay());
+			loaiCay.setTenLoaiCay(loaiCayMD.getTenLoaiCay());
+			
+			if (loaiCayMD.getAnhLoaiCay() != null) {
+	            byte[] anhLoaiCay = loaiCayMD.getAnhLoaiCay().getBytes();
+	            if (anhLoaiCay != null && anhLoaiCay.length > 0) {
+	            	loaiCay.setAnhLoaiCay(anhLoaiCay);
+	            }
+	        }
+			
+			this.xoa(idLoaiCay);
+			this.sessionFactory.getCurrentSession().persist(loaiCay);
 		}
 		
-		loaiCay.setIdLoaiCay(loaiCayMD.getIdLoaiCay());
-		loaiCay.setTenLoaiCay(loaiCayMD.getTenLoaiCay());
 		
-		if (loaiCayMD.getAnhLoaiCay() != null) {
-            byte[] anhLoaiCay = loaiCayMD.getAnhLoaiCay().getBytes();
-            if (anhLoaiCay != null && anhLoaiCay.length > 0) {
-            	loaiCay.setAnhLoaiCay(anhLoaiCay);
-            }
-        }
 		
-		this.sessionFactory.getCurrentSession().persist(loaiCay);
+		
 	}
 
 	@Override

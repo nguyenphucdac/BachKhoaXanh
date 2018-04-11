@@ -133,7 +133,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Nội dung</label>
 									<div class="col-sm-9">
-										<form:input path="noiDung" type="text" class="form-control" id="inputEmail1" placeholder="loại cây" />
+										<form:input path="noiDung" type="text" class="form-control" id="inputEmail1" />
 									</div>
 								</div>
 								<div class="form-group">
