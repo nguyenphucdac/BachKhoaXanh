@@ -149,7 +149,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<td>${thanhVien.tenDayDu}</td>
 										<td>${thanhVien.idLoaiThanhVien }</td>
 										<td>${thanhVien.trangThai }</td>
-										<td><img src="${pageContext.request.contextPath}/anh-thanh-vien?idThanhVien=${thanhVien.idThanhVien }" width="32"/></td>										
+										<td><img src="${pageContext.request.contextPath}/get-anh-thanh-vien?idThanhVien=${thanhVien.idThanhVien }" width="32"/></td>										
 										
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/thanhvien-xoa?idThanhVien=${thanhVien.idThanhVien }"><i class="fa fa-times-circle-o"></i>Delete</a></td> 
 									</tr>

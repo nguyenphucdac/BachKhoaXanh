@@ -122,8 +122,8 @@ public class ThongBaoController {
         }
 		try {
 			
-			iThongBaoDAO.xoa(thongBaoMD.getIdThongBao().split(",")[0]);
-			thongBaoMD.setIdThongBao(thongBaoMD.getIdThongBao().split(",")[1]);
+			iThongBaoDAO.xoa(thongBaoMD.getIdThongBao());
+			
 			iThongBaoDAO.luu(thongBaoMD);
 		}
 		catch(Exception ex) {

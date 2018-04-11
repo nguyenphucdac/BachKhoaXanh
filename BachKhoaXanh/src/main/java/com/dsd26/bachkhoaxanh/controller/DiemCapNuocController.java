@@ -106,8 +106,7 @@ public class DiemCapNuocController {
             return "admin/diemcapnuoc/sua";
         }
 		try {
-			iDiemCapNuocDAO.xoa(diemCapNuocMD.getIdDiemCapNuoc().split(",")[0]);
-			diemCapNuocMD.setIdDiemCapNuoc(diemCapNuocMD.getIdDiemCapNuoc().split(",")[1]);
+			iDiemCapNuocDAO.xoa(diemCapNuocMD.getIdDiemCapNuoc());
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
 		}
 		catch(Exception ex) {

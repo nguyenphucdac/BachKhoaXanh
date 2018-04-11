@@ -129,12 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="baoCaoTinhTrangCayForm" method="POST" class="form-horizontal">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="id" type="text" class="form-control" id="inputEmail3" value="${baoCaoTinhTrangCay.id }" />
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Id thành viên</label>
 									<div class="col-sm-9">
@@ -150,7 +145,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
 									<div class="col-sm-9">
-										<form:input path="tinhTrang" type="text" class="form-control" id="inputPassword3" value="${baoCaoTinhTrangCay.tinhTrang }"/>
+										<form:select path="tinhTrang" class="form-control">
+											<option value="bị héo">
+        										bị héo
+   											</option>
+   											<option value="bị úng nước">
+        										bị úng nước
+   											</option>
+   											<option value="xấu">
+        										xấu
+   											</option>
+										</form:select>
 									</div>
 								</div>
 								

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.entity.BaoCaoTinhTrangDCN;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
 import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangDCNMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 
@@ -73,6 +74,9 @@ public class BaoCaoTinhTrangDCNController {
 			return "redirect:/baocaotinhtrangdcn-tao-moi";
 		}
 		try {
+			PaginationResult<BaoCaoTinhTrangDCNMD> danhSachBaoCaoTinhTrangDCN = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			baoCaoTinhTrangDCNMD.setId("bao_cao_cay_"+ (danhSachBaoCaoTinhTrangDCN.getList().size() + 1));
+			
 			iBaoCaoTinhTrangDCNDAO.luu(baoCaoTinhTrangDCNMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
@@ -118,8 +122,7 @@ public class BaoCaoTinhTrangDCNController {
         }
 		try {
 			
-			iBaoCaoTinhTrangDCNDAO.xoa(baoCaoTinhTrangDCNMD.getId().split(",")[0]);
-			baoCaoTinhTrangDCNMD.setId(baoCaoTinhTrangDCNMD.getId().split(",")[1]);
+			iBaoCaoTinhTrangDCNDAO.xoa(baoCaoTinhTrangDCNMD.getId());
 			iBaoCaoTinhTrangDCNDAO.luu(baoCaoTinhTrangDCNMD);
 		}
 		catch(Exception ex) {

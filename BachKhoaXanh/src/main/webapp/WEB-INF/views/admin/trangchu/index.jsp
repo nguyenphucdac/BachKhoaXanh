@@ -129,37 +129,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div class="activity_box">
 					<h2>Danh sách thành viên</h2>
 					<div class="scrollbar" id="style-1">
-						<div class="activity-row">
-							<div class="col-xs-4 activity-img"><img src="images/4.jpg" class="img-responsive" alt=""></div>
-							<div class="col-xs-7 activity-desc1"><h6>Nguyễn Văn Công</h6></div>
-							
-							<div class="col-xs-1 activity-desc1"><h6>o</h6></div>
-							<div class="clearfix"> </div>
-						</div>
 						
-						<div class="activity-row">
-							<div class="col-xs-4 activity-img"><img src="images/4.jpg" class="img-responsive" alt=""></div>
-							<div class="col-xs-7 activity-desc1"><h6>Dương Thế Cường</h6></div>
-							
-							<div class="col-xs-1 activity-desc1"><h6>o</h6></div>
-							<div class="clearfix"> </div>
-						</div>
-						
-						<div class="activity-row">
-							<div class="col-xs-4 activity-img"><img src="images/4.jpg" class="img-responsive" alt=""></div>
-							<div class="col-xs-7 activity-desc1"><h6>Nguyễn Phúc Đạc</h6></div>
-							
-							<div class="col-xs-1 activity-desc1"><h6>o</h6></div>
-							<div class="clearfix"> </div>
-						</div>
-						
-						<div class="activity-row">
-							<div class="col-xs-4 activity-img"><img src="images/4.jpg" class="img-responsive" alt=""></div>
-							<div class="col-xs-7 activity-desc1"><h6>Vũ Đức Việt</h6></div>
-							
-							<div class="col-xs-1 activity-desc1"><h6>o</h6></div>
-							<div class="clearfix"> </div>
-						</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Icon</th>
+										<th>Tài khoản</th>
+										<th>Trạng thái</th>
+
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${danhSachThanhVien.list}" var="thanhVien">
+								<tr class="active">
+										<td><img src="${pageContext.request.contextPath}/get-anh-thanh-vien?idThanhVien=${thanhVien.idThanhVien }" width="32"/></td>
+										<td>${thanhVien.tenTaiKhoan}</td>
+										<td>${thanhVien.trangThai }</td>
+	
+										
+								 </c:forEach>
+								</tbody>
+							</table>
 					</div>
 					
 				</div>

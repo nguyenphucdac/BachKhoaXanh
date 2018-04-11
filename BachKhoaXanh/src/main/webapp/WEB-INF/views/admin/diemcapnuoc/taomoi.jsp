@@ -150,8 +150,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
+									
 									<div class="col-sm-9">
-										<form:input path="tinhTrang" type="text" class="form-control" id="inputPassword3" placeholder="tình trạng" />
+										<form:select path="tinhTrang" class="form-control">
+											<option value="tốt">
+        										tốt
+   											</option>
+   											<option value="bình thường">
+        										bình thường
+   											</option>
+   											<option value="xấu">
+        										xấu
+   											</option>
+										</form:select>
 									</div>
 								</div>
 								<div class="col-sm-offset-2">

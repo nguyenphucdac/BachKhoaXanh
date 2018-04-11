@@ -129,12 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-body">
 							<form:form modelAttribute="diemCapNuocForm" method="POST" class="form-horizontal">
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">id</label>
-									<div class="col-sm-9">
-										<form:input path="idDiemCapNuoc" type="text" class="form-control" id="inputEmail3" placeholder="id" value="${diemCapNuoc.idDiemCapNuoc}" />
-									</div>
-								</div>
+							 								
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Tọa độ x</label>
 									<div class="col-sm-9">
@@ -155,8 +150,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="form-group">
 									<label for="inputPassword3" class="col-sm-2 control-label">Tình trạng</label>
+									
 									<div class="col-sm-9">
-										<form:input path="tinhTrang" type="text" class="form-control" id="inputPassword3" placeholder="tình trạng" value="${diemCapNuoc.tinhTrang}" />
+										<form:select path="tinhTrang" class="form-control">
+											<option value="tốt">
+        										tốt
+   											</option>
+   											<option value="bình thường">
+        										bình thường
+   											</option>
+   											<option value="xấu">
+        										xấu
+   											</option>
+										</form:select>
 									</div>
 								</div>
 								<div class="col-sm-offset-2">
