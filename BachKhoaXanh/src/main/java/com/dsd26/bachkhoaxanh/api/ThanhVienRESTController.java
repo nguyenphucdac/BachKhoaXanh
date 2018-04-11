@@ -112,7 +112,7 @@ public class ThanhVienRESTController {
 		}
 		
 		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
-		thanhVienMD.setTrangThai(0);
+		thanhVienMD.setTrangThai("off");
 		thanhVienMD.setMatKhau(thanhVien.getMatKhau());
 		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
