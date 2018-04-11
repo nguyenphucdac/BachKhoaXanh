@@ -88,7 +88,7 @@ public class ThanhVienRESTController {
 		}
 		
 		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
-		thanhVienMD.setTrangThai(1);
+		thanhVienMD.setTrangThai("on");
 		thanhVienMD.setMatKhau(matKhau);
 		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
@@ -97,7 +97,7 @@ public class ThanhVienRESTController {
 		LoaiThanhVien loaiThanhVien = iLoaiThanhVienDAO.timKiem(thanhVien.getIdLoaiThanhVien());
 		LoaiThanhVienObject loaiThanhVienObject = new LoaiThanhVienObject(loaiThanhVien);
 		thanhVienObject = new ThanhVienObject(thanhVien, loaiThanhVienObject);
-		thanhVienObject.setTrangThai(1);
+		thanhVienObject.setTrangThai("on");
 		
 		return thanhVienObject;
 	}
