@@ -108,18 +108,17 @@ public class ThanhVienRESTController {
 		
 		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		if(thanhVien == null) {
-			return new ThongDiepObject("1001", "Đăng xuất thất bại");
+			return new ThongDiepObject("200", "Đăng xuất thất bại");
 		}
 		
 		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
 		thanhVienMD.setTrangThai("off");
-		thanhVienMD.setMatKhau(thanhVien.getMatKhau());
 		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
 		iThanhVienDAO.luu(thanhVienMD);
 		
 		
-		return new ThongDiepObject("1000", "Đăng xuất thành công");
+		return new ThongDiepObject("200", "Đăng xuất thành công");
 	}
 	
 }

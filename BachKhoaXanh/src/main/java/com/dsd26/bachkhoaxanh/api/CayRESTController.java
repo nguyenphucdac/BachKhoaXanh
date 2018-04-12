@@ -3,6 +3,8 @@ package com.dsd26.bachkhoaxanh.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,13 +21,19 @@ import com.dsd26.bachkhoaxanh.business.Map;
 import com.dsd26.bachkhoaxanh.business.Point;
 import com.dsd26.bachkhoaxanh.business.TimDuongDi;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
+import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 import com.dsd26.bachkhoaxanh.object.CayObject;
 import com.dsd26.bachkhoaxanh.object.LoaiCayObject;
+import com.dsd26.bachkhoaxanh.object.ThongDiepObject;
 
 /*
  * author: Nguyễn Phúc Đạc
@@ -38,6 +46,9 @@ public class CayRESTController {
 	
 	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
+	
+	@Autowired
+	private ILichSuTuoiDAO iLichSuTuoiDAO;
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public CayObject  getCay(@PathVariable("idCay") String idCay) {
@@ -55,7 +66,8 @@ public class CayRESTController {
 	
 	@RequestMapping(value = "/get-list-cay", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<CayObject> getListCay() {
+	public List<CayObject> getListCay(final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<CayObject> lstCayObj = new ArrayList<CayObject>();
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		System.out.println(danhSachCay.getList().size());
@@ -74,6 +86,42 @@ public class CayRESTController {
 		headers.add("message", "successfuly");
 		return lstCayObj;
 	}
+	
+	
+	@RequestMapping(value = "/cap-nhat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ThongDiepObject capNhatNuocChoCay(@RequestBody(required = true) String body, 
+			String idThanhVien,
+			String idCay,
+			int luongNuoc
+			) 
+	{
+		Cay cay = iCayDAO.timKiem(idCay);
+		
+		if(cay == null) {
+			new ThongDiepObject("200", "Cây không tồn tại !!!");
+		}
+		
+		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + luongNuoc) {
+			cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
+		}
+		
+		else {
+			cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + luongNuoc);
+		}
+		iCayDAO.xoa(idCay);
+		iCayDAO.luu(new CayMD(cay));
+		
+		LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
+		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+		lichSuTuoiMD.setIdCay(idCay);
+		lichSuTuoiMD.setIdThanhVien(idThanhVien);
+		lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+		
+		iLichSuTuoiDAO.luu(lichSuTuoiMD);
+		return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");
+	}
+	
 	
 	@RequestMapping(value = "/get-trace-cay-1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Point> getTrace1(	@RequestBody(required = true) String body, 

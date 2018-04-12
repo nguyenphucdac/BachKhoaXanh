@@ -17,7 +17,7 @@ public class ThanhVienMD {
 	private String matKhau;
 	private String tenDayDu;
 	private String trangThai;
-	private CommonsMultipartFile anhThanhVien;
+	private byte[] anhThanhVien;
 	private int toaDoX;
 	private int toaDoY;
 	
@@ -27,11 +27,12 @@ public class ThanhVienMD {
 		this.idThanhVien = thanhVien.getIdThanhVien();
 		this.idLoaiThanhVien = thanhVien.getIdLoaiThanhVien();
 		this.tenTaiKhoan = thanhVien.getTenTaiKhoan();
-		this.matKhau = "";
+		this.matKhau = thanhVien.getMatKhau();
 		this.tenDayDu = thanhVien.getTenDayDu();
 		this.trangThai = thanhVien.getTrangThai();
 		this.toaDoX = thanhVien.getToaDoX();
 		this.toaDoY = thanhVien.getToaDoY();
+		this.anhThanhVien = thanhVien.getAnhThanhVien();
 	}
 	
 	public ThanhVienMD(
@@ -101,11 +102,11 @@ public class ThanhVienMD {
 		this.trangThai = trangThai;
 	}
 
-	public CommonsMultipartFile getAnhThanhVien() {
+	public byte[] getAnhThanhVien() {
 		return anhThanhVien;
 	}
 
-	public void setAnhThanhVien(CommonsMultipartFile anhThanhVien) {
+	public void setAnhThanhVien(byte[] anhThanhVien) {
 		this.anhThanhVien = anhThanhVien;
 	}
 
