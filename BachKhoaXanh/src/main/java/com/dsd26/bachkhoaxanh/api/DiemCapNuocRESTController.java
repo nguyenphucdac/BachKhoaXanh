@@ -1,6 +1,7 @@
 package com.dsd26.bachkhoaxanh.api;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dsd26.bachkhoaxanh.business.Map;
 import com.dsd26.bachkhoaxanh.business.Point;
 import com.dsd26.bachkhoaxanh.business.TimDuongDi;
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.entity.DiemCapNuoc;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangDCNMD;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.DiemCapNuocMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.object.ThongDiepObject;
 
 /*
  * author: Vu Duc Viet
@@ -29,6 +34,8 @@ import com.dsd26.bachkhoaxanh.model.PaginationResult;
 public class DiemCapNuocRESTController {
 	@Autowired
 	private IDiemCapNuocDAO iDiemCapNuocDAO;
+	@Autowired
+	private IBaoCaoTinhTrangDCNDAO iBaoCaoTinhTrangDCNDAO;
 	
 	@RequestMapping(value = "/get-dcn/{idDiemCapNuoc}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -52,6 +59,27 @@ public class DiemCapNuocRESTController {
 		}
 		lstDiemCapNuoc = danhsachDCN.getList();
 		return lstDiemCapNuoc;
+	}
+	
+	@RequestMapping(value = "/bao-cao-diem-cap-nuoc", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ThongDiepObject baoCaoTinhTrangCay(@RequestBody(required = true) String body, 
+			String idThanhVien,
+			String idDiemCapNuoc,
+			String noiDung
+			) {
+		
+		BaoCaoTinhTrangDCNMD baoCaoTinhTrangDCNMD = new BaoCaoTinhTrangDCNMD();
+		PaginationResult<BaoCaoTinhTrangDCNMD> danhSachLichSuTuoi = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		baoCaoTinhTrangDCNMD.setId("bao_cao_cay_" + (danhSachLichSuTuoi.getList().size() + 1));
+		baoCaoTinhTrangDCNMD.setIdDiemCapNuoc(idDiemCapNuoc);
+		baoCaoTinhTrangDCNMD.setIdThanhVien(idThanhVien);
+		baoCaoTinhTrangDCNMD.setTinhTrang(noiDung);
+		baoCaoTinhTrangDCNMD.setThoiGian(Calendar.getInstance().getTime());
+		
+		iBaoCaoTinhTrangDCNDAO.luu(baoCaoTinhTrangDCNMD);
+		
+		return new ThongDiepObject("200", "Đã gửi báo cáo !!!");
 	}
 	
 	@RequestMapping(value = "/get-trace-dcn-1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

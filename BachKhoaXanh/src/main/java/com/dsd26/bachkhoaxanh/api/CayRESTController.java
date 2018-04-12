@@ -1,6 +1,7 @@
 package com.dsd26.bachkhoaxanh.api;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dsd26.bachkhoaxanh.business.Map;
 import com.dsd26.bachkhoaxanh.business.Point;
 import com.dsd26.bachkhoaxanh.business.TimDuongDi;
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangCayDAO;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
+import com.dsd26.bachkhoaxanh.entity.BaoCaoTinhTrangCay;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
@@ -49,6 +53,9 @@ public class CayRESTController {
 	
 	@Autowired
 	private ILichSuTuoiDAO iLichSuTuoiDAO;
+	
+	@Autowired
+	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public CayObject  getCay(@PathVariable("idCay") String idCay) {
@@ -117,9 +124,31 @@ public class CayRESTController {
 		lichSuTuoiMD.setIdCay(idCay);
 		lichSuTuoiMD.setIdThanhVien(idThanhVien);
 		lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 		
 		iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");
+	}
+	
+	@RequestMapping(value = "/bao-cao-cay", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ThongDiepObject baoCaoTinhTrangCay(@RequestBody(required = true) String body, 
+			String idThanhVien,
+			String idCay,
+			String noiDung
+			) {
+		
+		BaoCaoTinhTrangCayMD baoCaoTinhTrangCayMD = new BaoCaoTinhTrangCayMD();
+		PaginationResult<BaoCaoTinhTrangCayMD> danhSachLichSuTuoi = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		baoCaoTinhTrangCayMD.setId("bao_cao_cay_" + (danhSachLichSuTuoi.getList().size() + 1));
+		baoCaoTinhTrangCayMD.setIdCay(idCay);
+		baoCaoTinhTrangCayMD.setIdThanhVien(idThanhVien);
+		baoCaoTinhTrangCayMD.setTinhTrang(noiDung);
+		baoCaoTinhTrangCayMD.setThoiGian(Calendar.getInstance().getTime());
+		
+		iBaoCaoTinhTrangCayDAO.luu(baoCaoTinhTrangCayMD);
+		
+		return new ThongDiepObject("200", "Đã gửi báo cáo !!!");
 	}
 	
 	

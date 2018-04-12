@@ -76,7 +76,6 @@ public class LichSuTuoiController {
 	@RequestMapping(value = { "/lichsutuoi-tao-moi" }, method = RequestMethod.POST)
 	public String luuLichSuTuoi(Model model, @ModelAttribute("lichSuTuoiForm") @Validated LichSuTuoiMD lichSuTuoiMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 
 		if (result.hasErrors()) {
 			System.out.println("có lỗi");
@@ -86,6 +85,7 @@ public class LichSuTuoiController {
 		try {
 			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
