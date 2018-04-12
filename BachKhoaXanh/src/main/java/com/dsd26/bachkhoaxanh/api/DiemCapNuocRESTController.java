@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +52,8 @@ public class DiemCapNuocRESTController {
 	
 	@RequestMapping(value = "/get-list-dcn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<DiemCapNuocMD> getListDiemCapNuoc() {
+	public List<DiemCapNuocMD> getListDiemCapNuoc(final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<DiemCapNuocMD> lstDiemCapNuoc = new ArrayList<>();
 		PaginationResult<DiemCapNuocMD> danhsachDCN = iDiemCapNuocDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		

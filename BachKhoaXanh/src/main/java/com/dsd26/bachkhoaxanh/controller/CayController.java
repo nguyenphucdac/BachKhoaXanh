@@ -57,6 +57,8 @@ public class CayController {
 	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
 	
+	public String host = "http://10.10.169.108:3000/";
+	
 	@RequestMapping("/cay")
 	public String index(
 			Model model,
@@ -92,14 +94,10 @@ public class CayController {
 			return "redirect:/cay-tao-moi";
 		}
 		try {
-			
 			PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
-			
 			cayMD.setIdCay("cay_" + (danhSachCay.getList().size() + 1));
 			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
-			
-			postToNode("Vừa có cây mới nhé ");
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
@@ -118,7 +116,6 @@ public class CayController {
 	@RequestMapping(value = {"/cay-sua"}, method = RequestMethod.GET)
 	public String suaCay(Model model, @RequestParam(value="idCay", defaultValue = "0") String idCay,
 			@ModelAttribute("cayForm") @Validated CayMD cayMD) {
-		
 		Cay cay = null;
 		if(idCay != null && idCay != "") {
 			cay = iCayDAO.timKiem(idCay);
@@ -153,47 +150,58 @@ public class CayController {
 		return "redirect:/cay";
 	}
 	
-	public void postToNode(String jsonObject) {
-		String host = "http://10.10.169.108:3000/add-tree";
+	public void notificaitonNewTree(String jsonObject) {
 		HttpURLConnection connection = null;
-		
-//		URL obj;
-//		try {
-//			System.out.println("dang gui...");
-//			obj = new URL(hostNode);
-//			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//			con.setRequestMethod("POST");
-//			con.setRequestProperty("username", "Nguyễn Phúc Đạc from java server");
-//			System.out.println("da gui...");
-//			
-//			con.setDoOutput(true);
-//			java.io.OutputStream os = con.getOutputStream();
-//			os.write("username=dacfromserverjava?email=nguyenphucdac".getBytes());
-//			
-//			os.flush();
-//			os.close();
-//			
-//			int responseCode = con.getResponseCode();
-//			System.out.println("POST Response Code :: " + responseCode);
-//			
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(host);
+			url = new URL(host + "add-tree");
 			Map<String,Object> params = new LinkedHashMap<>();
-	        params.put("username", "Freddie the Fish");
-	        params.put("email", "fishie@seamail.example.com");
+//	        params.put("username", "Freddie the Fish");
+//	        params.put("email", "fishie@seamail.example.com");
 	       
+	        StringBuilder postData = new StringBuilder();
+	        for (Map.Entry<String,Object> param : params.entrySet()) {
+	            if (postData.length() != 0) postData.append('&');
+	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+	            postData.append('=');
+	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+	        }
+	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	        conn.setDoOutput(true);
+	        conn.getOutputStream().write(postDataBytes);
+
+	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+	        for (int c; (c = in.read()) >= 0;)
+	            System.out.print((char)c);
+	        System.out.println("da gui...");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public void notificationUpdateTree(String jsonObject) {
+		HttpURLConnection connection = null;
+		URL url;
+		try {
+			System.out.println("dang gui...");
+			url = new URL(host + "update-tree");
+			Map<String,Object> params = new LinkedHashMap<>();
+	        
 	        StringBuilder postData = new StringBuilder();
 	        for (Map.Entry<String,Object> param : params.entrySet()) {
 	            if (postData.length() != 0) postData.append('&');

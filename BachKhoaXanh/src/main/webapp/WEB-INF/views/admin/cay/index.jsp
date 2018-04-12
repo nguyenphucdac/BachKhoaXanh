@@ -135,6 +135,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<table class="table">
 								<thead>
 									<tr>
+										<th>Id cây</th>
 										<th>Tên cây</th>
 										<th>Loại Cây</th>
 										<th>Tọa độ x</th>
@@ -147,6 +148,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<tbody>
 								<c:forEach items="${danhSachCay.list}" var="cay">
 								<tr class="active">
+									<td>${cay.idCay }</td>
 										<td>${cay.tenCay }</td>
 										<td>${cay.idLoaiCay}</td>
 										<td>${cay.toaDoX}</td>

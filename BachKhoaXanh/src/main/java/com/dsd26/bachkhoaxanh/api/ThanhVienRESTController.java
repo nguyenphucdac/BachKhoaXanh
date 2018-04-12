@@ -3,6 +3,8 @@ package com.dsd26.bachkhoaxanh.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -56,7 +58,8 @@ public class ThanhVienRESTController {
 	
 	@RequestMapping(value = "/get-list-thanhvien", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<ThanhVienObject> getListThanhVien() {
+	public List<ThanhVienObject> getListThanhVien(final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<ThanhVienObject> listThanhVienObj = new ArrayList<ThanhVienObject>();
 		PaginationResult<ThanhVienMD> danhSachTV = iThanhVienDAO.queryRoles(1, 20, 10);
 		System.out.println(danhSachTV.getList().size());
