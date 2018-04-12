@@ -153,6 +153,7 @@ public class CayRESTController {
 	
 	
 	@RequestMapping(value = "/get-trace-cay-1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public List<Point> getTrace1(	@RequestBody(required = true) String body, 
 							String idThanhVien,
 							String toaDoX,
