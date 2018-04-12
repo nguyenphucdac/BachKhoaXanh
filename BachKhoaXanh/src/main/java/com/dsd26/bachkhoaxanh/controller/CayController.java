@@ -39,6 +39,7 @@ import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.object.Host;
 import com.google.gson.Gson;
 
 
@@ -56,8 +57,6 @@ public class CayController {
 	private ICayDAO iCayDAO;
 	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
-	
-	public String host = "http://10.10.169.108:3000/";
 	
 	@RequestMapping("/cay")
 	public String index(
@@ -155,7 +154,7 @@ public class CayController {
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(host + "add-tree");
+			url = new URL(Host.hostNode + "add-tree");
 			Map<String,Object> params = new LinkedHashMap<>();
 //	        params.put("username", "Freddie the Fish");
 //	        params.put("email", "fishie@seamail.example.com");
@@ -199,7 +198,7 @@ public class CayController {
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(host + "update-tree");
+			url = new URL(Host.hostNode + "update-tree");
 			Map<String,Object> params = new LinkedHashMap<>();
 	        
 	        StringBuilder postData = new StringBuilder();
