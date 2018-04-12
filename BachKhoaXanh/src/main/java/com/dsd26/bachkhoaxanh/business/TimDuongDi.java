@@ -23,10 +23,6 @@ public class TimDuongDi {
 
 		Point currPoint = new Point(0, 0);
 		int min;
-
-		if(Map.map[startPoint.x][startPoint.y] != 4) {
-			return resultWay;
-		}
 		
 		while (true) {
 			min = MAX_COST;
