@@ -94,6 +94,9 @@ public class ThanhVienRESTController {
 		thanhVienMD.setTrangThai("on");
 		thanhVienMD.setMatKhau(matKhau);
 		
+		thanhVienMD.setToaDoX(2);
+		thanhVienMD.setToaDoY(1);
+		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
 		iThanhVienDAO.luu(thanhVienMD);
 		
