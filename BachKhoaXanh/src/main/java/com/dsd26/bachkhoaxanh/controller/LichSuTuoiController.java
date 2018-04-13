@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.LichSuTuoi;
 import com.dsd26.bachkhoaxanh.model.CayMD;
 import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
@@ -95,6 +96,17 @@ public class LichSuTuoiController {
 				}
 			}
 			
+//			Cay cay = iCayDAO.timKiem(lichSuTuoiMD.getIdCay());
+//			CayMD cayMD = new CayMD(cay);
+//			if(cay.getLuongNuocDaTuoi() <= cay.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi()) {
+//				cayMD.setLuongNuocDaTuoi(cayMD.getLuongNuocToiDa());
+//			}
+//			else {
+//				cayMD.setLuongNuocDaTuoi(cayMD.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi());
+//			}
+//			
+//			iCayDAO.xoa(cayMD.getIdCay());
+//			iCayDAO.luu(cayMD);
 			
 			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);

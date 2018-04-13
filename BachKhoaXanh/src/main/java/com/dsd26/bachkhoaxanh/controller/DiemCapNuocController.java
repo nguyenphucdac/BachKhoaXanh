@@ -27,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
 import com.dsd26.bachkhoaxanh.entity.DiemCapNuoc;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangDCNMD;
 import com.dsd26.bachkhoaxanh.model.DiemCapNuocMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.object.Host;
@@ -45,6 +47,8 @@ public class DiemCapNuocController {
 	
 	@Autowired
 	private IDiemCapNuocDAO iDiemCapNuocDAO;
+	@Autowired
+	private IBaoCaoTinhTrangDCNDAO iBaoCaoTinhTrangDCNDAO;
 	
 	@RequestMapping("/diemcapnuoc")
 	public String index(
@@ -101,6 +105,14 @@ public class DiemCapNuocController {
 	
 	@RequestMapping(value= {"/diemcapnuoc-xoa"}, method = RequestMethod.GET)
 	public String xoaNuoc(@RequestParam(value = "idDiemCapNuoc", defaultValue = "0") String idDiemCapNuoc) {
+		PaginationResult<BaoCaoTinhTrangDCNMD> danhSachBaoCaoTinhTrangDCN = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		for(int i = 0 ; i < danhSachBaoCaoTinhTrangDCN.getList().size() ; i++) {
+			if(danhSachBaoCaoTinhTrangDCN.getList().get(i).getIdDiemCapNuoc().equals(idDiemCapNuoc)) {
+				iBaoCaoTinhTrangDCNDAO.xoa(danhSachBaoCaoTinhTrangDCN.getList().get(i).getId());
+			}
+		}
+		
 		iDiemCapNuocDAO.xoa(idDiemCapNuoc);
 		return "redirect:/diemcapnuoc";
 	}

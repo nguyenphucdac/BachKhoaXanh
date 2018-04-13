@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.ICayDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
@@ -43,6 +45,8 @@ public class LoaiCayController {
 
 	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
+	@Autowired
+	private ICayDAO iCayDAO;
 	
 	@RequestMapping("/loaicay")
 	public String index(
@@ -68,9 +72,6 @@ public class LoaiCayController {
 	@RequestMapping(value = { "/loaicay-tao-moi" }, method = RequestMethod.POST)
 	public String luuLoaiCay(Model model, @ModelAttribute("loaiCayForm") @Validated LoaiCayMD loaiCayMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			return "redirect:/loaicay-tao-moi";
-		}
 		try {
 			
 			PaginationResult<LoaiCayMD> danhSachLoaiCay = iLoaiCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
@@ -85,7 +86,6 @@ public class LoaiCayController {
 				}
 			}
 			
-			
 			iLoaiCayDAO.luu(loaiCayMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
@@ -98,6 +98,14 @@ public class LoaiCayController {
 	
 	@RequestMapping(value= {"/loaicay-xoa"}, method = RequestMethod.GET)
 	public String xoaCay(@RequestParam(value = "idLoaiCay", defaultValue = "0") String idLoaiCay) {
+		
+		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
+			if(danhSachCay.getList().get(i).getIdLoaiCay().equals(idLoaiCay)) {
+				iCayDAO.xoa(danhSachCay.getList().get(i).getIdCay());
+			}
+		}
+		
 		iLoaiCayDAO.xoa(idLoaiCay);
 		return "redirect:/loaicay";
 	}
@@ -122,9 +130,6 @@ public class LoaiCayController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes
 			) {
-		if (result.hasErrors()) {
-            return "admin/loaicay/sua";
-        }
 		try {
 			iLoaiCayDAO.xoa(loaiCayMD.getIdLoaiCay());
 			iLoaiCayDAO.luu(loaiCayMD);

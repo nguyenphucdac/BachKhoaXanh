@@ -12,9 +12,15 @@ public class LoaiCayMD {
 	private String idLoaiCay;
 	private String tenLoaiCay;
 	private CommonsMultipartFile anhLoaiCay;
-	
+		
 	public LoaiCayMD() {
 		super();
+	}
+	
+	public LoaiCayMD(LoaiCay loaiCay) {
+		this.idLoaiCay = loaiCay.getIdLoaiCay();
+		this.tenLoaiCay = loaiCay.getTenLoaiCay();
+		
 	}
 	
 	public LoaiCayMD(String idLoaiCay, String tenLoaiCay) {
@@ -43,7 +49,5 @@ public class LoaiCayMD {
 	public void setAnhLoaiCay(CommonsMultipartFile anhLoaiCay) {
 		this.anhLoaiCay = anhLoaiCay;
 	}
-	
-	
 	
 }

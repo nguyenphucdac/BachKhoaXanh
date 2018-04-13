@@ -23,15 +23,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangCayDAO;
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
+import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
+import com.dsd26.bachkhoaxanh.dao.IThongBaoDAO;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.ThanhVien;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangDCNMD;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
+import com.dsd26.bachkhoaxanh.model.ThongBaoMD;
 
 /*
 * author: Nguyễn Phúc Đạc
@@ -47,6 +55,14 @@ public class ThanhVienController {
 	private IThanhVienDAO iThanhVienDAO;
 	@Autowired
 	private ILoaiThanhVienDAO iLoaiThanhVienDAO;
+	@Autowired
+	private ILichSuTuoiDAO iLichSuTuoiDAO;
+	@Autowired
+	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
+	@Autowired
+	private IBaoCaoTinhTrangDCNDAO iBaoCaoTinhTrangDCNDAO;
+	@Autowired
+	private IThongBaoDAO iThongBaoDAO;
 	
 	@RequestMapping("/thanhvien")
 	public String index(
@@ -109,6 +125,36 @@ public class ThanhVienController {
 	
 	@RequestMapping(value= {"/thanhvien-xoa"}, method = RequestMethod.GET)
 	public String xoaThanhVien(@RequestParam(value = "idThanhVien", defaultValue = "0") String idThanhVien) {
+		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		for(int i = 0 ; i < danhSachLichSuTuoi.getList().size() ; i++) {
+			if(danhSachLichSuTuoi.getList().get(i).getIdThanhVien().equals(idThanhVien)) {
+				iLichSuTuoiDAO.xoa(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi());
+			}
+		}
+		
+		PaginationResult<BaoCaoTinhTrangCayMD> danhSachBaoCaoTinhTrangCay = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		for(int i = 0 ; i < danhSachBaoCaoTinhTrangCay.getList().size() ; i++) {
+			if(danhSachBaoCaoTinhTrangCay.getList().get(i).getIdThanhVien().equals(idThanhVien)) {
+				iBaoCaoTinhTrangCayDAO.xoa(danhSachBaoCaoTinhTrangCay.getList().get(i).getId());
+			}
+		}
+		
+		PaginationResult<BaoCaoTinhTrangDCNMD> danhSachBaoCaoTinhTrangDCN = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		for(int i = 0 ; i < danhSachBaoCaoTinhTrangDCN.getList().size() ; i++) {
+			if(danhSachBaoCaoTinhTrangDCN.getList().get(i).getIdThanhVien().equals(idThanhVien)) {
+				iBaoCaoTinhTrangDCNDAO.xoa(danhSachBaoCaoTinhTrangDCN.getList().get(i).getId());
+			}
+		}
+		
+		PaginationResult<ThongBaoMD> danhSachThongBao = iThongBaoDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		for(int i = 0 ; i < danhSachThongBao.getList().size() ; i++) {
+			if(danhSachThongBao.getList().get(i).getIdThanhVien().equals(idThanhVien)) {
+				iThongBaoDAO.xoa(danhSachThongBao.getList().get(i).getIdThanhVien());
+			}
+		}
+		
 		iThanhVienDAO.xoa(idThanhVien);
 		return "redirect:/thanhvien";
 	}

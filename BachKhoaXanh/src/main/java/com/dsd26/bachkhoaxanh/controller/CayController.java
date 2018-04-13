@@ -33,10 +33,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangCayDAO;
 import com.dsd26.bachkhoaxanh.dao.ICayDAO;
+import com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO;
 import com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO;
 import com.dsd26.bachkhoaxanh.entity.Cay;
+import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
 import com.dsd26.bachkhoaxanh.model.CayMD;
+import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.LoaiCayMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.object.Host;
@@ -57,6 +61,10 @@ public class CayController {
 	private ICayDAO iCayDAO;
 	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
+	@Autowired
+	private ILichSuTuoiDAO iLichSuTuoiDAO;
+	@Autowired
+	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
 	
 	@RequestMapping("/cay")
 	public String index(
@@ -118,6 +126,22 @@ public class CayController {
 	
 	@RequestMapping(value= {"/cay-xoa"}, method = RequestMethod.GET)
 	public String xoaCay(@RequestParam(value = "idCay", defaultValue = "0") String idCay) {
+		
+		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		for(int i = 0 ; i < danhSachLichSuTuoi.getList().size() ; i++) {
+			if(danhSachLichSuTuoi.getList().get(i).getIdCay().equals(idCay)) {
+				iLichSuTuoiDAO.xoa(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi());
+			}
+		}
+		
+		PaginationResult<BaoCaoTinhTrangCayMD> danhSachBaoCaoTinhTrangCay = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		for(int i = 0 ; i < danhSachBaoCaoTinhTrangCay.getList().size() ; i++) {
+			if(danhSachBaoCaoTinhTrangCay.getList().get(i).getIdCay().equals(idCay)) {
+				iBaoCaoTinhTrangCayDAO.xoa(danhSachBaoCaoTinhTrangCay.getList().get(i).getId());
+			}
+		}
+		
 		iCayDAO.xoa(idCay);
 		return "redirect:/cay";
 	}

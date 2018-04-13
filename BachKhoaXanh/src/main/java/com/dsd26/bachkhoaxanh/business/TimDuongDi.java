@@ -13,7 +13,7 @@ public class TimDuongDi {
 	public static boolean[][] freePoint = new boolean[Map.Size_X][Map.Size_Y];
 	public static Point[][] trace = new Point[Map.Size_X][Map.Size_Y];
 	public static List<Point> resultWay = new ArrayList<>();
-	public static int around;
+	
 
 	public static List<Point> timDuongDi(Point startPoint, Point targetPoint) {
 
@@ -42,7 +42,8 @@ public class TimDuongDi {
 
 			freePoint[currPoint.x][currPoint.y] = false;
 			
-			around = 0;
+			int around = 0;
+			
 			
 			if(isInMap(currPoint.x + 1, currPoint.y) == true) {
 				if (freePoint[currPoint.x + 1][currPoint.y] == true
@@ -113,14 +114,15 @@ public class TimDuongDi {
 			}
 			
 			
-			if(around == 4 ) {
-				System.out.println("Xung quanh k cos duong");
-				break;
-			}
+//			if(around == 4 ) {
+//				System.out.println("Xung quanh k co duong");
+//				break;
+//			}
 			
 		}
 
 		System.out.println("ket qua tim kiem duong di ngan nhat :");
+		System.out.println();
 		//resultWay.add(targetPoint);
 		int i = targetPoint.x, j = targetPoint.y;
 		while (true) {

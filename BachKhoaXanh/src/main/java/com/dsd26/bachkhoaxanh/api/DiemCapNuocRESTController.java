@@ -101,9 +101,11 @@ public class DiemCapNuocRESTController {
 		Point startPoint = new Point(Integer.parseInt(toaDoX), Integer.parseInt(toaDoY));
 		Point targetPoint = new Point(diemCapNuoc.getToaDoX(), diemCapNuoc.getToaDoY());
 		
+		int temp = Map.map[targetPoint.x][targetPoint.y];
+		
 		Map.map[targetPoint.x][targetPoint.y] = 4;
 		trace = TimDuongDi.timDuongDi(startPoint, targetPoint);
-		Map.map[targetPoint.x][targetPoint.y] = 1;
+		Map.map[targetPoint.x][targetPoint.y] = temp;
 		
 		return trace;
 	}
@@ -136,9 +138,11 @@ public class DiemCapNuocRESTController {
 				Point startPoint = new Point(Integer.parseInt(toaDoX), Integer.parseInt(toaDoY));
 				Point targetPoint = new Point(lstDCNRequire.get(i).getToaDoX(), lstDCNRequire.get(i).getToaDoY());
 				
+				int temp2 = Map.map[targetPoint.x][targetPoint.y];
+				
 				Map.map[targetPoint.x][targetPoint.y] = 4;
 				temp = TimDuongDi.timDuongDi(startPoint, targetPoint);
-				Map.map[targetPoint.x][targetPoint.y] = 1;
+				Map.map[targetPoint.x][targetPoint.y] = temp2;
 				
 				System.out.println(temp.size());
 				if(temp.size() < minRoad) {

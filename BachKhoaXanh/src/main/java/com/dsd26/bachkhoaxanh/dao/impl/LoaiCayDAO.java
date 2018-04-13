@@ -30,24 +30,20 @@ public class LoaiCayDAO implements ILoaiCayDAO {
 	
 	@Override
 	public void luu(LoaiCayMD loaiCayMD) {
-		String idLoaiCay = loaiCayMD.getIdLoaiCay();
-		LoaiCay loaiCay = null;
-		
-		if(idLoaiCay != null && idLoaiCay.equals("")) {
-			loaiCay = this.timKiem(idLoaiCay);
-		}
-		if(loaiCay == null) {
-			loaiCay = new LoaiCay();
-		}
+		System.out.println("asdadsf");
+		LoaiCay loaiCay = new LoaiCay();
+
 		loaiCay.setIdLoaiCay(loaiCayMD.getIdLoaiCay());
 		loaiCay.setTenLoaiCay(loaiCayMD.getTenLoaiCay());
 		
+		
 		if (loaiCayMD.getAnhLoaiCay() != null) {
-            byte[] anhLoaiCay = loaiCayMD.getAnhLoaiCay().getBytes();
-            if (anhLoaiCay != null && anhLoaiCay.length > 0) {
-            	loaiCay.setAnhLoaiCay(anhLoaiCay);
+            byte[] anhLoaiThanhVien = loaiCayMD.getAnhLoaiCay().getBytes();
+            if (anhLoaiThanhVien != null && anhLoaiThanhVien.length > 0) {
+            	loaiCay.setAnhLoaiCay(loaiCayMD.getAnhLoaiCay().getBytes());
             }
         }
+		
 		
 		this.sessionFactory.getCurrentSession().persist(loaiCay);
 	}

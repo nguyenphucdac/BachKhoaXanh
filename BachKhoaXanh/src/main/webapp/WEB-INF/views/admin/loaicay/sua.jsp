@@ -148,6 +148,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<button type="submit" class="btn btn-default">Xác nhận</button>
 								</div>
 							</form:form>
+							
 						</div>
 					</div>
 				</div>

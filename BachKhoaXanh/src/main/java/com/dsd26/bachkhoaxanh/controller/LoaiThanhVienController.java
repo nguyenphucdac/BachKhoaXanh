@@ -20,10 +20,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.entity.LoaiCay;
 import com.dsd26.bachkhoaxanh.entity.LoaiThanhVien;
 import com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
+import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 
 
 /*
@@ -36,6 +38,8 @@ import com.dsd26.bachkhoaxanh.model.PaginationResult;
 @Service
 public class LoaiThanhVienController {
 
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
 	@Autowired
 	private ILoaiThanhVienDAO iLoaiThanhVienDAO;
 	
@@ -94,6 +98,16 @@ public class LoaiThanhVienController {
 	
 	@RequestMapping(value= {"/loaithanhvien-xoa"}, method = RequestMethod.GET)
 	public String xoathanhvien(@RequestParam(value = "idLoaiThanhVien", defaultValue = "0") String idLoaiThanhVien) {
+		
+		PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+		
+		for(int i = 0 ; i < danhSachThanhVien.getList().size() ; i++){
+			if(danhSachThanhVien.getList().get(i).getIdLoaiThanhVien().equals(idLoaiThanhVien)) {
+				iThanhVienDAO.xoa(danhSachThanhVien.getList().get(i).getIdThanhVien());
+			}
+		}
+		
+		
 		iLoaiThanhVienDAO.xoa(idLoaiThanhVien);
 		return "redirect:/loaithanhvien";
 	}

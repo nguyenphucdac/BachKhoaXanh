@@ -169,9 +169,10 @@ public class CayRESTController {
 		Point startPoint = new Point(Integer.parseInt(toaDoX), Integer.parseInt(toaDoY));
 		Point targetPoint = new Point(cay.getToaDoX(), cay.getToaDoY());
 		
+		int temp = Map.map[targetPoint.x][targetPoint.y];
 		Map.map[targetPoint.x][targetPoint.y] = 4;
 		trace = TimDuongDi.timDuongDi(startPoint, targetPoint);
-		Map.map[targetPoint.x][targetPoint.y] = 1;
+		Map.map[targetPoint.x][targetPoint.y] = temp;
 		
 		return trace;
 	}
@@ -206,9 +207,11 @@ public class CayRESTController {
 				
 				System.out.println("x= " + targetPoint.x + "| y = " + targetPoint.y);
 				
+				int temp2 = Map.map[targetPoint.x][targetPoint.y];
+				
 				Map.map[targetPoint.x][targetPoint.y] = 4;
 				temp = TimDuongDi.timDuongDi(startPoint, targetPoint);
-				Map.map[targetPoint.x][targetPoint.y] = 1;
+				Map.map[targetPoint.x][targetPoint.y] = temp2;
 				
 				System.out.println(temp.size());
 				if(temp.size() < minRoad) {

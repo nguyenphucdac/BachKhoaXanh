@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangCayDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.BaoCaoTinhTrangCayDAO;
 import com.dsd26.bachkhoaxanh.entity.BaoCaoTinhTrangCay;
 import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
@@ -36,6 +37,8 @@ import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 public class BaoCaoTinhTrangCayController {
 	@Autowired
 	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
 	
 	@RequestMapping("/baocaotinhtrangcay")
 	public String index(
@@ -99,6 +102,8 @@ public class BaoCaoTinhTrangCayController {
 	
 	@RequestMapping(value= {"/baocaotinhtrangcay-xoa"}, method = RequestMethod.GET)
 	public String xoaCay(@RequestParam(value = "id", defaultValue = "0") String id) {
+		
+		
 		iBaoCaoTinhTrangCayDAO.xoa(id);
 		return "redirect:/baocaotinhtrangcay";
 	}
