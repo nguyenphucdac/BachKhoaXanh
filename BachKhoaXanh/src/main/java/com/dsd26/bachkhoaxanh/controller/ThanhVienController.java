@@ -76,9 +76,6 @@ public class ThanhVienController {
 	@RequestMapping(value = { "/thanhvien-tao-moi" }, method = RequestMethod.POST)
 	public String luuLoaiCay(Model model, @ModelAttribute("thanhVienForm") @Validated ThanhVienMD thanhVienMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			return "redirect:/thanhvien-tao-moi";
-		}
 		try {
 			
 			PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
@@ -86,6 +83,8 @@ public class ThanhVienController {
 			thanhVienMD.setTrangThai("off");
 			thanhVienMD.setToaDoX(0);
 			thanhVienMD.setToaDoY(0);
+			
+			thanhVienMD.setAnhThanhVien(thanhVienMD.getAnhThanhVienPhu().getBytes());
 			iThanhVienDAO.luu(thanhVienMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

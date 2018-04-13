@@ -18,6 +18,7 @@ public class ThanhVienMD {
 	private String tenDayDu;
 	private String trangThai;
 	private byte[] anhThanhVien;
+	private CommonsMultipartFile anhThanhVienPhu;
 	private int toaDoX;
 	private int toaDoY;
 	
@@ -124,6 +125,14 @@ public class ThanhVienMD {
 
 	public void setToaDoY(int toaDoY) {
 		this.toaDoY = toaDoY;
+	}
+
+	public CommonsMultipartFile getAnhThanhVienPhu() {
+		return anhThanhVienPhu;
+	}
+
+	public void setAnhThanhVienPhu(CommonsMultipartFile anhThanhVienPhu) {
+		this.anhThanhVienPhu = anhThanhVienPhu;
 	}
 	
 	

@@ -163,7 +163,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Icon</label>
 									<div class="col-sm-9">
-										<form:input path="anhThanhVien" type="file" class="form-control" />
+										<form:input path="anhThanhVienPhu" type="file" class="form-control" />
 									</div>
 								</div>
 								<div class="col-sm-offset-2">

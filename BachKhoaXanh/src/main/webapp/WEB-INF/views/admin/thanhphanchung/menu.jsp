@@ -26,9 +26,15 @@
 							<li class="treeview"><a href="${pageContext.request.contextPath}/admin"> <i
 									class="fa fa-dashboard"></i> <span>Trang chủ</span>
 							</a></li>
-							<li class="treeview"><a href="index.html"> <i
-									class="fa fa-dashboard"></i> <span>Thống kê</span>
-							</a></li>
+							<li class="treeview">
+								<a href="#"> <i class="fa fa-laptop"></i> <span>Thống kê</span> 
+									<i class="fa fa-angle-left pull-right"></i>
+								</a>
+							<ul class="treeview-menu">
+							<li><a href="${pageContext.request.contextPath}/thongkelichsutuoicay"><i class="fa fa-angle-right"></i> Thống kê cây được tưới</a></li>
+							<li><a href="${pageContext.request.contextPath}/thongkelichsutuoithanhvien"><i class="fa fa-angle-right"></i> Thống kê người dùng tưới</a></li>
+
+							</ul></li>
 							
 							<li class="treeview">
 								<a href="#"> <i class="fa fa-laptop"></i> <span>Thông báo</span> 
