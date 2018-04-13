@@ -79,6 +79,16 @@ public class DiemCapNuocController {
 		try {
 			PaginationResult<DiemCapNuocMD> danhSachDiemCapNuoc = iDiemCapNuocDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			diemCapNuocMD.setIdDiemCapNuoc("diem_cap_nuoc_" + (danhSachDiemCapNuoc.getList().size() + 1));
+			
+			int k = danhSachDiemCapNuoc.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachDiemCapNuoc.getList().size(); i++) {
+				if(danhSachDiemCapNuoc.getList().get(i).getIdDiemCapNuoc().equals(diemCapNuocMD.getIdDiemCapNuoc())) {
+					k++;
+					diemCapNuocMD.setIdDiemCapNuoc("diem_cap_nuoc_" + k);
+				}
+			}
+			
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

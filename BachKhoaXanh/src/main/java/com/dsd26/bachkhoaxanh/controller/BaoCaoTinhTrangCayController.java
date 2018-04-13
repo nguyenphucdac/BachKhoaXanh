@@ -76,7 +76,16 @@ public class BaoCaoTinhTrangCayController {
 		}
 		try {
 			PaginationResult<BaoCaoTinhTrangCayMD> danhSachBaoCaoTinhTrangCay = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
-			baoCaoTinhTrangCayMD.setId("bao_cao_cay"+ (danhSachBaoCaoTinhTrangCay.getList().size() + 1));
+			baoCaoTinhTrangCayMD.setId("bao_cao_cay_"+ (danhSachBaoCaoTinhTrangCay.getList().size() + 1));
+			int k = danhSachBaoCaoTinhTrangCay.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachBaoCaoTinhTrangCay.getList().size(); i++) {
+				if(danhSachBaoCaoTinhTrangCay.getList().get(i).getId().equals(baoCaoTinhTrangCayMD.getIdCay())) {
+					k++;
+					baoCaoTinhTrangCayMD.setIdCay("bao_cao_cay_" + k);
+				}
+			}
+			
 			
 			iBaoCaoTinhTrangCayDAO.luu(baoCaoTinhTrangCayMD);
 		} catch (Exception ex) {

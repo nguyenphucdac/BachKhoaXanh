@@ -74,8 +74,18 @@ public class BaoCaoTinhTrangDCNController {
 			return "redirect:/baocaotinhtrangdcn-tao-moi";
 		}
 		try {
-			PaginationResult<BaoCaoTinhTrangDCNMD> danhSachBaoCaoTinhTrangDCN = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
-			baoCaoTinhTrangDCNMD.setId("bao_cao_cay_"+ (danhSachBaoCaoTinhTrangDCN.getList().size() + 1));
+			PaginationResult<BaoCaoTinhTrangDCNMD> danhSachBaoCaoTinhTrangDCN = iBaoCaoTinhTrangDCNDAO.queryRoles(1,
+					Integer.MAX_VALUE, 1);
+			baoCaoTinhTrangDCNMD.setId("bao_cao_dcn_" + (danhSachBaoCaoTinhTrangDCN.getList().size() + 1));
+
+			int k = danhSachBaoCaoTinhTrangDCN.getList().size() + 1;
+
+			for (int i = 0; i < danhSachBaoCaoTinhTrangDCN.getList().size(); i++) {
+				if (danhSachBaoCaoTinhTrangDCN.getList().get(i).getId().equals(baoCaoTinhTrangDCNMD.getId())) {
+					k++;
+					baoCaoTinhTrangDCNMD.setId("bao_cao_dcn_" + k);
+				}
+			}
 			
 			iBaoCaoTinhTrangDCNDAO.luu(baoCaoTinhTrangDCNMD);
 		} catch (Exception ex) {

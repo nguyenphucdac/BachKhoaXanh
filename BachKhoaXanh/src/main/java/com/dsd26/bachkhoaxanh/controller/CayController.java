@@ -95,6 +95,16 @@ public class CayController {
 		try {
 			PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			cayMD.setIdCay("cay_" + (danhSachCay.getList().size() + 1));
+			int k = danhSachCay.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
+				if(danhSachCay.getList().get(i).getIdCay().equals(cayMD.getIdCay())) {
+					k++;
+					cayMD.setIdCay("cay_" + k);
+				}
+			}
+			
+			
 			cayMD.setLuongNuocDaTuoi(0);
 			iCayDAO.luu(cayMD);
 		} catch (Exception ex) {

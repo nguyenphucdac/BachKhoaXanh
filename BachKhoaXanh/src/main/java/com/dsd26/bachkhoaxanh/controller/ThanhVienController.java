@@ -80,6 +80,18 @@ public class ThanhVienController {
 			
 			PaginationResult<ThanhVienMD> danhSachThanhVien = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			thanhVienMD.setIdThanhVien("thanh_vien_" + (danhSachThanhVien.getList().size() + 1));
+			
+			
+			int k = danhSachThanhVien.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachThanhVien.getList().size(); i++) {
+				if(danhSachThanhVien.getList().get(i).getIdThanhVien().equals(thanhVienMD.getIdThanhVien())) {
+					k++;
+					thanhVienMD.setIdThanhVien("thanh_vien_" + k);
+				}
+			}
+			
+			
 			thanhVienMD.setTrangThai("off");
 			thanhVienMD.setToaDoX(0);
 			thanhVienMD.setToaDoY(0);

@@ -85,6 +85,17 @@ public class LichSuTuoiController {
 		try {
 			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+			
+			int k = danhSachLichSuTuoi.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachLichSuTuoi.getList().size(); i++) {
+				if(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi().equals(lichSuTuoiMD.getIdLichSuTuoi())) {
+					k++;
+					lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + k);
+				}
+			}
+			
+			
 			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		} catch (Exception ex) {

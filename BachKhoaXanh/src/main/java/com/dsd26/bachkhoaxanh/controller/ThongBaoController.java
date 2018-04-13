@@ -77,6 +77,16 @@ public class ThongBaoController {
 		try {
 			PaginationResult<ThongBaoMD> danhSachThongBao = iThongBaoDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			thongBaoMD.setIdThongBao("thong_bao_" + (danhSachThongBao.getList().size() + 1));
+			
+			int k = danhSachThongBao.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachThongBao.getList().size(); i++) {
+				if(danhSachThongBao.getList().get(i).getIdThongBao().equals(thongBaoMD.getIdThongBao())) {
+					k++;
+					thongBaoMD.setIdThongBao("thong_bao_" + k);
+				}
+			}
+			
 			iThongBaoDAO.luu(thongBaoMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

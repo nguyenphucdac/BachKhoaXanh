@@ -1,10 +1,45 @@
+<%@page import="com.dsd26.bachkhoaxanh.object.LichSuTuoiObject"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="org.springframework.stereotype.Controller" %>
+<%@ page import="org.springframework.ui.Model" %>
+<%@ page import="org.springframework.web.bind.annotation.RequestMapping" %>
+<%@ page import="org.springframework.web.bind.annotation.RequestParam" %>
+<%@ page import="org.springframework.web.servlet.config.annotation.EnableWebMvc" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="com.dsd26.bachkhoaxanh.dao.ICayDAO" %>
+<%@ page import="com.dsd26.bachkhoaxanh.dao.ILichSuTuoiDAO" %>
+<%@ page import="com.dsd26.bachkhoaxanh.dao.ILoaiCayDAO" %>
+<%@ page import="com.dsd26.bachkhoaxanh.dao.ILoaiThanhVienDAO" %>
+<%@ page import="com.dsd26.bachkhoaxanh.entity.Cay" %>
+<%@ page import="com.dsd26.bachkhoaxanh.entity.LoaiCay" %>
+<%@ page import="com.dsd26.bachkhoaxanh.entity.ThanhVien" %>
+<%@ page import="com.dsd26.bachkhoaxanh.model.LichSuTuoiMD" %>
+<%@ page import="com.dsd26.bachkhoaxanh.model.LoaiThanhVienMD" %>
+<%@ page import="com.dsd26.bachkhoaxanh.model.PaginationResult" %>
+<%@ page import="com.dsd26.bachkhoaxanh.object.CayObject" %>
+<%@ page import="com.dsd26.bachkhoaxanh.object.LichSuTuoiObject" %>
+<%@ page import="com.dsd26.bachkhoaxanh.object.LoaiCayObject" %>
+<%@ page import="com.dsd26.bachkhoaxanh.object.LoaiThanhVienObject" %>
+<%@ page import="com.dsd26.bachkhoaxanh.object.ThanhVienObject" %>
+
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>BKX</title>
+<title>role index</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -120,47 +155,148 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
+			
 			<div class="main-page">
-				
-				<div class="col-md-9 ">
-					<!-- Phần code của bản đồ -->
-				</div>
-				<div class="col-md-3">
-				<div class="activity_box">
-					<h2>Danh sách thành viên</h2>
-					<div class="scrollbar" id="style-1">
-						
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Icon</th>
-										<th>Tài khoản</th>
-										<th>Trạng thái</th>
 
-									</tr>
-								</thead>
-								<tbody>
-								<c:forEach items="${danhSachThanhVien.list}" var="thanhVien">
-								<tr class="active">
-										<td><img src="${pageContext.request.contextPath}/get-anh-thanh-vien?idThanhVien=${thanhVien.idThanhVien }" width="32"/></td>
-										<td>${thanhVien.tenTaiKhoan}</td>
-										<td>${thanhVien.trangThai}</td>
-								 </c:forEach>
-								</tbody>
-							</table>
-					</div>
+				<div class="col-md-12 ">
+					
+						<div class="chartjs-size-monitor"
+							style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+							<div class="chartjs-size-monitor-expand"
+								style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+								<div
+									style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+							</div>
+							<div class="chartjs-size-monitor-shrink"
+								style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+								<div
+									style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+							</div>
+						</div>
+						<canvas id="canvas"
+							style="display: block; width: 953px; height: 476px;" width="953"
+							height="476" class="chartjs-render-monitor"></canvas>
 					
 				</div>
-			</div>
 				
-			</div>
+			
+		</div>
+			
 		</div>
 		<!--footer-->
 		<jsp:include page="../thanhphanchung/footer.jsp"></jsp:include>
 		<!--//footer-->
 	</div>
 
-	
+	<!-- new added graphs chart js-->
+
+	<script src="js/Chart.bundle.js"></script>
+	<script src="js/utils.js"></script>
+
+
+
+	<script>
+		var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		<c:forEach items="${danhSachLoaiCay.list}" var="loaiCay">
+			0010
+		</c:forEach>
+       
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: color(window.chartColors.blue).alpha(1).rgbString(),
+                borderColor: window.chartColors.blue,                borderWidth: 1,
+                data: [
+                	10,
+                	10,
+                	10,
+                ]
+            }]
+
+        };
+
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Thống kế số lần tưới cây'
+                    }
+                }
+            });
+
+        };
+
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            var zero = Math.random() < 0.4 ? true : false;
+            barChartData.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return zero ? 0.0 : randomScalingFactor();
+                });
+
+            });
+            window.myBar.update();
+        });
+
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+            var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+            var dsColor = window.chartColors[colorName];
+            var newDataset = {
+                label: 'Dataset ' + barChartData.datasets.length,
+                backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+                borderColor: dsColor,
+                borderWidth: 1,
+                data: []
+            };
+
+            for (var index = 0; index < barChartData.labels.length; ++index) {
+                newDataset.data.push(randomScalingFactor());
+            }
+
+            barChartData.datasets.push(newDataset);
+            window.myBar.update();
+        });
+
+        document.getElementById('addData').addEventListener('click', function() {
+            if (barChartData.datasets.length > 0) {
+                var month = MONTHS[barChartData.labels.length % MONTHS.length];
+                barChartData.labels.push(month);
+
+                for (var index = 0; index < barChartData.datasets.length; ++index) {
+                    //window.myBar.addData(randomScalingFactor(), index);
+                    barChartData.datasets[index].data.push(randomScalingFactor());
+                }
+
+                window.myBar.update();
+            }
+        });
+
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            barChartData.datasets.splice(0, 1);
+            window.myBar.update();
+        });
+
+        document.getElementById('removeData').addEventListener('click', function() {
+            barChartData.labels.splice(-1, 1); // remove the label first
+
+            barChartData.datasets.forEach(function(dataset, datasetIndex) {
+                dataset.data.pop();
+            });
+
+            window.myBar.update();
+        });
+    </script>
+	<!-- new added graphs chart js-->
 
 	<!-- Classie -->
 	<!-- for toggle left push menu script -->
@@ -200,8 +336,260 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<!-- //side nav js -->
 
 	<!-- for index page weekly sales java script -->
-	
-	
+	<script src="js/SimpleChart.js"></script>
+	<script>
+        var graphdata1 = {
+            linecolor: "#CCA300",
+            title: "Monday",
+            values: [
+            { X: "6:00", Y: 10.00 },
+            { X: "7:00", Y: 20.00 },
+            { X: "8:00", Y: 40.00 },
+            { X: "9:00", Y: 34.00 },
+            { X: "10:00", Y: 40.25 },
+            { X: "11:00", Y: 28.56 },
+            { X: "12:00", Y: 18.57 },
+            { X: "13:00", Y: 34.00 },
+            { X: "14:00", Y: 40.89 },
+            { X: "15:00", Y: 12.57 },
+            { X: "16:00", Y: 28.24 },
+            { X: "17:00", Y: 18.00 },
+            { X: "18:00", Y: 34.24 },
+            { X: "19:00", Y: 40.58 },
+            { X: "20:00", Y: 12.54 },
+            { X: "21:00", Y: 28.00 },
+            { X: "22:00", Y: 18.00 },
+            { X: "23:00", Y: 34.89 },
+            { X: "0:00", Y: 40.26 },
+            { X: "1:00", Y: 28.89 },
+            { X: "2:00", Y: 18.87 },
+            { X: "3:00", Y: 34.00 },
+            { X: "4:00", Y: 40.00 }
+            ]
+        };
+        var graphdata2 = {
+            linecolor: "#00CC66",
+            title: "Tuesday",
+            values: [
+              { X: "6:00", Y: 100.00 },
+            { X: "7:00", Y: 120.00 },
+            { X: "8:00", Y: 140.00 },
+            { X: "9:00", Y: 134.00 },
+            { X: "10:00", Y: 140.25 },
+            { X: "11:00", Y: 128.56 },
+            { X: "12:00", Y: 118.57 },
+            { X: "13:00", Y: 134.00 },
+            { X: "14:00", Y: 140.89 },
+            { X: "15:00", Y: 112.57 },
+            { X: "16:00", Y: 128.24 },
+            { X: "17:00", Y: 118.00 },
+            { X: "18:00", Y: 134.24 },
+            { X: "19:00", Y: 140.58 },
+            { X: "20:00", Y: 112.54 },
+            { X: "21:00", Y: 128.00 },
+            { X: "22:00", Y: 118.00 },
+            { X: "23:00", Y: 134.89 },
+            { X: "0:00", Y: 140.26 },
+            { X: "1:00", Y: 128.89 },
+            { X: "2:00", Y: 118.87 },
+            { X: "3:00", Y: 134.00 },
+            { X: "4:00", Y: 180.00 }
+            ]
+        };
+        var graphdata3 = {
+            linecolor: "#FF99CC",
+            title: "Wednesday",
+            values: [
+              { X: "6:00", Y: 230.00 },
+            { X: "7:00", Y: 210.00 },
+            { X: "8:00", Y: 214.00 },
+            { X: "9:00", Y: 234.00 },
+            { X: "10:00", Y: 247.25 },
+            { X: "11:00", Y: 218.56 },
+            { X: "12:00", Y: 268.57 },
+            { X: "13:00", Y: 274.00 },
+            { X: "14:00", Y: 280.89 },
+            { X: "15:00", Y: 242.57 },
+            { X: "16:00", Y: 298.24 },
+            { X: "17:00", Y: 208.00 },
+            { X: "18:00", Y: 214.24 },
+            { X: "19:00", Y: 214.58 },
+            { X: "20:00", Y: 211.54 },
+            { X: "21:00", Y: 248.00 },
+            { X: "22:00", Y: 258.00 },
+            { X: "23:00", Y: 234.89 },
+            { X: "0:00", Y: 210.26 },
+            { X: "1:00", Y: 248.89 },
+            { X: "2:00", Y: 238.87 },
+            { X: "3:00", Y: 264.00 },
+            { X: "4:00", Y: 270.00 }
+            ]
+        };
+        var graphdata4 = {
+            linecolor: "Random",
+            title: "Thursday",
+            values: [
+              { X: "6:00", Y: 300.00 },
+            { X: "7:00", Y: 410.98 },
+            { X: "8:00", Y: 310.00 },
+            { X: "9:00", Y: 314.00 },
+            { X: "10:00", Y: 310.25 },
+            { X: "11:00", Y: 318.56 },
+            { X: "12:00", Y: 318.57 },
+            { X: "13:00", Y: 314.00 },
+            { X: "14:00", Y: 310.89 },
+            { X: "15:00", Y: 512.57 },
+            { X: "16:00", Y: 318.24 },
+            { X: "17:00", Y: 318.00 },
+            { X: "18:00", Y: 314.24 },
+            { X: "19:00", Y: 310.58 },
+            { X: "20:00", Y: 312.54 },
+            { X: "21:00", Y: 318.00 },
+            { X: "22:00", Y: 318.00 },
+            { X: "23:00", Y: 314.89 },
+            { X: "0:00", Y: 310.26 },
+            { X: "1:00", Y: 318.89 },
+            { X: "2:00", Y: 518.87 },
+            { X: "3:00", Y: 314.00 },
+            { X: "4:00", Y: 310.00 }
+            ]
+        };
+        var Piedata = {
+            linecolor: "Random",
+            title: "Profit",
+            values: [
+              { X: "Monday", Y: 50.00 },
+            { X: "Tuesday", Y: 110.98 },
+            { X: "Wednesday", Y: 70.00 },
+            { X: "Thursday", Y: 204.00 },
+            { X: "Friday", Y: 80.25 },
+            { X: "Saturday", Y: 38.56 },
+            { X: "Sunday", Y: 98.57 }
+            ]
+        };
+        $(function () {
+            $("#Bargraph").SimpleChart({
+                ChartType: "Bar",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata4, graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+            $("#sltchartype").on('change', function () {
+                $("#Bargraph").SimpleChart('ChartType', $(this).val());
+                $("#Bargraph").SimpleChart('reload', 'true');
+            });
+            $("#Hybridgraph").SimpleChart({
+                ChartType: "Hybrid",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata4],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+            $("#Linegraph").SimpleChart({
+                ChartType: "Line",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: false,
+                data: [graphdata4, graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+            $("#Areagraph").SimpleChart({
+                ChartType: "Area",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata4, graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+            $("#Scatterredgraph").SimpleChart({
+                ChartType: "Scattered",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata4, graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+            $("#Piegraph").SimpleChart({
+                ChartType: "Pie",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                showpielables: true,
+                data: [Piedata],
+                legendsize: "250",
+                legendposition: 'right',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+
+            $("#Stackedbargraph").SimpleChart({
+                ChartType: "Stacked",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+
+            $("#StackedHybridbargraph").SimpleChart({
+                ChartType: "StackedHybrid",
+                toolwidth: "50",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: true,
+                data: [graphdata3, graphdata2, graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Weekly Profit',
+                yaxislabel: 'Profit in $'
+            });
+        });
+
+    </script>
 	<!-- //for index page weekly sales java script -->
 
 

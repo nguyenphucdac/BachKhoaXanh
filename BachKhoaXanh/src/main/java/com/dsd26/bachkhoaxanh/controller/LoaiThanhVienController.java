@@ -72,6 +72,16 @@ public class LoaiThanhVienController {
 		try {
 			PaginationResult<LoaiThanhVienMD> danhSachLoaiThanhVien = iLoaiThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			loaiThanhVienMD.setIdLoaiThanhVien("loai_thanh_vien_" + (danhSachLoaiThanhVien.getList().size() + 1));
+			
+			int k = danhSachLoaiThanhVien.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachLoaiThanhVien.getList().size(); i++) {
+				if(danhSachLoaiThanhVien.getList().get(i).getIdLoaiThanhVien().equals(loaiThanhVienMD.getIdLoaiThanhVien())) {
+					k++;
+					loaiThanhVienMD.setIdLoaiThanhVien("loai_thanh_vien_" + k);
+				}
+			}
+			
 			iLoaiThanhVienDAO.luu(loaiThanhVienMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();

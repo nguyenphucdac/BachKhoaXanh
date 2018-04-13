@@ -75,7 +75,17 @@ public class LoaiCayController {
 			
 			PaginationResult<LoaiCayMD> danhSachLoaiCay = iLoaiCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			loaiCayMD.setIdLoaiCay("loai_cay_" + (danhSachLoaiCay.getList().size() + 1));
-			System.out.println(loaiCayMD.getIdLoaiCay());
+			
+			int k = danhSachLoaiCay.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachLoaiCay.getList().size(); i++) {
+				if(danhSachLoaiCay.getList().get(i).getIdLoaiCay().equals(loaiCayMD.getIdLoaiCay())) {
+					k++;
+					loaiCayMD.setIdLoaiCay("loai_cay_" + k);
+				}
+			}
+			
+			
 			iLoaiCayDAO.luu(loaiCayMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
