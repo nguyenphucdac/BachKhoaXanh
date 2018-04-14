@@ -56,6 +56,11 @@ public class CayRESTController {
 	
 	@Autowired
 	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
+	
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
+	
+	
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public CayObject  getCay(@PathVariable("idCay") String idCay) {
@@ -95,7 +100,7 @@ public class CayRESTController {
 	}
 	
 	
-	@RequestMapping(value = "/cap-nhat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/cap-nhat-cay", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ThongDiepObject capNhatNuocChoCay(@RequestBody(required = true) String body, 
 			String idThanhVien,
 			String idCay,
@@ -103,9 +108,17 @@ public class CayRESTController {
 			) 
 	{
 		Cay cay = iCayDAO.timKiem(idCay);
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		
 		if(cay == null) {
-			new ThongDiepObject("200", "Cây không tồn tại !!!");
+			return new ThongDiepObject("400", "Cây không tồn tại !!!");
+		}
+		
+		if(thanhVien == null) {
+			return new ThongDiepObject("400", "Thành viên không tồn tại !!!");
+		}
+		if(luongNuoc <= 0) {
+			return new ThongDiepObject("400", "Lượng nước nhỏ hơn 0 !!!");
 		}
 		
 		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + luongNuoc) {
