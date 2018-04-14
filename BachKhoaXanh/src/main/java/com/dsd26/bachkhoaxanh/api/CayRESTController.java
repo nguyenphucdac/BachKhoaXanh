@@ -150,6 +150,26 @@ public class CayRESTController {
 			String noiDung
 			) {
 		
+		Cay cay = iCayDAO.timKiem(idCay);
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
+		
+		if(cay == null) {
+			return new ThongDiepObject("400", "Cây không tồn tại !!!");
+		}
+		
+		if(thanhVien == null) {
+			return new ThongDiepObject("400", "Thành viên không tồn tại !!!");
+		}
+		
+		if(noiDung == null) {
+			return new ThongDiepObject("400", "Nội dung trống !!!");
+		}
+		else {
+			if(noiDung.length() == 0) {
+				return new ThongDiepObject("400", "Nội dung trống !!!");
+			}
+		}
+		
 		BaoCaoTinhTrangCayMD baoCaoTinhTrangCayMD = new BaoCaoTinhTrangCayMD();
 		PaginationResult<BaoCaoTinhTrangCayMD> danhSachLichSuTuoi = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 		

@@ -20,7 +20,10 @@ import com.dsd26.bachkhoaxanh.business.Point;
 import com.dsd26.bachkhoaxanh.business.TimDuongDi;
 import com.dsd26.bachkhoaxanh.dao.IBaoCaoTinhTrangDCNDAO;
 import com.dsd26.bachkhoaxanh.dao.IDiemCapNuocDAO;
+import com.dsd26.bachkhoaxanh.dao.IThanhVienDAO;
+import com.dsd26.bachkhoaxanh.entity.Cay;
 import com.dsd26.bachkhoaxanh.entity.DiemCapNuoc;
+import com.dsd26.bachkhoaxanh.entity.ThanhVien;
 import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangCayMD;
 import com.dsd26.bachkhoaxanh.model.BaoCaoTinhTrangDCNMD;
 import com.dsd26.bachkhoaxanh.model.CayMD;
@@ -38,6 +41,8 @@ public class DiemCapNuocRESTController {
 	private IDiemCapNuocDAO iDiemCapNuocDAO;
 	@Autowired
 	private IBaoCaoTinhTrangDCNDAO iBaoCaoTinhTrangDCNDAO;
+	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
 	
 	@RequestMapping(value = "/get-dcn/{idDiemCapNuoc}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -70,6 +75,26 @@ public class DiemCapNuocRESTController {
 			String idDiemCapNuoc,
 			String noiDung
 			) {
+		
+		DiemCapNuoc diemCapNuoc = iDiemCapNuocDAO.timKiem(idDiemCapNuoc);
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
+		
+		if(diemCapNuoc == null) {
+			return new ThongDiepObject("400", "Điểm cấp nước không tồn tại !!!");
+		}
+		
+		if(thanhVien == null) {
+			return new ThongDiepObject("400", "Thành viên không tồn tại !!!");
+		}
+		
+		if(noiDung == null) {
+			return new ThongDiepObject("400", "Nội dung trống !!!");
+		}
+		else {
+			if(noiDung.length() == 0) {
+				return new ThongDiepObject("400", "Nội dung trống !!!");
+			}
+		}
 		
 		BaoCaoTinhTrangDCNMD baoCaoTinhTrangDCNMD = new BaoCaoTinhTrangDCNMD();
 		PaginationResult<BaoCaoTinhTrangDCNMD> danhSachLichSuTuoi = iBaoCaoTinhTrangDCNDAO.queryRoles(1, Integer.MAX_VALUE, 1);
