@@ -134,10 +134,22 @@ public class CayRESTController {
 		LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
 		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 		lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+		int k = danhSachLichSuTuoi.getList().size() + 1;
+		
+		for(int i = 0 ; i < danhSachLichSuTuoi.getList().size(); i++) {
+			if(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi().equals(lichSuTuoiMD.getIdLichSuTuoi())) {
+				k++;
+				lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + k);
+			}
+		}
+		
+		
 		lichSuTuoiMD.setIdCay(idCay);
 		lichSuTuoiMD.setIdThanhVien(idThanhVien);
 		lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
 		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
+		
+		System.out.println("id:" + lichSuTuoiMD.getIdLichSuTuoi());
 		
 		iLichSuTuoiDAO.luu(lichSuTuoiMD);
 		return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");

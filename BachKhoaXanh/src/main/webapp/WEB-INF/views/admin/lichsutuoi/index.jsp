@@ -126,7 +126,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="widget-shadow " data-example-id="basic-forms">
 						<div class="form-title col-md-12">
 							<h4 class="col-md-10">Lịch sử tưới :</h4>
-							<a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-tao-moi"><i class="fa fa-plus-square"></i> Create new</a>
+							
 							
 						</div>
 							<table class="table">
@@ -149,7 +149,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										<td>${lichSuTuoi.luongNuocDaTuoi }</td>
 										<td>${lichSuTuoi.thoiGian}</td>
 										
-										<td><a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-sua?idLichSuTuoi=${lichSuTuoi.idLichSuTuoi}"><i class="fa fa-edit"></i>edit</a></td>
+										
 										
 										<td><a class="agile-icon" href="${pageContext.request.contextPath}/lichsutuoi-xoa?idLichSuTuoi=${lichSuTuoi.idLichSuTuoi}"><i class="fa fa-times-circle-o"></i>Delete</a></td>
 									</tr>

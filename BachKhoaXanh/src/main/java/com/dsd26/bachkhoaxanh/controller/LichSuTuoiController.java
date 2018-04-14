@@ -84,6 +84,7 @@ public class LichSuTuoiController {
 			return "redirect:/lichsutuoi-tao-moi";
 		}
 		try {
+			
 			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
 			
@@ -97,16 +98,16 @@ public class LichSuTuoiController {
 			}
 			
 //			Cay cay = iCayDAO.timKiem(lichSuTuoiMD.getIdCay());
-//			CayMD cayMD = new CayMD(cay);
-//			if(cay.getLuongNuocDaTuoi() <= cay.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi()) {
-//				cayMD.setLuongNuocDaTuoi(cayMD.getLuongNuocToiDa());
-//			}
-//			else {
-//				cayMD.setLuongNuocDaTuoi(cayMD.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi());
+//			
+//			if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi()) {
+//				cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
 //			}
 //			
-//			iCayDAO.xoa(cayMD.getIdCay());
-//			iCayDAO.luu(cayMD);
+//			else {
+//				cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + lichSuTuoiMD.getLuongNuocDaTuoi());
+//			}
+//			iCayDAO.xoa(idCay);
+//			iCayDAO.luu(new CayMD(cay));
 			
 			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
