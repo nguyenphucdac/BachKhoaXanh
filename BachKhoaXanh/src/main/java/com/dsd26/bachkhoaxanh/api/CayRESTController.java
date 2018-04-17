@@ -169,9 +169,7 @@ public class CayRESTController {
 			return new ThongDiepObject("400", "Cây không tồn tại !!!");
 		}
 		
-		if(thanhVien == null) {
-			return new ThongDiepObject("400", "Thành viên không tồn tại !!!");
-		}
+		
 		
 		if(noiDung == null) {
 			return new ThongDiepObject("400", "Nội dung trống !!!");
