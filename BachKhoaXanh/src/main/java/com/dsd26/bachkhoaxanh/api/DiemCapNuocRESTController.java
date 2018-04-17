@@ -46,7 +46,8 @@ public class DiemCapNuocRESTController {
 	
 	@RequestMapping(value = "/get-dcn/{idDiemCapNuoc}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public DiemCapNuocMD getDiemCapNuoc(@PathVariable("idDiemCapNuoc") String idDiemCapNuoc) {
+	public DiemCapNuocMD getDiemCapNuoc(@PathVariable("idDiemCapNuoc") String idDiemCapNuoc, final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		DiemCapNuoc diemCapNuoc = iDiemCapNuocDAO.timKiem(idDiemCapNuoc);
 		if (diemCapNuoc == null) {
 			return null;

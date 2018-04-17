@@ -1,7 +1,17 @@
 package com.dsd26.bachkhoaxanh.api;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +46,7 @@ import com.dsd26.bachkhoaxanh.model.LichSuTuoiMD;
 import com.dsd26.bachkhoaxanh.model.PaginationResult;
 import com.dsd26.bachkhoaxanh.model.ThanhVienMD;
 import com.dsd26.bachkhoaxanh.object.CayObject;
+import com.dsd26.bachkhoaxanh.object.Host;
 import com.dsd26.bachkhoaxanh.object.LoaiCayObject;
 import com.dsd26.bachkhoaxanh.object.ThongDiepObject;
 
@@ -63,7 +74,8 @@ public class CayRESTController {
 	
 
 	@RequestMapping(value = "/get-cay/{idCay}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public CayObject  getCay(@PathVariable("idCay") String idCay) {
+	public CayObject  getCay(@PathVariable("idCay") String idCay, final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		Cay cay = iCayDAO.timKiem(idCay);
 		if (cay == null) {
 			return null;
@@ -277,5 +289,47 @@ public class CayRESTController {
 			lstFist.add(point.clone());
 		}
 	}
-	
+	public void notificationUpdateTree(String idCay) {
+		HttpURLConnection connection = null;
+		URL url;
+		try {
+			System.out.println("dang gui...");
+			url = new URL(Host.hostNode + "edit-tree");
+			java.util.Map<String,Object> params = new LinkedHashMap<>();
+			params.put("idCay", idCay);
+	        
+	        StringBuilder postData = new StringBuilder();
+	        for (java.util.Map.Entry<String,Object> param : params.entrySet()) {
+	            if (postData.length() != 0) postData.append('&');
+	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+	            postData.append('=');
+	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+	        }
+	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	        conn.setDoOutput(true);
+	        conn.getOutputStream().write(postDataBytes);
+
+	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+	        for (int c; (c = in.read()) >= 0;)
+	            System.out.print((char)c);
+	        System.out.println("da gui...");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 }

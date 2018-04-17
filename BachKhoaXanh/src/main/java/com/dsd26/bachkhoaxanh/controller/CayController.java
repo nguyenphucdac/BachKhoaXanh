@@ -114,6 +114,9 @@ public class CayController {
 			
 			
 			cayMD.setLuongNuocDaTuoi(0);
+			
+			notificaitonNewTree(cayMD.getIdCay());
+			
 			iCayDAO.luu(cayMD);
 		} catch (Exception ex) {
 			String message = ex.getMessage();
@@ -183,16 +186,16 @@ public class CayController {
 		return "redirect:/cay";
 	}
 	
-	public void notificaitonNewTree(String jsonObject) {
+	public void notificaitonNewTree(String idCay) {
+		System.out.println("goi coong");
 		HttpURLConnection connection = null;
 		URL url;
 		try {
 			System.out.println("dang gui...");
 			url = new URL(Host.hostNode + "add-tree");
 			Map<String,Object> params = new LinkedHashMap<>();
-//	        params.put("username", "Freddie the Fish");
-//	        params.put("email", "fishie@seamail.example.com");
-	       
+	        params.put("idCay", idCay);
+
 	        StringBuilder postData = new StringBuilder();
 	        for (Map.Entry<String,Object> param : params.entrySet()) {
 	            if (postData.length() != 0) postData.append('&');
@@ -227,13 +230,57 @@ public class CayController {
 		
 		
 	}
-	public void notificationUpdateTree(String jsonObject) {
+	public void notificationUpdateTree(String idCay) {
 		HttpURLConnection connection = null;
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "update-tree");
+			url = new URL(Host.hostNode + "edit-tree");
 			Map<String,Object> params = new LinkedHashMap<>();
+			params.put("idCay", idCay);
+	        
+	        StringBuilder postData = new StringBuilder();
+	        for (Map.Entry<String,Object> param : params.entrySet()) {
+	            if (postData.length() != 0) postData.append('&');
+	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+	            postData.append('=');
+	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+	        }
+	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	        conn.setDoOutput(true);
+	        conn.getOutputStream().write(postDataBytes);
+
+	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+	        for (int c; (c = in.read()) >= 0;)
+	            System.out.print((char)c);
+	        System.out.println("da gui...");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public void notificationDeleteTree(String idCay) {
+		HttpURLConnection connection = null;
+		URL url;
+		try {
+			System.out.println("dang gui...");
+			url = new URL(Host.hostNode + "delete-tree");
+			Map<String,Object> params = new LinkedHashMap<>();
+			params.put("idCay", idCay);
 	        
 	        StringBuilder postData = new StringBuilder();
 	        for (Map.Entry<String,Object> param : params.entrySet()) {
