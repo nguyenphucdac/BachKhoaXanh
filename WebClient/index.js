@@ -52,7 +52,7 @@ app.get('/manager', (req, res) => {
 var clients = [];
 
 io.on('connection', function (socket) {
-  console.log('new User!!')
+  console.log(socket.handshake.headers.host + ' connected')
   var addedUser = false;
   // when the client emits 'new message', this listens and executes
 
@@ -119,12 +119,19 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('user logout', req.body);
     res.status(200).json({status: 200, message: "Successfully!"});  
   });
-  socket.on('user move', function(data) {
+  socket.on('user move', function(id, x, y) {
+    let data = {
+      id: id,
+      x: x,
+      y: y
+    }
+    console.log(data);
     socket.broadcast.emit('user move', data);
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
+    socket.handshake.headers.host + ' disconnected'
     if (addedUser) {
       clients[socket.user.username]--;
       if (clients[socket.user.username] == 0) {

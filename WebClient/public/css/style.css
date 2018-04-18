@@ -61,3 +61,6 @@ img {
     line-height: 20px;
     color: white;
   }
+  #notification-list li {
+      font-size: 12px;
+  }
