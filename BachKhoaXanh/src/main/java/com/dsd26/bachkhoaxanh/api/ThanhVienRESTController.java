@@ -52,7 +52,7 @@ public class ThanhVienRESTController {
 	@Autowired
 	private ILoaiThanhVienDAO iLoaiThanhVienDAO;
 
-	@RequestMapping(value = "/get-thanhvien/{idThanhVien}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/get-thanh-vien/{idThanhVien}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ThanhVienObject  getThanhVien(@PathVariable("idThanhVien") String idThanhVien, final HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -69,7 +69,7 @@ public class ThanhVienRESTController {
 		return thanhVienObj;
 	}
 	
-	@RequestMapping(value = "/get-list-thanhvien", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/get-list-thanh-vien", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<ThanhVienObject> getListThanhVien(final HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -84,6 +84,30 @@ public class ThanhVienRESTController {
 			ThanhVienObject thanhVienObj = new ThanhVienObject(thanhVienMD, loaiThanhVienObject);
 			
 			listThanhVienObj.add(thanhVienObj);
+		}
+		
+		return listThanhVienObj;
+	}
+	
+	@RequestMapping(value = "/get-list-thanh-vien-2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<ThanhVienObject> getListThanhVien2(@RequestBody(required = true) String body, String idThanhVien, final HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		List<ThanhVienObject> listThanhVienObj = new ArrayList<ThanhVienObject>();
+		PaginationResult<ThanhVienMD> danhSachTV = iThanhVienDAO.queryRoles(1, 20, 10);
+		System.out.println(danhSachTV.getList().size());
+		for(int i = 0 ; i < danhSachTV.getList().size(); i++) {
+			
+			if(!danhSachTV.getList().get(i).getIdThanhVien().equals(idThanhVien)) {
+				
+			
+			ThanhVienMD thanhVienMD = danhSachTV.getList().get(i);
+			LoaiThanhVien loaiThanhVien = iLoaiThanhVienDAO.timKiem(thanhVienMD.getIdLoaiThanhVien());
+			LoaiThanhVienObject loaiThanhVienObject = new LoaiThanhVienObject(loaiThanhVien);
+			ThanhVienObject thanhVienObj = new ThanhVienObject(thanhVienMD, loaiThanhVienObject);
+			
+			listThanhVienObj.add(thanhVienObj);
+			}
 		}
 		
 		return listThanhVienObj;
