@@ -125,6 +125,7 @@ io.on('connection', function (socket) {
       x: x,
       y: y
     }
+    console.log(data);
     socket.broadcast.emit('user move', data);
   });
 
