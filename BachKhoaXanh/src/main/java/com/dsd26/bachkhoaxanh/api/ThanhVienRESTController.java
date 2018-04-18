@@ -89,6 +89,28 @@ public class ThanhVienRESTController {
 		return listThanhVienObj;
 	}
 	
+	@RequestMapping(value = "/cap-nhat-thanh-vien", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ThongDiepObject capNhatThanhVien(@RequestBody(required = true) String body, String idThanhVien, String toaDoX, String toaDoY) {
+		
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
+		if(thanhVien == null) {
+			return new ThongDiepObject("200", "Cập nhật thành công");
+		}
+		
+		
+		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
+		
+		thanhVienMD.setToaDoX(Integer.parseInt(toaDoX));
+		thanhVienMD.setToaDoY(Integer.parseInt(toaDoY));
+		
+		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
+		iThanhVienDAO.luu(thanhVienMD);
+		
+		return new ThongDiepObject("200", "Cập nhật thành công");
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ThanhVienObject login(@RequestBody(required = true) String body, String tenTaiKhoan, String matKhau) {
@@ -118,6 +140,8 @@ public class ThanhVienRESTController {
 		thanhVienObject = new ThanhVienObject(thanhVien, loaiThanhVienObject);
 		thanhVienObject.setTrangThai("on");
 		
+		notificationUserLogin(thanhVien.getIdThanhVien());
+		
 		return thanhVienObject;
 	}
 	
@@ -136,6 +160,7 @@ public class ThanhVienRESTController {
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
 		iThanhVienDAO.luu(thanhVienMD);
 		
+		notificationUserLogout(thanhVien.getIdThanhVien());
 		
 		return new ThongDiepObject("200", "Đăng xuất thành công");
 	}
