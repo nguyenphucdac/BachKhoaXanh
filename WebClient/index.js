@@ -115,6 +115,7 @@ io.on('connection', function (socket) {
   });
  
   app.post('/logout', (req, res) => {
+    console.log("user log out!");
     // process user move here
     socket.broadcast.emit('user logout', req.body);
     res.status(200).json({status: 200, message: "Successfully!"});  
