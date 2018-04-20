@@ -172,7 +172,7 @@ public class ThanhVienRESTController {
 		
 		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		if(thanhVien == null) {
-			return new ThongDiepObject("200", "Đăng xuất thất bại");
+			return new ThongDiepObject("201", "Đăng xuất thất bại");
 		}
 		
 		ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
