@@ -23,6 +23,7 @@ public class ThanhVien {
 	private int toaDoX;
 	private int toaDoY;
 	private byte[] anhThanhVien;
+	private int luongNuocMangTheo;
 	
 	@Id
 	@Column(name = "id_thanh_vien", length = 20, nullable = false)
@@ -100,6 +101,14 @@ public class ThanhVien {
 	}
 	public void setAnhThanhVien(byte[] anhThanhVien) {
 		this.anhThanhVien = anhThanhVien;
+	}
+	
+	@Column(name = "luong_Nuoc_Mang_Theo", length = 20, nullable = true)
+	public int getLuongNuocMangTheo() {
+		return luongNuocMangTheo;
+	}
+	public void setLuongNuocMangTheo(int luongNuocMangTheo) {
+		this.luongNuocMangTheo = luongNuocMangTheo;
 	}
 	
 	

@@ -111,6 +111,7 @@ public class ThanhVienController {
 			thanhVienMD.setTrangThai("off");
 			thanhVienMD.setToaDoX(0);
 			thanhVienMD.setToaDoY(0);
+			thanhVienMD.setLuongNuocMangTheo(0);
 			
 			thanhVienMD.setAnhThanhVien(thanhVienMD.getAnhThanhVienPhu().getBytes());
 			iThanhVienDAO.luu(thanhVienMD);

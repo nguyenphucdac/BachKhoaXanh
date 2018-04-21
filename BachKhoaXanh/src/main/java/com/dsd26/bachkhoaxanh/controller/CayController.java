@@ -97,9 +97,6 @@ public class CayController {
 	@RequestMapping(value = { "/cay-tao-moi" }, method = RequestMethod.POST)
 	public String luuCay(Model model, @ModelAttribute("cayForm") @Validated CayMD cayMD, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			return "redirect:/cay-tao-moi";
-		}
 		try {
 			PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 			cayMD.setIdCay("cay_" + (danhSachCay.getList().size() + 1));
@@ -111,25 +108,21 @@ public class CayController {
 					cayMD.setIdCay("cay_" + k);
 				}
 			}
-			
-			
 			cayMD.setLuongNuocDaTuoi(0);
-			
-			notificaitonNewTree(cayMD.getIdCay());
+			cayMD.setTinhTrang("thiếu nước");
 			
 			iCayDAO.luu(cayMD);
+			notificaitonNewTree(cayMD.getIdCay());
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
-			
 			return "redirect:/cay-tao-moi";
 		}
 		return "redirect:/cay";
 	}
 	
 	@RequestMapping(value= {"/cay-xoa"}, method = RequestMethod.GET)
-	public String xoaCay(@RequestParam(value = "idCay", defaultValue = "0") String idCay) {
-		
+	public String xoaCay(@RequestParam(value = "idCay", defaultValue = "0") String idCay) {	
 		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
 		for(int i = 0 ; i < danhSachLichSuTuoi.getList().size() ; i++) {
 			if(danhSachLichSuTuoi.getList().get(i).getIdCay().equals(idCay)) {
@@ -138,14 +131,13 @@ public class CayController {
 		}
 		
 		PaginationResult<BaoCaoTinhTrangCayMD> danhSachBaoCaoTinhTrangCay = iBaoCaoTinhTrangCayDAO.queryRoles(1, Integer.MAX_VALUE, 1);
-		
 		for(int i = 0 ; i < danhSachBaoCaoTinhTrangCay.getList().size() ; i++) {
 			if(danhSachBaoCaoTinhTrangCay.getList().get(i).getIdCay().equals(idCay)) {
 				iBaoCaoTinhTrangCayDAO.xoa(danhSachBaoCaoTinhTrangCay.getList().get(i).getId());
 			}
 		}
-		
 		iCayDAO.xoa(idCay);
+		notificationDeleteTree(idCay);
 		return "redirect:/cay";
 	}
 	
@@ -170,12 +162,19 @@ public class CayController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes
 			) {
-		if (result.hasErrors()) {
-            return "admin/cay/sua";
-        }
 		try {
 			iCayDAO.xoa(cayMD.getIdCay());
+			if(cayMD.getLuongNuocDaTuoi() > cayMD.getLuongNuocToiDa()) {
+				cayMD.setTinhTrang("thừa nước");
+			}
+			else if(cayMD.getLuongNuocDaTuoi() == cayMD.getLuongNuocToiDa()) {
+				cayMD.setTinhTrang("đủ nước");
+			}
+			else {
+				cayMD.setTinhTrang("thiếu nước");
+			}
 			iCayDAO.luu(cayMD);
+			notificationUpdateTree(cayMD.getIdCay());
 		}
 		catch(Exception ex) {
 			String message = ex.getMessage();
@@ -187,98 +186,20 @@ public class CayController {
 	}
 	
 	public void notificaitonNewTree(String idCay) {
-		System.out.println("goi coong");
-		HttpURLConnection connection = null;
-		URL url;
-		try {
-			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "add-tree");
-			Map<String,Object> params = new LinkedHashMap<>();
-	        params.put("idCay", idCay);
-
-	        StringBuilder postData = new StringBuilder();
-	        for (Map.Entry<String,Object> param : params.entrySet()) {
-	            if (postData.length() != 0) postData.append('&');
-	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-	            postData.append('=');
-	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-	        }
-	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	        conn.setRequestMethod("POST");
-	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	        conn.setDoOutput(true);
-	        conn.getOutputStream().write(postDataBytes);
-
-	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-	        for (int c; (c = in.read()) >= 0;)
-	            System.out.print((char)c);
-	        System.out.println("da gui...");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		notificationNodeServer(idCay, "add-tree");
 	}
 	public void notificationUpdateTree(String idCay) {
-		HttpURLConnection connection = null;
-		URL url;
-		try {
-			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "edit-tree");
-			Map<String,Object> params = new LinkedHashMap<>();
-			params.put("idCay", idCay);
-	        
-	        StringBuilder postData = new StringBuilder();
-	        for (Map.Entry<String,Object> param : params.entrySet()) {
-	            if (postData.length() != 0) postData.append('&');
-	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-	            postData.append('=');
-	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-	        }
-	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	        conn.setRequestMethod("POST");
-	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	        conn.setDoOutput(true);
-	        conn.getOutputStream().write(postDataBytes);
-
-	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-	        for (int c; (c = in.read()) >= 0;)
-	            System.out.print((char)c);
-	        System.out.println("da gui...");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		notificationNodeServer(idCay, "edit-tree");
 	}
 	public void notificationDeleteTree(String idCay) {
+		notificationNodeServer(idCay, "delete-tree");
+	}
+	public void notificationNodeServer(String idCay, String link) {
 		HttpURLConnection connection = null;
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "delete-tree");
+			url = new URL(Host.hostNode + link);
 			Map<String,Object> params = new LinkedHashMap<>();
 			params.put("idCay", idCay);
 	        

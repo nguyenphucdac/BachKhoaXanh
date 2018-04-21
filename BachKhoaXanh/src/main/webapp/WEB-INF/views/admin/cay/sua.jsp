@@ -200,24 +200,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											placeholder="lượng nước cần" value="${cay.luongNuocDaTuoi}" />
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Tình
-										trạng</label>
-									<div class="col-sm-9">
-										<form:select path="tinhTrang" class="form-control"
-											itemValue="${cay.tinhTrang}">
-											<option value="tốt">
-        										tốt
-   											</option>
-											<option value="bình thường">
-        										bình thường
-   											</option>
-											<option value="xấu">
-        										xấu
-   											</option>
-										</form:select>
-									</div>
-								</div>
+								
 								<div class="col-sm-offset-2">
 									<button type="submit" class="btn btn-default">Xác nhận</button>
 								</div>

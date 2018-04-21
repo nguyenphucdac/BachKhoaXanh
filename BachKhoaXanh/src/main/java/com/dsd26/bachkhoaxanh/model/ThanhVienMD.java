@@ -21,6 +21,7 @@ public class ThanhVienMD {
 	private CommonsMultipartFile anhThanhVienPhu;
 	private int toaDoX;
 	private int toaDoY;
+	private int luongNuocMangTheo;
 	
 	public ThanhVienMD() {}
 	
@@ -34,6 +35,7 @@ public class ThanhVienMD {
 		this.toaDoX = thanhVien.getToaDoX();
 		this.toaDoY = thanhVien.getToaDoY();
 		this.anhThanhVien = thanhVien.getAnhThanhVien();
+		this.luongNuocMangTheo = thanhVien.getLuongNuocMangTheo();
 	}
 	
 	public ThanhVienMD(
@@ -53,6 +55,7 @@ public class ThanhVienMD {
 		this.trangThai = trangThai;
 		this.toaDoX = toaDoX;
 		this.toaDoY = toaDoY;
+		
 	}
 
 	public String getIdThanhVien() {
@@ -135,7 +138,12 @@ public class ThanhVienMD {
 		this.anhThanhVienPhu = anhThanhVienPhu;
 	}
 	
-	
+	public int getLuongNuocMangTheo() {
+		return luongNuocMangTheo;
+	}
+	public void setLuongNuocMangTheo(int luongNuocMangTheo) {
+		this.luongNuocMangTheo = luongNuocMangTheo;
+	}
 	
 
 }

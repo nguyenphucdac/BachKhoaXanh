@@ -115,11 +115,11 @@ public class ThanhVienRESTController {
 	
 	@RequestMapping(value = "/cap-nhat-thanh-vien", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ThongDiepObject capNhatThanhVien(@RequestBody(required = true) String body, String idThanhVien, String toaDoX, String toaDoY) {
+	public ThongDiepObject capNhatThanhVien(@RequestBody(required = true) String body, String idThanhVien, String toaDoX, String toaDoY, String luongNuocMangTheo) {
 		
 		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		if(thanhVien == null) {
-			return new ThongDiepObject("200", "Cập nhật thành công");
+			return new ThongDiepObject("400", "Thành viên không tồn tại");
 		}
 		
 		
@@ -127,6 +127,10 @@ public class ThanhVienRESTController {
 		
 		thanhVienMD.setToaDoX(Integer.parseInt(toaDoX));
 		thanhVienMD.setToaDoY(Integer.parseInt(toaDoY));
+		
+		if(luongNuocMangTheo != null && !luongNuocMangTheo.equals("")) {
+			thanhVienMD.setLuongNuocMangTheo(Integer.parseInt(luongNuocMangTheo));
+		}
 		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
 		iThanhVienDAO.luu(thanhVienMD);
@@ -186,54 +190,17 @@ public class ThanhVienRESTController {
 		return new ThongDiepObject("200", "Đăng xuất thành công");
 	}
 	public void notificationUserLogin(String idThanhVien) {
-		HttpURLConnection connection = null;
-		URL url;
-		try {
-			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "login");
-			Map<String,Object> params = new LinkedHashMap<>();
-			params.put("idThanhVien", idThanhVien);
-	        
-	        StringBuilder postData = new StringBuilder();
-	        for (Map.Entry<String,Object> param : params.entrySet()) {
-	            if (postData.length() != 0) postData.append('&');
-	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-	            postData.append('=');
-	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-	        }
-	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	        conn.setRequestMethod("POST");
-	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	        conn.setDoOutput(true);
-	        conn.getOutputStream().write(postDataBytes);
-
-	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-	        for (int c; (c = in.read()) >= 0;)
-	            System.out.print((char)c);
-	        System.out.println("da gui...");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		notificationNodeServer(idThanhVien, "login");
 	}
 	public void notificationUserLogout(String idThanhVien) {
+		notificationNodeServer(idThanhVien, "logout");
+	}
+	public void notificationNodeServer(String idThanhVien, String link) {
 		HttpURLConnection connection = null;
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "logout");
+			url = new URL(Host.hostNode + link);
 			Map<String,Object> params = new LinkedHashMap<>();
 			params.put("idThanhVien", idThanhVien);
 	        

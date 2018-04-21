@@ -36,7 +36,6 @@ import com.dsd26.bachkhoaxanh.dao.impl.LoaiCayDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.LoaiThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.ThanhVienDAO;
 import com.dsd26.bachkhoaxanh.dao.impl.ThongBaoDAO;
-import com.dsd26.bachkhoaxanh.socket.ServerConnection;
 
 /*
  * author: Nguyễn Phúc Đạc

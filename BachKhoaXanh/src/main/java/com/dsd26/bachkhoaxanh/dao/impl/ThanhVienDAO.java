@@ -48,14 +48,8 @@ public class ThanhVienDAO implements IThanhVienDAO {
 		thanhVien.setTrangThai(thanhVienMD.getTrangThai());
 		thanhVien.setToaDoX(thanhVienMD.getToaDoX());
 		thanhVien.setToaDoY(thanhVienMD.getToaDoY());
-		
-//		if (thanhVienMD.getAnhThanhVien() != null) {
-//            byte[] anhThanhVien = thanhVienMD.getAnhThanhVien().getBytes();
-//            if (anhThanhVien != null && anhThanhVien.length > 0) {
-//            	thanhVien.setAnhThanhVien(anhThanhVien);
-//            }
-//        }
 		thanhVien.setAnhThanhVien(thanhVienMD.getAnhThanhVien());
+		thanhVien.setLuongNuocMangTheo(thanhVienMD.getLuongNuocMangTheo());
 		
 		this.sessionFactory.getCurrentSession().persist(thanhVien);
 		

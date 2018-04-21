@@ -92,8 +92,8 @@ public class DiemCapNuocController {
 					diemCapNuocMD.setIdDiemCapNuoc("diem_cap_nuoc_" + k);
 				}
 			}
-			
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
+			notificaitonNewWater(diemCapNuocMD.getIdDiemCapNuoc());
 		} catch (Exception ex) {
 			String message = ex.getMessage();
 			model.addAttribute("message", message);
@@ -112,8 +112,8 @@ public class DiemCapNuocController {
 				iBaoCaoTinhTrangDCNDAO.xoa(danhSachBaoCaoTinhTrangDCN.getList().get(i).getId());
 			}
 		}
-		
 		iDiemCapNuocDAO.xoa(idDiemCapNuoc);
+		notificationDeleteWater(idDiemCapNuoc);
 		return "redirect:/diemcapnuoc";
 	}
 	
@@ -143,6 +143,8 @@ public class DiemCapNuocController {
 		try {
 			iDiemCapNuocDAO.xoa(diemCapNuocMD.getIdDiemCapNuoc());
 			iDiemCapNuocDAO.luu(diemCapNuocMD);
+			
+			notificationDeleteWater(diemCapNuocMD.getIdDiemCapNuoc());
 		}
 		catch(Exception ex) {
 			String message = ex.getMessage();
@@ -153,96 +155,21 @@ public class DiemCapNuocController {
 		return "redirect:/diemcapnuoc";
 	}
 	
-	public void notificationUpdateWater(String idDiemCapNuoc) {
-		HttpURLConnection connection = null;
-		URL url;
-		try {
-			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "edit-water");
-			Map<String,Object> params = new LinkedHashMap<>();
-			params.put("idDiemCapNuoc", idDiemCapNuoc);
-	        
-	        StringBuilder postData = new StringBuilder();
-	        for (Map.Entry<String,Object> param : params.entrySet()) {
-	            if (postData.length() != 0) postData.append('&');
-	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-	            postData.append('=');
-	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-	        }
-	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	        conn.setRequestMethod("POST");
-	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	        conn.setDoOutput(true);
-	        conn.getOutputStream().write(postDataBytes);
-
-	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-	        for (int c; (c = in.read()) >= 0;)
-	            System.out.print((char)c);
-	        System.out.println("da gui...");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+	public void notificaitonNewWater(String idDiemCapNuoc) {
+		notificationNodeServer(idDiemCapNuoc, "add-water");
 	}
-	public void notificationNewWater(String idDiemCapNuoc) {
-		HttpURLConnection connection = null;
-		URL url;
-		try {
-			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "edit-water");
-			Map<String,Object> params = new LinkedHashMap<>();
-			params.put("idDiemCapNuoc", idDiemCapNuoc);
-	        
-	        StringBuilder postData = new StringBuilder();
-	        for (Map.Entry<String,Object> param : params.entrySet()) {
-	            if (postData.length() != 0) postData.append('&');
-	            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-	            postData.append('=');
-	            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-	        }
-	        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-	        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	        conn.setRequestMethod("POST");
-	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	        conn.setDoOutput(true);
-	        conn.getOutputStream().write(postDataBytes);
-
-	        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-	        for (int c; (c = in.read()) >= 0;)
-	            System.out.print((char)c);
-	        System.out.println("da gui...");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+	public void notificationUpdateWater(String idDiemCapNuoc) {
+		notificationNodeServer(idDiemCapNuoc, "edit-water");
 	}
 	public void notificationDeleteWater(String idDiemCapNuoc) {
+		notificationNodeServer(idDiemCapNuoc, "delete-water");
+	}
+	public void notificationNodeServer(String idDiemCapNuoc, String link) {
 		HttpURLConnection connection = null;
 		URL url;
 		try {
 			System.out.println("dang gui...");
-			url = new URL(Host.hostNode + "delete-water");
+			url = new URL(Host.hostNode + link);
 			Map<String,Object> params = new LinkedHashMap<>();
 			params.put("idDiemCapNuoc", idDiemCapNuoc);
 	        
@@ -277,9 +204,6 @@ public class DiemCapNuocController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
-
 
 }
