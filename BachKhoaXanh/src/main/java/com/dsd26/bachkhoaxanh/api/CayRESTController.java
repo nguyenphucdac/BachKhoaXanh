@@ -135,10 +135,37 @@ public class CayRESTController {
 		
 		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + luongNuoc) {
 			cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
+			cay.setTinhTrang("thừa nước");
+			
+			iCayDAO.xoa(idCay);
+			iCayDAO.luu(new CayMD(cay));
+			
+			LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
+			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+			int k = danhSachLichSuTuoi.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachLichSuTuoi.getList().size(); i++) {
+				if(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi().equals(lichSuTuoiMD.getIdLichSuTuoi())) {
+					k++;
+					lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + k);
+				}
+			}
+			
+			
+			lichSuTuoiMD.setIdCay(idCay);
+			lichSuTuoiMD.setIdThanhVien(idThanhVien);
+			lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
+			iLichSuTuoiDAO.luu(lichSuTuoiMD);
+			notificationUpdateTree(idCay);
+			
+			return new ThongDiepObject("200", "Cây đã thừa nước !!!");
 		}
 		
 		else {
 			cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + luongNuoc);
+			cay.setTinhTrang("thiếu nước");
 		}
 		iCayDAO.xoa(idCay);
 		iCayDAO.luu(new CayMD(cay));
@@ -160,10 +187,9 @@ public class CayRESTController {
 		lichSuTuoiMD.setIdThanhVien(idThanhVien);
 		lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
 		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
-		
-		System.out.println("id:" + lichSuTuoiMD.getIdLichSuTuoi());
-		
 		iLichSuTuoiDAO.luu(lichSuTuoiMD);
+		notificationUpdateTree(idCay);
+		
 		return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");
 	}
 	
@@ -175,8 +201,6 @@ public class CayRESTController {
 			) {
 		
 		Cay cay = iCayDAO.timKiem(idCay);
-		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
-		
 		if(cay == null) {
 			return new ThongDiepObject("400", "Cây không tồn tại !!!");
 		}
@@ -238,18 +262,18 @@ public class CayRESTController {
 							String toaDoX,
 							String toaDoY
 			) {
+		
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
 		List<Point> trace = new ArrayList<>();trace.clear();
 		List<Point> temp = new ArrayList<>(); temp.clear();
 		List<CayMD> lstCayRequire = new ArrayList<>();
-		int minAccept = 2;
 		int minRoad = Integer.MAX_VALUE;
 		
 		PaginationResult<CayMD> danhSachCay = iCayDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		CayMD cayMD = null;
 		for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
 			cayMD = danhSachCay.getList().get(i);
-			
-			if(cayMD.getLuongNuocToiDa() - cayMD.getLuongNuocDaTuoi() >= minAccept) {
+			if(cayMD.getLuongNuocToiDa() - cayMD.getLuongNuocDaTuoi() < 0) {
 				lstCayRequire.add(cayMD);
 			}
 		}
