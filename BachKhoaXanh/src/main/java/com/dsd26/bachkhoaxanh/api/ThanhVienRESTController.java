@@ -131,7 +131,7 @@ public class ThanhVienRESTController {
 		thanhVienMD.setToaDoY(Integer.parseInt(toaDoY));
 		
 		if(luongNuocMangTheo != null && !luongNuocMangTheo.equals("")) {
-			thanhVienMD.setLuongNuocMangTheo(Integer.parseInt(luongNuocMangTheo));
+			thanhVienMD.setLuongNuocMangTheo(thanhVienMD.getLuongNuocMangTheo() + Integer.parseInt(luongNuocMangTheo));
 		}
 		
 		iThanhVienDAO.xoa(thanhVien.getIdThanhVien());

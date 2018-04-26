@@ -133,6 +133,16 @@ public class CayRESTController {
 			return new ThongDiepObject("400", "Lượng nước nhỏ hơn 0 !!!");
 		}
 		
+		if(thanhVien.getLuongNuocMangTheo() >= luongNuoc) {
+			ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
+			thanhVienMD.setLuongNuocMangTheo(thanhVienMD.getLuongNuocMangTheo() - luongNuoc);
+			iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
+			iThanhVienDAO.luu(thanhVienMD);
+		}
+		else {
+			return new ThongDiepObject("400", "Thành viên có lượng nước ảo !!");
+		}
+		
 		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + luongNuoc) {
 			cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
 			cay.setTinhTrang("thừa nước");
@@ -166,31 +176,32 @@ public class CayRESTController {
 		else {
 			cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + luongNuoc);
 			cay.setTinhTrang("thiếu nước");
-		}
-		iCayDAO.xoa(idCay);
-		iCayDAO.luu(new CayMD(cay));
 		
-		LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
-		PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
-		lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
-		int k = danhSachLichSuTuoi.getList().size() + 1;
-		
-		for(int i = 0 ; i < danhSachLichSuTuoi.getList().size(); i++) {
-			if(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi().equals(lichSuTuoiMD.getIdLichSuTuoi())) {
-				k++;
-				lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + k);
+			iCayDAO.xoa(idCay);
+			iCayDAO.luu(new CayMD(cay));
+			
+			LichSuTuoiMD lichSuTuoiMD = new LichSuTuoiMD();
+			PaginationResult<LichSuTuoiMD> danhSachLichSuTuoi = iLichSuTuoiDAO.queryRoles(1, Integer.MAX_VALUE, 1);
+			lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + (danhSachLichSuTuoi.getList().size() + 1));
+			int k = danhSachLichSuTuoi.getList().size() + 1;
+			
+			for(int i = 0 ; i < danhSachLichSuTuoi.getList().size(); i++) {
+				if(danhSachLichSuTuoi.getList().get(i).getIdLichSuTuoi().equals(lichSuTuoiMD.getIdLichSuTuoi())) {
+					k++;
+					lichSuTuoiMD.setIdLichSuTuoi("lich_su_tuoi_" + k);
+				}
 			}
+			
+			
+			lichSuTuoiMD.setIdCay(idCay);
+			lichSuTuoiMD.setIdThanhVien(idThanhVien);
+			lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
+			iLichSuTuoiDAO.luu(lichSuTuoiMD);
+			notificationUpdateTree(idCay);
+			
+			return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");
 		}
-		
-		
-		lichSuTuoiMD.setIdCay(idCay);
-		lichSuTuoiMD.setIdThanhVien(idThanhVien);
-		lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
-		lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
-		iLichSuTuoiDAO.luu(lichSuTuoiMD);
-		notificationUpdateTree(idCay);
-		
-		return new ThongDiepObject("200", "Cập nhật dữ liệu thành công");
 	}
 	
 	@RequestMapping(value = "/bao-cao-cay", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
