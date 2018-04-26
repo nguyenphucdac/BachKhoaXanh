@@ -45,7 +45,8 @@ public class ThanhVienMD {
 			String idLoaiThanhVien, 
 			String trangThai,
 			int toaDoX,
-			int toaDoY
+			int toaDoY,
+			int luongNuocMangtheo
 			) {
 		super();
 		this.idThanhVien = idThanhVien;
@@ -55,7 +56,7 @@ public class ThanhVienMD {
 		this.trangThai = trangThai;
 		this.toaDoX = toaDoX;
 		this.toaDoY = toaDoY;
-		
+		this.luongNuocMangTheo = luongNuocMangtheo;
 	}
 
 	public String getIdThanhVien() {

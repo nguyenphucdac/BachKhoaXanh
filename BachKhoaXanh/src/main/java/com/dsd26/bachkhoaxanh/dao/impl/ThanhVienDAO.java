@@ -96,7 +96,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 	@Override
 	public PaginationResult<ThanhVienMD> queryRoles(int page, int maxResult, int maxNavigationPage, String likeName) {
 		String sql = "Select new " + ThanhVienMD.class.getName() 
-				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.idLoaiThanhVien, p.trangThai, p.toaDoX, p.toaDoY) " 
+				+ " (p.idThanhVien, p.tenTaiKhoan, p.tenDayDu, p.idLoaiThanhVien, p.trangThai, p.toaDoX, p.toaDoY, p.luongNuocMangTheo) " 
 				+ " from "
 				+ ThanhVien.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {

@@ -65,4 +65,4 @@ var waterList = [];
 
 var selectedObject = {};
 
-var javaServerHost = 'http://10.10.236.122:9999';
+var javaServerHost = 'http://10.10.25.223:9999';

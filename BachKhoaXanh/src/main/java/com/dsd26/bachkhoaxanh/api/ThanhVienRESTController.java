@@ -83,6 +83,8 @@ public class ThanhVienRESTController {
 			LoaiThanhVienObject loaiThanhVienObject = new LoaiThanhVienObject(loaiThanhVien);
 			ThanhVienObject thanhVienObj = new ThanhVienObject(thanhVienMD, loaiThanhVienObject);
 			
+			System.out.println("luong nuoc mang theo: " + thanhVienMD.getLuongNuocMangTheo());
+			
 			listThanhVienObj.add(thanhVienObj);
 		}
 		
@@ -199,7 +201,7 @@ public class ThanhVienRESTController {
 		HttpURLConnection connection = null;
 		URL url;
 		try {
-			System.out.println("dang gui...");
+			System.out.println("dang gui..login.");
 			url = new URL(Host.hostNode + link);
 			Map<String,Object> params = new LinkedHashMap<>();
 			params.put("idThanhVien", idThanhVien);

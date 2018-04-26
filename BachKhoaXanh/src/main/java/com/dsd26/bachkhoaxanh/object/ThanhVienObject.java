@@ -13,6 +13,7 @@ public class ThanhVienObject {
 	private int toaDoY;
 	private String anhThanhVien;
 	private LoaiThanhVienObject loaiThanhVienObject;
+	private int luongNuocMangTheo;
 	
 	public ThanhVienObject() {
 		super();
@@ -29,6 +30,7 @@ public class ThanhVienObject {
 		this.toaDoY = thanhVien.getToaDoY();
 		this.anhThanhVien = "/get-anh-thanh-vien?idThanhVien=" + thanhVien.getIdThanhVien();
 		this.loaiThanhVienObject = loaiThanhVienObject;
+		this.luongNuocMangTheo = thanhVien.getLuongNuocMangTheo();
 	}
 	
 	public ThanhVienObject(ThanhVienMD thanhVienMD, LoaiThanhVienObject loaiThanhVienObject) {
@@ -42,6 +44,7 @@ public class ThanhVienObject {
 		this.toaDoY = thanhVienMD.getToaDoY();
 		this.anhThanhVien = "/get-anh-thanh-vien?idThanhVien=" + thanhVienMD.getIdThanhVien();
 		this.loaiThanhVienObject = loaiThanhVienObject;
+		this.luongNuocMangTheo = thanhVienMD.getLuongNuocMangTheo();
 	}
 	
 	
@@ -102,6 +105,14 @@ public class ThanhVienObject {
 	}
 	public void setLoaiThanhVien(LoaiThanhVienObject loaiThanhVienObject) {
 		this.loaiThanhVienObject = loaiThanhVienObject;
+	}
+
+	public int getLuongNuocMangTheo() {
+		return luongNuocMangTheo;
+	}
+
+	public void setLuongNuocMangTheo(int luongNuocMangTheo) {
+		this.luongNuocMangTheo = luongNuocMangTheo;
 	}
 	
 	

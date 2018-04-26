@@ -273,7 +273,7 @@ public class CayRESTController {
 		CayMD cayMD = null;
 		for(int i = 0 ; i < danhSachCay.getList().size(); i++) {
 			cayMD = danhSachCay.getList().get(i);
-			if(cayMD.getLuongNuocToiDa() - cayMD.getLuongNuocDaTuoi() < 0) {
+			if(cayMD.getLuongNuocToiDa() - cayMD.getLuongNuocDaTuoi() > 0) {
 				lstCayRequire.add(cayMD);
 			}
 		}
