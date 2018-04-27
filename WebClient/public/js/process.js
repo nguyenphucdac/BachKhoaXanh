@@ -127,6 +127,7 @@ function renderInfo(obj) {
         $("#information").append('<div>Tên tài khoản:' + obj.user.tenTaiKhoan + '</div>');
         $("#information").append('<div>Tên đầy đủ:' + obj.user.tenDayDu + '</div>')
         $("#information").append('<div>Loại thành viên:' + obj.user.loaiThanhVien.tenLoaiThanhVien + '</div>')
+        $("#information").append('<div><input type="button" onclick="showChart()" value="Xem thống kê"></div>')
     } else if (obj.type == 'tree') {
         $("#ex-image").text('');
         $("#ex-image").append('<img src="' + javaServerHost + obj.tree.loaiCayObject.anhLoaiCay + '">');
@@ -141,6 +142,7 @@ function renderInfo(obj) {
         $("#information").append('<div>Lượng nước tối đa:' + obj.tree.luongNuocToiDa + '</div>')
         $("#information").append('<div>Lượng nước đã tưới:' + obj.tree.luongNuocDaTuoi + '</div>')
         $("#information").append('<div>Tình trạng cây:' + obj.tree.tinhTrang + '</div>')
+        $("#information").append('<div><input type="button" onclick="showChart()" value="Xem thống kê"></div>')
 
     } else if (obj.type == 'water') {
         $("#ex-image").text('');
@@ -223,6 +225,38 @@ function getMapObject(x, y) {
         }
     }
     return null;
+}
+
+function getDataChart(data) {
+    var waterHistoryData = JSON.parse(data);
+    var myData = {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: 'Bảng thống kê',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+    }
+    var myChart = drawChart(myData);
+}
+
+function showChart() {
+    // if (!selectedObject) {
+    //     return;
+    // } else if (selectedObject.type == 'tree') {
+    //     loadChartDataByIdCay(getDataChart, selectedObject.tree.idCay);
+    // } else if (selectedObject.type == 'user') {
+    //     loadChartDataByIdThanhVien(getDataChart, selectedObject.user.idThanhVien);
+    // }
+    let myData = {
+        labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+        datasets: [{
+            label: 'Bảng thống kê',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+    }
+    var myChart = drawChart(myData);
 }
 
 $(document).ready(function () {

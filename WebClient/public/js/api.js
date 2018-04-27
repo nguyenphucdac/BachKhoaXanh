@@ -35,3 +35,13 @@ function loadWater(cFunction, idWater) {
 function loadUser(cFunction, idThanhVien) {
     getAPI(javaServerHost + '/get-thanh-vien/'+idThanhVien, cFunction);
 }
+
+// API get lich su tuoi
+
+function loadChartDataByIdThanhVien(cFunction, idThanhVien) {
+    getAPI(javaServerHost + '/get-lich-su-tuoi-thanh-vien/' + idThanhVien, cFunction);
+}
+
+function loadChartDataByIdCay(cFunction, idCay) {
+    getAPI(javaServerHost + '/get-lich-su-tuoi-cay/' + idCay, cFunction);
+}
