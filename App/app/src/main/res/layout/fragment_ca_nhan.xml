@@ -8,9 +8,12 @@
     tools:context="ambe.com.vn.bachkhoaxanh.fragments.CaNhanFragment">
 
     <RelativeLayout
+        android:id="@+id/rll_ca_nhan_tv"
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_centerInParent="true">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_avatar_nv"
             android:layout_width="100dp"
@@ -67,10 +70,10 @@
                 <ImageView
                     android:id="@+id/img_show_pass"
                     android:layout_width="0dp"
-                    android:layout_marginRight="5dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:src="@drawable/show" />
 
@@ -136,46 +139,77 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-0                android:text="NV_SD_01 "
+                android:text="NV_SD_01 "
                 android:textColor="#000000" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="9"
+            android:layout_below="@+id/lnl_pass"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/lnl_pass">
+            android:orientation="horizontal"
+            android:weightSum="9">
+
             <TextView
+                android:id="@+id/txt_bao_cao_cn"
                 android:layout_width="0dp"
-                android:layout_weight="3"
                 android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:text="@string/bao_cao"
                 android:textColor="#B71C1C"
-                android:text="@string/bao_cao"/>
+                android:textSize="18dp" />
+
             <TextView
+                android:id="@+id/txt_doi_mat_khau"
                 android:layout_width="0dp"
-                android:layout_weight="3"
                 android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:text="@string/doi_mat_khau"
 
                 android:textColor="#B71C1C"
-                android:text="@string/doi_mat_khau"/>
+                android:textSize="18dp" />
+
             <TextView
+                android:id="@+id/txt_dang_xuat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:text="@string/dang_xuat"
 
                 android:textColor="#B71C1C"
-                android:text="@string/dang_xuat"/>
+                android:textSize="18dp" />
         </LinearLayout>
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/lnl_ca_nhan_tnv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Bạn phải đăng nhập để thực hiện chức năng này" />
+
+        <Button
+            android:id="@+id/btn_tnv_ca_nhan_dang_nhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Đăng nhập"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
 
 
 

@@ -9,6 +9,14 @@ import java.io.Serializable;
 public class LoaiThanhVien implements Serializable {
     private String idLoaiThanhVien;
     private String tenLoaiThanhVien;
+    private String anhLoaiThanhVien;
+
+
+    public LoaiThanhVien(String idLoaiThanhVien, String tenLoaiThanhVien, String anhLoaiThanhVien) {
+        this.idLoaiThanhVien = idLoaiThanhVien;
+        this.tenLoaiThanhVien = tenLoaiThanhVien;
+        this.anhLoaiThanhVien = anhLoaiThanhVien;
+    }
 
     public LoaiThanhVien(String idLoaiThanhVien, String tenLoaiThanhVien) {
         this.idLoaiThanhVien = idLoaiThanhVien;
@@ -29,6 +37,14 @@ public class LoaiThanhVien implements Serializable {
 
     public void setTenLoaiThanhVien(String tenLoaiThanhVien) {
         this.tenLoaiThanhVien = tenLoaiThanhVien;
+    }
+
+    public String getAnhLoaiThanhVien() {
+        return anhLoaiThanhVien;
+    }
+
+    public void setAnhLoaiThanhVien(String anhLoaiThanhVien) {
+        this.anhLoaiThanhVien = anhLoaiThanhVien;
     }
 }
 

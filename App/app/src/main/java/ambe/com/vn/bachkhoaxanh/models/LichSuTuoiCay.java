@@ -7,44 +7,43 @@ import java.io.Serializable;
  */
 
 public class LichSuTuoiCay implements Serializable {
-    private String id;
-    private String idCay;
-    private String luongNuoc;
+    private String idLichSuTuoi;
+    private int luongNuocDaTuoi;
     private String thoiGian;
+    private Cay cayObject;
+    private ThanhVien thanhVienObject;
 
+    public LichSuTuoiCay(String idLichSuTuoi, int luongNuocDaTuoi, String thoiGian) {
+        this.idLichSuTuoi = idLichSuTuoi;
+        this.luongNuocDaTuoi = luongNuocDaTuoi;
+        this.thoiGian = thoiGian;
+    }
+
+    public LichSuTuoiCay(String idLichSuTuoi, int luongNuocDaTuoi, String thoiGian, Cay cayObject, ThanhVien thanhVienObject) {
+        this.idLichSuTuoi = idLichSuTuoi;
+        this.luongNuocDaTuoi = luongNuocDaTuoi;
+        this.thoiGian = thoiGian;
+        this.cayObject = cayObject;
+        this.thanhVienObject = thanhVienObject;
+    }
 
     public LichSuTuoiCay() {
     }
 
-    public LichSuTuoiCay(String id, String idCay, String luongNuoc, String thoiGian) {
-        this.id = id;
-        this.idCay = idCay;
-        this.luongNuoc = luongNuoc;
-        this.thoiGian = thoiGian;
+    public String getIdLichSuTuoi() {
+        return idLichSuTuoi;
     }
 
-    public String getId() {
-        return id;
+    public void setIdLichSuTuoi(String idLichSuTuoi) {
+        this.idLichSuTuoi = idLichSuTuoi;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public int getLuongNuocDaTuoi() {
+        return luongNuocDaTuoi;
     }
 
-    public String getIdCay() {
-        return idCay;
-    }
-
-    public void setIdCay(String idCay) {
-        this.idCay = idCay;
-    }
-
-    public String getLuongNuoc() {
-        return luongNuoc;
-    }
-
-    public void setLuongNuoc(String luongNuoc) {
-        this.luongNuoc = luongNuoc;
+    public void setLuongNuocDaTuoi(int luongNuocDaTuoi) {
+        this.luongNuocDaTuoi = luongNuocDaTuoi;
     }
 
     public String getThoiGian() {
@@ -53,5 +52,21 @@ public class LichSuTuoiCay implements Serializable {
 
     public void setThoiGian(String thoiGian) {
         this.thoiGian = thoiGian;
+    }
+
+    public Cay getCayObject() {
+        return cayObject;
+    }
+
+    public void setCayObject(Cay cayObject) {
+        this.cayObject = cayObject;
+    }
+
+    public ThanhVien getThanhVienObject() {
+        return thanhVienObject;
+    }
+
+    public void setThanhVienObject(ThanhVien thanhVienObject) {
+        this.thanhVienObject = thanhVienObject;
     }
 }

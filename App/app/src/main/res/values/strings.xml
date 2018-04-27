@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BachKhoaXanh</string>
     <string name="title_home">Trang chủ</string>
-    <string name="title_dashboard">Thống kê</string>
+    <string name="title_dashboard">Lịch sử</string>
     <string name="title_notifications">Cá nhân</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -9,5 +9,6 @@
     <string name="bao_cao"><u>Báo cáo</u></string>
     <string name="dang_xuat"><u>Đăng xuất</u></string>
     <string name="doi_mat_khau"><u>Đổi mật khẩu</u></string>
+    <string name="quen_mat_khau"><u>Quên mật khẩu?</u></string>
 
 </resources>

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ambe.com.vn.bachkhoaxanh.R;
 import ambe.com.vn.bachkhoaxanh.models.LichSuTuoiCay;
@@ -25,22 +27,27 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.ItemViewHo
     public LichSuAdapter(Context context, ArrayList<LichSuTuoiCay> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
-        this.inflater=LayoutInflater.from(context);
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.item_lich_su_tuoi_cay,parent,false);
-        ItemViewHolder itemViewHolder=new ItemViewHolder(view);
+        View view = inflater.inflate(R.layout.item_lich_su_tuoi_cay_cua_nv, parent, false);
+        ItemViewHolder itemViewHolder = new ItemViewHolder(view);
         return itemViewHolder;
     }
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        LichSuTuoiCay ls=arrayList.get(position);
-        holder.txtTenCay.setText(ls.getIdCay());
-        holder.txtThoiGian.setText(ls.getThoiGian());
-        holder.txtLuongNuoc.setText(ls.getLuongNuoc());
+        LichSuTuoiCay ls = arrayList.get(position);
+        holder.txtTenCay.setText(ls.getCayObject().getIdCay());
+        long dateTime = Long.parseLong(ls.getThoiGian());
+        Date date = new Date(dateTime);
+
+        SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        holder.txtThoiGian.setText(dt.format(date));
+        holder.txtLuongNuoc.setText(ls.getLuongNuocDaTuoi()+" Lít");
     }
 
     @Override

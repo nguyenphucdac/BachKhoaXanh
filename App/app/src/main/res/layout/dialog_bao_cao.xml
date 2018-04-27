@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rll_dialog_bao_cao"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:layout_centerInParent="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Nội dung:"/>
+        <EditText
+            android:id="@+id/edit_noi_dung_bao_cao"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10">
+            <Button
+                android:id="@+id/btn_guI_bao_cao"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:textAllCaps="false"
+                android:text="Gửi"/>
+            <Button
+                android:id="@+id/btn_dong_bao_cao"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:textAllCaps="false"
+                android:text="Đóng"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

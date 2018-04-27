@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ambe.com.vn.bachkhoaxanh.activities.login.LoginActivity">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_login" />
+
+    <TextView
+        android:id="@+id/img_logo_login"
+        android:layout_width="252dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="Bách Khoa Xanh" />
+
+    <LinearLayout
+        android:id="@+id/lnl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_logo_login"
+
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_edit_txt"
+            android:gravity="center_horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="23dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/phone_login"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/edit_sdt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Số điện thoại"
+                android:ems="10"
+                android:maxLength="11"
+                android:imeOptions="actionNext"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:background="@android:color/transparent"
+                android:layout_weight="0.85"
+                android:layout_gravity="center_vertical"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_edit_txt"
+
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="23dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/lock_login"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/edit_mat_khau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Mật khẩu"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:layout_weight="0.85"
+                android:layout_gravity="center_vertical"
+                android:imeOptions="actionSend"
+                android:fontFamily="sans-serif"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:id="@+id/btn_dang_nhap"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_bo_qua"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Đăng nhập"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_dang_ky_atv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:background="@drawable/bg_dang_ky_1"
+                android:gravity="center"
+                android:text="Đăng ký"
+                android:textColor="@color/colorRed" />
+
+            <TextView
+                android:id="@+id/txt_bo_qua_atv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@drawable/bg_dang_ky_1"
+                android:gravity="center"
+                android:text="Bỏ qua"
+                android:textColor="@color/colorRed" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txt_quen_mat_khau_atv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/quen_mat_khau"
+        android:textColor="@color/colorWhite" />
+
+
+</RelativeLayout>

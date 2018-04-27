@@ -1,7 +1,6 @@
 package ambe.com.vn.bachkhoaxanh.models;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import java.io.Serializable;
 
@@ -15,23 +14,29 @@ public class Cay implements Serializable {
     private int toaDoX;
     private int toaDoY;
     private String tinhTrang;
-    private String luongNuocCan;
+    private int luongNuocToiDa;
+    private int luongNuocDaTuoi;
     private Bitmap bitmap;
+    private LoaiCayObject loaiCayObject;
 
-    public Cay(String idCay, String idLoaiCay, int toaDoX, int toaDoY, String tinhTrang, String luongNuocCan) {
+    public Cay(String idCay, String idLoaiCay, int toaDoX, int toaDoY, String tinhTrang, int luongNuocToiDa, int luongNuocDaTuoi, Bitmap bitmap, LoaiCayObject loaiCayObject) {
         this.idCay = idCay;
         this.idLoaiCay = idLoaiCay;
         this.toaDoX = toaDoX;
-        this.toaDoY = toaDoY;
+        this.toaDoY = toaDoY ;
         this.tinhTrang = tinhTrang;
-        this.luongNuocCan = luongNuocCan;
+        this.luongNuocToiDa = luongNuocToiDa;
+        this.luongNuocDaTuoi = luongNuocDaTuoi;
+        this.bitmap = bitmap;
+        this.loaiCayObject = loaiCayObject;
     }
 
-    public Cay(Bitmap bitmap, int toaDoX, int toaDoY) {
-        this.bitmap = bitmap;
-        this.toaDoX = toaDoX;
-        this.toaDoY = toaDoY;
+    public LoaiCayObject getLoaiCayObject() {
+        return loaiCayObject;
+    }
 
+    public void setLoaiCayObject(LoaiCayObject loaiCayObject) {
+        this.loaiCayObject = loaiCayObject;
     }
 
     public Bitmap getBitmap() {
@@ -82,11 +87,19 @@ public class Cay implements Serializable {
         this.tinhTrang = tinhTrang;
     }
 
-    public String getLuongNuocCan() {
-        return luongNuocCan;
+    public int getLuongNuocToiDa() {
+        return luongNuocToiDa;
     }
 
-    public void setLuongNuocCan(String luongNuocCan) {
-        this.luongNuocCan = luongNuocCan;
+    public void setLuongNuocToiDa(int luongNuocToiDa) {
+        this.luongNuocToiDa = luongNuocToiDa;
+    }
+
+    public int getLuongNuocDaTuoi() {
+        return luongNuocDaTuoi;
+    }
+
+    public void setLuongNuocDaTuoi(int luongNuocDaTuoi) {
+        this.luongNuocDaTuoi = luongNuocDaTuoi;
     }
 }
