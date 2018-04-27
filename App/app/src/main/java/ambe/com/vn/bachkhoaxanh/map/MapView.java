@@ -2,6 +2,7 @@ package ambe.com.vn.bachkhoaxanh.map;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -13,9 +14,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -411,15 +416,23 @@ public class MapView extends View implements IMainView {
         final TextView txtTinhTrangCay = dialog.findViewById(R.id.txt_tinh_trang_cay);
         final TextView txtLuongNuocCan = dialog.findViewById(R.id.txt_luong_nuoc_can);
         TextView txtLuongNuocToiDa = dialog.findViewById(R.id.txt_luong_nuoc_toi_da);
-        SeekBar seekBar = dialog.findViewById(R.id.seek_bar);
         Button btnChiDuong = dialog.findViewById(R.id.btn_chi_duong);
+        ProgressBar progressBar = dialog.findViewById(R.id.progressBar1);
         final Button btnDaTuoi = dialog.findViewById(R.id.btn_da_tuoi);
         ImageView imgCay = dialog.findViewById(R.id.img_cay_dialog);
         Button btnBaoCao = dialog.findViewById(R.id.btn_bao_cao);
         ImageView imgLichSu = dialog.findViewById(R.id.img_lich_su_tuoi);
         animateDialog();
+        int luongNuocMax = cay.getLuongNuocToiDa();
+        int luongNuocDaTuoi = cay.getLuongNuocDaTuoi();
 
+        Drawable draw = getResources().getDrawable(R.drawable.custom_progressbar);
+        // set the drawable as progress drawable
+        progressBar.setProgressDrawable(draw);
 
+        progressBar.setMax(luongNuocMax);
+
+        progressBar.setProgress(100);
         txtIdCay.setText(cay.getIdCay());
         txtTinhTrangCay.setText(cay.getTinhTrang());
         txtLuongNuocCan.setText((cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi()) + " Lít");
@@ -428,11 +441,6 @@ public class MapView extends View implements IMainView {
         String urlAvatar = "http://" + Api.ip + ":9999" + cay.getLoaiCayObject().getAnhLoaiCay();
         Picasso.with(getContext()).load(urlAvatar).error(R.drawable.bk).into(imgCay);
         btnDaTuoi.setEnabled(true);
-
-
-        seekBar.setMax(cay.getLuongNuocToiDa());
-        seekBar.setProgress(cay.getLuongNuocDaTuoi());
-        seekBar.setPressed(false);
 
 
         if (cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi() == 0) {
@@ -447,29 +455,8 @@ public class MapView extends View implements IMainView {
             public void onClick(View view) {
 
 
-                btnDaTuoi.setEnabled(false);
                 xuLyTuoiCay(cay);
-                final int luongNuocCanTuoi = cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi();
-                if (luongNuocCanTuoi > MainActivity.THANH_VIEN.getLuongNuocMangTheo()) {
 
-                    ((Activity) getContext()).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
-                            MainActivity.THANH_VIEN.setLuongNuocMangTheo(0);
-
-                            mainPresenter.layNuoc(getContext(),
-                                    MainActivity.THANH_VIEN.getIdThanhVien(),
-                                    String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
-                                    String.valueOf(MainActivity.THANH_VIEN.getToaDoY()),
-                                    String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
-                        }
-                    });
-
-
-                } else {
-
-                }
                 dialog.dismiss();
 
             }
@@ -510,7 +497,44 @@ public class MapView extends View implements IMainView {
 
     }
 
-    private void xuLyTuoiCay(Cay cay) {
+    private void xuLyTuoiCay(final Cay cay) {
+        final int luongNuocCanTuoi = cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi();
+        if (luongNuocCanTuoi >= MainActivity.THANH_VIEN.getLuongNuocMangTheo()) {
+
+            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + MainActivity.THANH_VIEN.getLuongNuocMangTheo());
+
+                    mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
+
+                    MainActivity.THANH_VIEN.setLuongNuocMangTheo(0);
+                    mainPresenter.capNhatThanhVien(getContext(),
+                            MainActivity.THANH_VIEN.getIdThanhVien(),
+                            String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
+                            String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
+                }
+            });
+
+
+        } else {
+
+            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
+
+                    mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
+
+                    MainActivity.THANH_VIEN.setLuongNuocMangTheo(MainActivity.THANH_VIEN.getLuongNuocMangTheo() - cay.getLuongNuocToiDa());
+                    mainPresenter.capNhatThanhVien(getContext(),
+                            MainActivity.THANH_VIEN.getIdThanhVien(),
+                            String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
+                            String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
+                }
+            });
+
+        }
 
 
     }
@@ -527,7 +551,7 @@ public class MapView extends View implements IMainView {
         TextView txtTinhTrang = dialog.findViewById(R.id.txt_tinh_trang_dcn);
         Spinner spinner = dialog.findViewById(R.id.txt_spinner);
         Button btnChiDuong = dialog.findViewById(R.id.btn_chi_duong_dcn);
-        Button btnLayNuoc = dialog.findViewById(R.id.btn_lay_nuoc);
+        final Button btnLayNuoc = dialog.findViewById(R.id.btn_lay_nuoc);
         Button btnBaoCao = dialog.findViewById(R.id.btn_bao_cao_dcn);
 
         final ArrayList<Integer> arrayList = new ArrayList<>();
@@ -698,6 +722,7 @@ public class MapView extends View implements IMainView {
 
     public void xuLyChiDuongTuListDcn() {
         if (MainActivity.THANH_VIEN != null) {
+
             mainPresenter.getDirectionFromListWater(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), String.valueOf(MainActivity.THANH_VIEN.getToaDoX()), String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
             invalidate();
         }
