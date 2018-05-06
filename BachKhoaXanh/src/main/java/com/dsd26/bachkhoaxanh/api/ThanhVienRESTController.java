@@ -191,6 +191,58 @@ public class ThanhVienRESTController {
 		
 		return new ThongDiepObject("200", "Đăng xuất thành công");
 	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ThongDiepObject signin(@RequestBody(required = true) String body, 
+			String tenTaiKhoan,
+			String matKhau,
+			String tenDayDu
+			) 
+	{
+		if(tenTaiKhoan == null || matKhau == null || tenDayDu == null) {
+			return new ThongDiepObject("400", "Trường thông tin không thể null");
+		}
+		if(tenTaiKhoan == "" || matKhau == "" || tenDayDu == "") {
+			return new ThongDiepObject("400", "Trường thông tin không thể rỗng");
+		}
+		
+		PaginationResult<ThanhVienMD> danhSachTV = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 10);
+		for(int i = 0 ; i < danhSachTV.getList().size() ; i++) {
+			if(danhSachTV.getList().get(i).getTenTaiKhoan().toLowerCase().equals(tenTaiKhoan.toLowerCase())){
+				return new ThongDiepObject("400", "Tên tài khoản đã được sử dụng !!!");
+			}
+		}
+		
+		ThanhVienMD thanhVienMD = new ThanhVienMD();
+		
+		int k = danhSachTV.getList().size() + 1;
+		thanhVienMD.setIdThanhVien("thanh_vien_" + k);
+		
+		for(int i = 0 ; i < danhSachTV.getList().size(); i++) {
+			if(danhSachTV.getList().get(i).getIdThanhVien().equals(thanhVienMD.getIdThanhVien())) {
+				k++;
+				thanhVienMD.setIdThanhVien("thanh_vien_" + k);
+			}
+		}
+		
+		thanhVienMD.setTenTaiKhoan(tenTaiKhoan);
+		thanhVienMD.setMatKhau(matKhau);
+		thanhVienMD.setTenDayDu(tenDayDu);
+		thanhVienMD.setAnhThanhVien(null);
+		thanhVienMD.setIdLoaiThanhVien("loai_thanh_vien_1");
+		thanhVienMD.setLuongNuocMangTheo(0);
+		thanhVienMD.setToaDoX(2);
+		thanhVienMD.setToaDoY(1);
+		thanhVienMD.setTrangThai("off");
+		
+		iThanhVienDAO.luu(thanhVienMD);
+		return new ThongDiepObject("200", "Đăng ký tài khoản thành công!!!");
+		
+	}
+	
+	
+	
 	public void notificationUserLogin(String idThanhVien) {
 		notificationNodeServer(idThanhVien, "login");
 	}
