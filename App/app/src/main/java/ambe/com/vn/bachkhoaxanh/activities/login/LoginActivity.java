@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import ambe.com.vn.bachkhoaxanh.R;
 import ambe.com.vn.bachkhoaxanh.activities.main.MainActivity;
+import ambe.com.vn.bachkhoaxanh.activities.register.RegisterActivity;
 import ambe.com.vn.bachkhoaxanh.models.ThanhVien;
 import ambe.com.vn.bachkhoaxanh.presenters.login.LoginPresenter;
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         txtBoQua.setOnClickListener(this);
         btnDangNhap.setOnClickListener(this);
+        txtDangKy.setOnClickListener(this);
 
 
     }
@@ -68,7 +70,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_dang_nhap:
                 xuLyDangNhap();
                 break;
+            case R.id.txt_dang_ky_atv:
+                xuLyDangKy();
+                break;
         }
+
+    }
+
+    private void xuLyDangKy() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
 
     }
 
@@ -88,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Bundle bundle = new Bundle();
         intent.putExtra("BUN", bundle);
         bundle.putSerializable("TV", thanhVien);
-        bundle.putString("TNV","");
+        bundle.putString("TNV", "");
         startActivity(intent);
 
     }

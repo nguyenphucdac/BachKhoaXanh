@@ -55,7 +55,7 @@
                 android:id="@+id/edit_sdt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Số điện thoại"
+                android:hint="Tên tài khoản"
                 android:ems="10"
                 android:maxLength="11"
                 android:imeOptions="actionNext"
