@@ -1,0 +1,10 @@
+﻿TC_1 : map module
+TC_2 : Đăng nhập
+TC_3 : hiển thị đường đi đến cây
+TC_4 : Test trạng thái thành viên khác online
+TC_5 : Thống kê cây đã được tưới bởi ai
+TC_6 : Tưới cây
+TC_7 : Tìm đường đi ngắn nhất với 1 cây xác định
+TC_8 : Tìm đường đi ngắn nhất do hệ thống tự chọn
+TC_9 : Hiển thị thông tin cây
+TC_10: Xem thông tin người dùng và vị trí của họ
