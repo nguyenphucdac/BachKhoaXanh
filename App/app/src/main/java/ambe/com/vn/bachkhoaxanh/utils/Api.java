@@ -5,8 +5,8 @@ package ambe.com.vn.bachkhoaxanh.utils;
  */
 
 public class Api {
-    public static final String ip = "10.10.25.223";
-    public static final String ipServerNodeJs = "10.10.25.223";
+    public static final String ip = "192.168.137.1";
+    public static final String ipServerNodeJs = "192.168.137.1";
     public static final String URL_SERVER_NODEJS = "http://" + ipServerNodeJs + ":3000";
 
     public static final String apiGetListCay = "http://" + ip + ":9999/get-list-cay";
@@ -24,4 +24,5 @@ public class Api {
     public static final String apiGetListThanhVien = "http://" + ip + ":9999/get-list-thanh-vien";
     public static final String apiCapNhatThanhVien = "http://" + ip + ":9999/cap-nhat-thanh-vien";
     public static final String apiTuoiNuoc = "http://" + ip + ":9999/cap-nhat-cay";
+    public static final String apiRegister = "http://" + ip + ":9999/signin";
 }
