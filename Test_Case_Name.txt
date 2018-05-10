@@ -8,3 +8,9 @@ TC_7 : Tìm đường đi ngắn nhất với 1 cây xác định
 TC_8 : Tìm đường đi ngắn nhất do hệ thống tự chọn
 TC_9 : Hiển thị thông tin cây
 TC_10: Xem thông tin người dùng và vị trí của họ
+TC_11 : Đăng xuất
+TC_12 : Thêm cây
+TC_13 : sửa cây
+TC_14 : Xóa cây
+TC_15: thêm dcn
+TC_16: sửa dcn
