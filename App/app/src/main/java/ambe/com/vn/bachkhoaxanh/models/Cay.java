@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Cay implements Serializable {
     private String idCay;
     private String idLoaiCay;
+    private String tenCay;
     private int toaDoX;
     private int toaDoY;
     private String tinhTrang;
@@ -18,6 +19,7 @@ public class Cay implements Serializable {
     private int luongNuocDaTuoi;
     private Bitmap bitmap;
     private LoaiCayObject loaiCayObject;
+    private boolean chiDuong;
 
     public Cay(String idCay, String idLoaiCay, int toaDoX, int toaDoY, String tinhTrang, int luongNuocToiDa, int luongNuocDaTuoi, Bitmap bitmap, LoaiCayObject loaiCayObject) {
         this.idCay = idCay;
@@ -29,6 +31,22 @@ public class Cay implements Serializable {
         this.luongNuocDaTuoi = luongNuocDaTuoi;
         this.bitmap = bitmap;
         this.loaiCayObject = loaiCayObject;
+    }
+
+    public String getTenCay() {
+        return tenCay;
+    }
+
+    public void setTenCay(String tenCay) {
+        this.tenCay = tenCay;
+    }
+
+    public boolean isChiDuong() {
+        return chiDuong;
+    }
+
+    public void setChiDuong(boolean chiDuong) {
+        this.chiDuong = chiDuong;
     }
 
     public LoaiCayObject getLoaiCayObject() {

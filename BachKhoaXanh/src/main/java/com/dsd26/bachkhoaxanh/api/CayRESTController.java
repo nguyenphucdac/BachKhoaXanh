@@ -60,6 +60,9 @@ public class CayRESTController {
 	private ICayDAO iCayDAO;
 	
 	@Autowired
+	private IThanhVienDAO iThanhVienDAO;
+	
+	@Autowired
 	private ILoaiCayDAO iLoaiCayDAO;
 	
 	@Autowired
@@ -67,9 +70,6 @@ public class CayRESTController {
 	
 	@Autowired
 	private IBaoCaoTinhTrangCayDAO iBaoCaoTinhTrangCayDAO;
-	
-	@Autowired
-	private IThanhVienDAO iThanhVienDAO;
 	
 	
 
@@ -116,26 +116,35 @@ public class CayRESTController {
 	public ThongDiepObject capNhatNuocChoCay(@RequestBody(required = true) String body, 
 			String idThanhVien,
 			String idCay,
-			int luongNuoc
+			String luongNuoc
 			) 
 	{
+		System.out.println("luong nuoc gui len :" + luongNuoc);
 		Cay cay = iCayDAO.timKiem(idCay);
-		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien);
+		
+		ThanhVien thanhVien = iThanhVienDAO.timKiem(idThanhVien.toString());
+		System.out.println("Tai khoan gui len :" + thanhVien.getTenTaiKhoan());
+
+		
+		
+		//System.out.println("thanh vien : " + thanhVien.getTenDayDu());
 		
 		if(cay == null) {
 			return new ThongDiepObject("400", "Cây không tồn tại !!!");
 		}
-		
-		if(thanhVien == null) {
-			return new ThongDiepObject("400", "Thành viên không tồn tại !!!");
+		if(thanhVien.getIdThanhVien() == null) {
+			return new ThongDiepObject("400", "thành không viên tồn tại !!!");
 		}
-		if(luongNuoc <= 0) {
+		
+		if(Integer.parseInt(luongNuoc) <= 0) {
 			return new ThongDiepObject("400", "Lượng nước nhỏ hơn 0 !!!");
 		}
 		
-		if(thanhVien.getLuongNuocMangTheo() >= luongNuoc) {
+		
+		if(thanhVien.getLuongNuocMangTheo() >= Integer.parseInt(luongNuoc)) {
 			ThanhVienMD thanhVienMD = new ThanhVienMD(thanhVien);
-			thanhVienMD.setLuongNuocMangTheo(thanhVienMD.getLuongNuocMangTheo() - luongNuoc);
+			thanhVienMD.setLuongNuocMangTheo(thanhVienMD.getLuongNuocMangTheo() - Integer.parseInt(luongNuoc));
+			System.out.println("id thanh vien: " + idThanhVien);
 			iThanhVienDAO.xoa(thanhVien.getIdThanhVien());
 			iThanhVienDAO.luu(thanhVienMD);
 		}
@@ -143,7 +152,7 @@ public class CayRESTController {
 			return new ThongDiepObject("400", "Thành viên có lượng nước ảo !!");
 		}
 		
-		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + luongNuoc) {
+		if(cay.getLuongNuocToiDa() <= cay.getLuongNuocDaTuoi() + Integer.parseInt(luongNuoc)) {
 			cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
 			cay.setTinhTrang("thừa nước");
 			
@@ -165,7 +174,7 @@ public class CayRESTController {
 			
 			lichSuTuoiMD.setIdCay(idCay);
 			lichSuTuoiMD.setIdThanhVien(idThanhVien);
-			lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+			lichSuTuoiMD.setLuongNuocDaTuoi(Integer.parseInt(luongNuoc));
 			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 			notificationUpdateTree(idCay);
@@ -174,7 +183,7 @@ public class CayRESTController {
 		}
 		
 		else {
-			cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + luongNuoc);
+			cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + Integer.parseInt(luongNuoc));
 			cay.setTinhTrang("thiếu nước");
 		
 			iCayDAO.xoa(idCay);
@@ -195,7 +204,7 @@ public class CayRESTController {
 			
 			lichSuTuoiMD.setIdCay(idCay);
 			lichSuTuoiMD.setIdThanhVien(idThanhVien);
-			lichSuTuoiMD.setLuongNuocDaTuoi(luongNuoc);
+			lichSuTuoiMD.setLuongNuocDaTuoi(Integer.parseInt(luongNuoc));
 			lichSuTuoiMD.setThoiGian(Calendar.getInstance().getTime());
 			iLichSuTuoiDAO.luu(lichSuTuoiMD);
 			notificationUpdateTree(idCay);

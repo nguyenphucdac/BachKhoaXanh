@@ -4,6 +4,7 @@ package ambe.com.vn.bachkhoaxanh.fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,12 +82,7 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_lich_su, container, false);
-        return view;
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         rcvLichSu = view.findViewById(R.id.rcv_lich_su);
         toggleButton = view.findViewById(R.id.tgb_thong_ke);
         lnlLichSuTnv = view.findViewById(R.id.lnl_tnv_lich_su);
@@ -99,8 +95,6 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
         mChart.setDrawBarShadow(false);
         mChart.setHighlightFullBarEnabled(false);
         mChart.setOnChartValueSelectedListener(this);
-
-
         if (MainActivity.TNV.equals("TNV")) {
             lnlLichSuTnv.setVisibility(View.VISIBLE);
             lnlLichSuTv.setVisibility(View.GONE);
@@ -108,12 +102,16 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
             lnlLichSuTv.setVisibility(View.VISIBLE);
             lnlLichSuTnv.setVisibility(View.GONE);
             lichSuTuoiCayPresenter = new LichSuTuoiCayPresenter(this);
-            lichSuTuoiCayPresenter.getLichSuTuoiCuaCay(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), Api.apiGetLichSuTuoiCuaNv);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(1000);
+                    lichSuTuoiCayPresenter.getLichSuTuoiCuaCay(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), Api.apiGetLichSuTuoiCuaNv);
+
+                }
+            }).start();;
 
         }
-
-
-
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -129,6 +127,15 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
         });
 
         btnDangNhapTnv.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
     }
 
 
@@ -150,8 +157,6 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
     private static DataSet dataChart() {
 
         LineData d = new LineData();
-
-
 
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
@@ -196,10 +201,12 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
     @Override
     public void showListLichSuTuoi(ArrayList<LichSuTuoiCay> arrayList) {
         lichSuAdapter = new LichSuAdapter(getActivity(), arrayList);
+        lichSuAdapter.notifyDataSetChanged();
         LinearLayoutManager ll = new LinearLayoutManager(getActivity());
         rcvLichSu.setLayoutManager(ll);
         rcvLichSu.setHasFixedSize(true);
         rcvLichSu.setAdapter(lichSuAdapter);
+        Log.e("LOI", "Size == " + arrayList.size());
 
         arrThang = new int[arrayList.size()];
 
@@ -211,7 +218,6 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
         }
 
         Arrays.sort(arrThang);
-
 
 
         new Thread(new Runnable() {
@@ -273,9 +279,6 @@ public class LichSuFragment extends Fragment implements OnChartValueSelectedList
 
             }
         }).start();
-
-
-
 
 
     }

@@ -15,8 +15,15 @@ public class DiemCapNuoc implements Serializable {
     private String luongNuocToiDa;
     private String tinhTrang;
     private Bitmap bitmap;
+    private boolean chiDuongDcn;
 
+    public boolean isChiDuongDcn() {
+        return chiDuongDcn;
+    }
 
+    public void setChiDuongDcn(boolean chiDuongDcn) {
+        this.chiDuongDcn = chiDuongDcn;
+    }
 
     public DiemCapNuoc(String idDiemCapNuoc, int toaDoX, int toaDoY, String luongNuocToiDa, String tinhTrang, Bitmap bitmap) {
         this.idDiemCapNuoc = idDiemCapNuoc;

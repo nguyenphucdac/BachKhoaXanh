@@ -168,28 +168,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:weightSum="10"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-                <ProgressBar
-                    android:id="@+id/progressBar1"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="8"
-                    android:minHeight="25dp" />
-                <TextView
-                    android:id="@+id/txt_phan_tram"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center"
-                    android:layout_height="match_parent"
-                    android:text="2/100"/>
-            </LinearLayout>
 
 
 

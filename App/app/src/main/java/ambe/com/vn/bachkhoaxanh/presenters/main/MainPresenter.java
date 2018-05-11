@@ -735,7 +735,7 @@ public class MainPresenter implements IMainPresenter {
                     NewResponse newResponse = new Gson().fromJson(response, NewResponse.class);
 
 
-                    //        layNuocThanhCong("");
+                            layNuocThanhCong("Lấy nước thành công");
 
                 } else {
                     layNuocThatBai(" Lỗi");
@@ -812,9 +812,9 @@ public class MainPresenter implements IMainPresenter {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("idThanhVien", idThanhVien);
-                hashMap.put("idCay", idCay);
-                hashMap.put("luongNuoc", luongNuoc);
+                hashMap.put("idThanhVien", idThanhVien.toString().trim());
+                hashMap.put("idCay", idCay.toString().trim());
+                hashMap.put("luongNuoc", luongNuoc.toString().trim());
                 return hashMap;
             }
         };
@@ -864,9 +864,9 @@ public class MainPresenter implements IMainPresenter {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("idThanhVien", idThanhVien);
-                hashMap.put("toaDoX", toaDoX);
-                hashMap.put("toaDoY", toaDoY);
+                hashMap.put("idThanhVien", idThanhVien.toString().trim());
+                hashMap.put("toaDoX", toaDoX.toString().trim());
+                hashMap.put("toaDoY", toaDoY.toString().trim());
                 return hashMap;
             }
         };

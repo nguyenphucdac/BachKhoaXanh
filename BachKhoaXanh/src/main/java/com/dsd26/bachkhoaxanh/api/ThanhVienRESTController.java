@@ -206,6 +206,9 @@ public class ThanhVienRESTController {
 		if(tenTaiKhoan == "" || matKhau == "" || tenDayDu == "") {
 			return new ThongDiepObject("400", "Trường thông tin không thể rỗng");
 		}
+		if(matKhau.length() < 6) {
+			return new ThongDiepObject("400", "Mật khẩu quá ngắn. Tối thiểu 6 kí tự");
+		}
 		
 		PaginationResult<ThanhVienMD> danhSachTV = iThanhVienDAO.queryRoles(1, Integer.MAX_VALUE, 10);
 		for(int i = 0 ; i < danhSachTV.getList().size() ; i++) {

@@ -57,6 +57,7 @@ public class ThanhVienDAO implements IThanhVienDAO {
 
 	@Override
 	public boolean xoa(String idThanhVien) {
+		System.out.println("trong dao" + idThanhVien);
 		String sql = "";
 		if(idThanhVien == null || idThanhVien.equals("")) {
 			return false;

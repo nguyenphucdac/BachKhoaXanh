@@ -2,7 +2,6 @@ package ambe.com.vn.bachkhoaxanh.map;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,15 +10,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -32,22 +27,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.time.Clock;
 import java.util.ArrayList;
 
 import ambe.com.vn.bachkhoaxanh.R;
+import ambe.com.vn.bachkhoaxanh.activities.login.LoginActivity;
 import ambe.com.vn.bachkhoaxanh.activities.main.IMainView;
 import ambe.com.vn.bachkhoaxanh.activities.lichsutuoi.LichSuTuoiCayActivity;
 import ambe.com.vn.bachkhoaxanh.activities.main.MainActivity;
@@ -71,6 +63,8 @@ public class MapView extends View implements IMainView {
     private float[] pts;
     private Path path;
     private String luongNuoc = "";
+    private boolean chiDuongCay = false;
+    private boolean chiDuongDcn = false;
 
     private Socket socket;
     private ArrayList<UserMove> arrUserMove;
@@ -164,7 +158,7 @@ public class MapView extends View implements IMainView {
 
     int[][] map = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 5, 5, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 5, 5, 0},
+            {0, 5, 5, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 5, 0},
             {0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 0},
             {0, 4, 2, 2, 2, 2, 4, 2, 4, 5, 2, 2, 5, 4, 2, 2, 2, 2, 2, 4, 5, 0},
             {0, 4, 4, 4, 4, 2, 4, 2, 4, 5, 0, 0, 5, 4, 2, 4, 4, 4, 2, 4, 5, 0},
@@ -175,9 +169,9 @@ public class MapView extends View implements IMainView {
             {0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 0},
             {0, 4, 2, 2, 2, 2, 2, 2, 4, 5, 5, 5, 5, 4, 2, 2, 2, 2, 2, 2, 2, 0},
             {0, 4, 2, 2, 2, 2, 2, 2, 4, 5, 5, 5, 5, 4, 2, 2, 2, 2, 2, 2, 2, 0},
-            {0, 4, 5, 2, 5, 5, 2, 5, 4, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 3, 3, 0},
+            {0, 4, 5, 2, 5, 5, 2, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 4, 3, 3, 0},
             {0, 4, 5, 2, 5, 5, 2, 5, 4, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 3, 3, 0},
-            {0, 4, 5, 2, 5, 4, 4, 4, 4, 4, 4, 1, 4, 4, 2, 2, 2, 2, 2, 2, 2, 0},
+            {0, 4, 5, 2, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 0},
             {0, 4, 5, 2, 5, 5, 2, 5, 4, 5, 0, 0, 5, 4, 2, 2, 2, 2, 2, 2, 2, 0},
             {0, 4, 5, 2, 5, 5, 2, 5, 4, 5, 0, 0, 5, 4, 4, 4, 4, 4, 4, 4, 5, 0},
             {0, 4, 2, 2, 2, 2, 2, 2, 4, 5, 0, 0, 5, 4, 2, 2, 2, 2, 2, 4, 5, 0},
@@ -298,22 +292,25 @@ public class MapView extends View implements IMainView {
         canvas.drawPath(path, p);
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         float x = event.getX();
         float y = event.getY();
 
-        float a = MainActivity.THANH_VIEN.getToaDoX() * 49;
-        float b = MainActivity.THANH_VIEN.getToaDoY() * 49;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //Check if the x and y position of the touch is inside the bitmap
-                if (x <= b + 49 && x >= b && y <= a + 49 && y >= a) {
+                if (MainActivity.THANH_VIEN != null) {
 
-                    showInfoMe();
+                    float a = MainActivity.THANH_VIEN.getToaDoX() * 49;
+                    float b = MainActivity.THANH_VIEN.getToaDoY() * 49;
+
+                    if (x <= b + 49 && x >= b && y <= a + 49 && y >= a) {
+
+                        showInfoMe();
+                    }
                 }
                 for (ThanhVien thanhVien : arrThanhVien) {
 
@@ -417,8 +414,7 @@ public class MapView extends View implements IMainView {
         final TextView txtLuongNuocCan = dialog.findViewById(R.id.txt_luong_nuoc_can);
         TextView txtLuongNuocToiDa = dialog.findViewById(R.id.txt_luong_nuoc_toi_da);
         Button btnChiDuong = dialog.findViewById(R.id.btn_chi_duong);
-        ProgressBar progressBar = dialog.findViewById(R.id.progressBar1);
-        final Button btnDaTuoi = dialog.findViewById(R.id.btn_da_tuoi);
+        Button btnDaTuoi = dialog.findViewById(R.id.btn_da_tuoi);
         ImageView imgCay = dialog.findViewById(R.id.img_cay_dialog);
         Button btnBaoCao = dialog.findViewById(R.id.btn_bao_cao);
         ImageView imgLichSu = dialog.findViewById(R.id.img_lich_su_tuoi);
@@ -426,29 +422,24 @@ public class MapView extends View implements IMainView {
         int luongNuocMax = cay.getLuongNuocToiDa();
         int luongNuocDaTuoi = cay.getLuongNuocDaTuoi();
 
+        if (cay.isChiDuong() && cay.getLuongNuocDaTuoi() != cay.getLuongNuocToiDa()) {
+            btnDaTuoi.setEnabled(true);
+        } else {
+            btnDaTuoi.setEnabled(false);
+        }
+
         Drawable draw = getResources().getDrawable(R.drawable.custom_progressbar);
         // set the drawable as progress drawable
-        progressBar.setProgressDrawable(draw);
 
-        progressBar.setMax(luongNuocMax);
 
-        progressBar.setProgress(100);
-        txtIdCay.setText(cay.getIdCay());
+        txtIdCay.setText(cay.getTenCay());
         txtTinhTrangCay.setText(cay.getTinhTrang());
         txtLuongNuocCan.setText((cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi()) + " Lít");
         txtLuongNuocToiDa.setText(cay.getLuongNuocToiDa() + " Lít");
 
         String urlAvatar = "http://" + Api.ip + ":9999" + cay.getLoaiCayObject().getAnhLoaiCay();
         Picasso.with(getContext()).load(urlAvatar).error(R.drawable.bk).into(imgCay);
-        btnDaTuoi.setEnabled(true);
 
-
-        if (cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi() == 0) {
-            btnDaTuoi.setEnabled(false);
-
-        } else {
-            btnDaTuoi.setEnabled(true);
-        }
 
         btnDaTuoi.setOnClickListener(new OnClickListener() {
             @Override
@@ -478,6 +469,14 @@ public class MapView extends View implements IMainView {
         btnChiDuong.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                for (Cay c : arrCay) {
+                    if (c.getIdCay().equals(cay.getIdCay())) {
+                        c.setChiDuong(true);
+
+                    } else {
+                        c.setChiDuong(false);
+                    }
+                }
                 xuLyChiDuong(cay);
                 dialog.dismiss();
             }
@@ -498,43 +497,37 @@ public class MapView extends View implements IMainView {
     }
 
     private void xuLyTuoiCay(final Cay cay) {
-        final int luongNuocCanTuoi = cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi();
+        int luongNuocCanTuoi = cay.getLuongNuocToiDa() - cay.getLuongNuocDaTuoi();
         if (luongNuocCanTuoi >= MainActivity.THANH_VIEN.getLuongNuocMangTheo()) {
 
-            ((Activity) getContext()).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + MainActivity.THANH_VIEN.getLuongNuocMangTheo());
 
-                    mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
+            //          Log.e("LOI", MainActivity.THANH_VIEN.getLuongNuocMangTheo() + "");
 
-                    MainActivity.THANH_VIEN.setLuongNuocMangTheo(0);
-                    mainPresenter.capNhatThanhVien(getContext(),
-                            MainActivity.THANH_VIEN.getIdThanhVien(),
-                            String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
-                            String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
-                }
-            });
+            mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
+            cay.setLuongNuocDaTuoi(cay.getLuongNuocDaTuoi() + MainActivity.THANH_VIEN.getLuongNuocMangTheo());
+ //           cay.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.explosion));
+
+            MainActivity.THANH_VIEN.setLuongNuocMangTheo(0);
+//            mainPresenter.capNhatThanhVien(getContext(), "2",
+//                    String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
+//                    String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
 
 
         } else {
 
-            ((Activity) getContext()).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
+            //         Log.e("LOI", MainActivity.THANH_VIEN.getLuongNuocMangTheo() + "");
 
-                    mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(MainActivity.THANH_VIEN.getLuongNuocMangTheo()));
+            mainPresenter.tuoiNuoc(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), cay.getIdCay(), String.valueOf(luongNuocCanTuoi));
+            cay.setLuongNuocDaTuoi(cay.getLuongNuocToiDa());
+            MainActivity.THANH_VIEN.setLuongNuocMangTheo(MainActivity.THANH_VIEN.getLuongNuocMangTheo() - luongNuocCanTuoi);
+//            mainPresenter.capNhatThanhVien(getContext(), "2",
+//                    String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
+//                    String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
 
-                    MainActivity.THANH_VIEN.setLuongNuocMangTheo(MainActivity.THANH_VIEN.getLuongNuocMangTheo() - cay.getLuongNuocToiDa());
-                    mainPresenter.capNhatThanhVien(getContext(),
-                            MainActivity.THANH_VIEN.getIdThanhVien(),
-                            String.valueOf(MainActivity.THANH_VIEN.getToaDoX()),
-                            String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
-                }
-            });
 
         }
+
+        invalidate();
 
 
     }
@@ -577,9 +570,23 @@ public class MapView extends View implements IMainView {
         txtTenDcn.setText(diemCapNuoc.getIdDiemCapNuoc());
         txtTinhTrang.setText(diemCapNuoc.getTinhTrang());
 
+        if (diemCapNuoc.isChiDuongDcn()) {
+            btnLayNuoc.setEnabled(true);
+        } else {
+            btnLayNuoc.setEnabled(false);
+        }
+
         btnChiDuong.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                for (DiemCapNuoc dcn : arrDiemCapNuoc) {
+                    if (dcn.getIdDiemCapNuoc().equals(diemCapNuoc.getIdDiemCapNuoc())) {
+                        dcn.setChiDuongDcn(true);
+                    } else {
+                        dcn.setChiDuongDcn(false);
+                    }
+
+                }
                 xuLyChiDuongDenDcn(diemCapNuoc);
                 dialog.dismiss();
             }
@@ -704,11 +711,34 @@ public class MapView extends View implements IMainView {
 
     private void xuLyChiDuong(Cay cay) {
         if (MainActivity.THANH_VIEN != null) {
+
+            for (DiemCapNuoc diemCapNuoc : arrDiemCapNuoc) {
+                diemCapNuoc.setChiDuongDcn(false);
+            }
             mainPresenter.getDirectionFromTree(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), String.valueOf(MainActivity.THANH_VIEN.getToaDoX()), String.valueOf(MainActivity.THANH_VIEN.getToaDoY()), cay.getIdCay());
 
             invalidate();
         } else {
-            Toast.makeText(getContext(), "ABCD", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Thông báo!");
+            builder.setMessage("Bạn phải đăng nhập để thực hiện chức năng này! Đăng nhập ngay?");
+            builder.setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    getContext().startActivity(intent);
+
+                }
+            });
+            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.create().show();
         }
     }
 
@@ -717,6 +747,27 @@ public class MapView extends View implements IMainView {
             mainPresenter.getDirectionFromListTrees(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), String.valueOf(MainActivity.THANH_VIEN.getToaDoX()), String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
 
             invalidate();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Thông báo!");
+            builder.setMessage("Bạn phải đăng nhập để thực hiện chức năng này! Đăng nhập ngay?");
+            builder.setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    getContext().startActivity(intent);
+
+                }
+            });
+            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.create().show();
         }
     }
 
@@ -725,13 +776,58 @@ public class MapView extends View implements IMainView {
 
             mainPresenter.getDirectionFromListWater(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), String.valueOf(MainActivity.THANH_VIEN.getToaDoX()), String.valueOf(MainActivity.THANH_VIEN.getToaDoY()));
             invalidate();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Thông báo!");
+            builder.setMessage("Bạn phải đăng nhập để thực hiện chức năng này! Đăng nhập ngay?");
+            builder.setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    getContext().startActivity(intent);
+
+                }
+            });
+            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.create().show();
         }
 
     }
 
     private void xuLyChiDuongDenDcn(DiemCapNuoc diemCapNuoc) {
         if (MainActivity.THANH_VIEN != null) {
+            for (Cay cay : arrCay) {
+                cay.setChiDuong(false);
+            }
             mainPresenter.getDirectionToDCn(getContext(), MainActivity.THANH_VIEN.getIdThanhVien(), String.valueOf(MainActivity.THANH_VIEN.getToaDoX()), String.valueOf(MainActivity.THANH_VIEN.getToaDoY()), diemCapNuoc.getIdDiemCapNuoc());
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Thông báo!");
+            builder.setMessage("Bạn phải đăng nhập để thực hiện chức năng này! Đăng nhập ngay?");
+            builder.setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    getContext().startActivity(intent);
+
+                }
+            });
+            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.create().show();
         }
         invalidate();
     }
@@ -750,7 +846,8 @@ public class MapView extends View implements IMainView {
     public void showListCay(ArrayList<Cay> arrayList) {
 
         for (Cay cay : arrayList) {
-            cay.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.tree));
+
+
             cay.setToaDoX(cay.getToaDoX() * 49);
             cay.setToaDoY(cay.getToaDoY() * 49);
             arrCay.add(cay);
@@ -942,6 +1039,12 @@ public class MapView extends View implements IMainView {
 
     private void drawTree(Canvas canvas) {
         for (Cay cay : arrCay) {
+            if (cay.getLuongNuocToiDa() == cay.getLuongNuocDaTuoi()) {
+                cay.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.tree));
+            } else {
+                cay.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.explosion));
+
+            }
             canvas.drawBitmap(cay.getBitmap(), cay.getToaDoY(), cay.getToaDoX(), p);
         }
 
